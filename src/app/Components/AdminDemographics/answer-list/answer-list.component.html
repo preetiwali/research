@@ -1,0 +1,170 @@
+<style>
+  .addanswer{
+    margin:3%;
+  }
+  .addbutton{
+    background-color: #0a2956;border: #0a2956;color:white;float:right;
+  }
+  .submitbutton{
+    background-color: #0a2956;border: #0a2956;color:white;
+  }
+  .table-responsive{
+    padding:1%;
+  }
+  .aboutquestion{
+    margin-top:1%;
+  }
+  
+</style>
+
+<button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/questionlist/{{question?.question_category_id}}">
+  <i class="fa fa-arrow-left"></i>
+</button>
+<span><button class="btn addbutton" (click)="openLarge(content3)">Add New Answer</button></span>
+
+    <div class="row aboutquestion">
+      <div class="col-md-12 col-lg-12 col-xs-12">
+        <div class="main-card mb-3 card">
+            <div class="card-header">
+              <table class="align-middle mb-0 table table-borderless">
+                <tbody>
+                  <tr>
+                    <td class="text-left"><i class="header-icon lnr-question-circle icon-gradient bg-love-kiss"> </i>{{ question?.title }} </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="position-relative form-group"><h5>
+                  {{ question?.description }}
+                </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col-md-12">
+          <div class="main-card mb-3 card">
+            <div class="card-header text-black">
+              <i class="header-icon lnr-location icon-gradient bg-love-kiss"> </i>
+              Answer
+            </div>
+          <div class="card-body">
+          <div class="table-responsive">
+              <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let answer of answerList; let i=index;">
+                  <td class="text-center"> {{answer.description}} </td>
+                  <td class="text-center">
+                    <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" title="Delete" (click)="openLarge(deleteanswer)"><i
+                      class="pe-7s-trash btn-icon-wrapper"></i></button>
+                    <button class="btn-icon btn-icon-only btn btn-outline-primary" title="Edit" (click)="openLarge(edit)"><i class="lnr-pencil"></i></button>
+                  </td>
+        
+                <!-- Edit category -->
+                
+                  <ng-template #edit let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Edit Answer</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form [formGroup]="this.editanswer" class="needs-validation" novalidate
+                            (validSubmit)="this.editAnswer(answer.id)">
+                      <div class="modal-body">
+                          <div class="col-md-12 mb-3 form-group">
+                            <label for="validationCustomdescription">Description</label>
+                            <input *ngIf="answer" formControlName="description" type="text" class="form-control" id="validationCustom01"
+                            [(ngModel)]="answer.description" required>
+                          </div>
+                          <div class="position-relative col-md-12 mb-3 form-group">
+                            <label for="validationCustomdescription">Follow_up_question</label>
+                            <select type="select" id="exampleCustomMutlipleSelect"
+                                    formControlName="follow_up_question" class="custom-select" [(ngModel)]="answer.follow_up_question">
+                              <option *ngFor="let question of follow_up_questions; let i=index;" [selected]="question.id == answer.follow_up_question" value="{{question.id}}">{{ question.description }}</option>
+                            </select>
+                          </div>
+                      </div>
+                      
+                      <div class="modal-footer">
+                        <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+                        <button type="submit" class="btn submitbutton">Save</button>
+                      </div>
+                    </form>
+                  </ng-template>
+
+              <!-- delete modal -->
+                  <ng-template #deleteanswer let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Delete Answers</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button> 
+                    </div>
+                      <div class="modal-body"> 
+                        <div class="col-md-12 mb-3 form-group">
+                          <h4>Sure! You want to delete answer?</h4>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                        <button type="submit" class="btn submitbutton" (click)="deleteAnswerInfo(answer.id);">Yes</button>
+                      </div>
+                  </ng-template>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+     
+  
+  <!-- ADD ANSWERS MODAL -->
+
+      <ng-template #content3 let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Answer</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form class="needs-validation addanswer" [formGroup]="addanswer" (ngSubmit)="addAnswer()" novalidate>
+          <div class="form-row">
+            <div class="col-md-12 mb-3 form-group">
+              <input type="hidden" class="form-control" id="validationCustom01" formControlName="question_id"
+                  [(ngModel)]="question.id">
+            </div>
+          </div>
+            <div class="form-row">
+              <div class="col-md-12 mb-3 form-group">
+                <label for="validationCustomdescription">Description</label>
+                <input formControlName="description" type="text" class="form-control" id="validationCustom02" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="position-relative col-md-12 mb-3 form-group">
+                <label for="validationCustomdescription">Follow_up_question</label>
+                <select type="select" id="exampleCustomMutlipleSelect"
+                        formControlName="follow_up_question" class="custom-select">
+                  <option  *ngFor="let question of follow_up_questions; let i=index;" value="{{question.id}}">{{ question.description }}</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn ml-2 submitbutton" [disabled]="!addanswer.valid" type="submit">Submit</button>
+          </form>
+      </ng-template>
+    
+  

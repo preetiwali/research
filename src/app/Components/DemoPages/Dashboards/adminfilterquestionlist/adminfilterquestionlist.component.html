@@ -1,0 +1,53 @@
+<style>
+
+  .addcate{
+    margin:3%;
+  }
+  .tablequestion {
+    display: block;overflow-y:scroll;padding:1%;
+  }
+  table{
+    width:100%;
+  }
+  button{
+    margin-bottom: 1%;
+  }
+  a{
+    text-decoration: none;
+  }
+  .backbutton{
+    font-size: 14px;
+  }
+</style>
+
+<button class="btn btn-lg bg-white backbutton" routerLink="/dashboards/adminfilter"><i class="fa fa-arrow-left"></i></button>  
+
+  <div class="main-card mb-3 card">
+      <div class="card-body">
+        <div class="table-responsive tablequestion">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Question</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let question of questionList; let i=index;">
+              <td class="text-center">{{ question['title'] }}</td>
+              <td class="text-center">
+                <a routerLink="/dashboards/adminfilteranswerlist/{{question.id}}"> 
+                  {{ question['description'] }} 
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>  
+  </div>
+  
+
+  
+  
+  

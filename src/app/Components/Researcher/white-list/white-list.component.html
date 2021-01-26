@@ -1,0 +1,144 @@
+<style>
+  .study{
+    display: block;height: 720px;overflow-y: scroll;padding:1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .addwhitelistuser{
+    background-color: #1f4988;border: #1f4988;color:white;float: right;margin-bottom: 1%;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .listuser{
+    float: right;
+  }
+  .faicons{
+    font-size: 15px;
+  }
+  .rejected{
+    margin-left:2%;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md -12 col-lg-12 col-xs-12">
+      <button class="btn addwhitelistuser" (click)="openLarge(list)">Add User</button>
+      <button class="mr-2 btn-icon btn-icon-only btn btn-outline-success listuser" title="Study will be send to all eligible users" *ngIf="study?.only_whitelisted == '1'" (click)="openLarge(selected)">Only Whitelisted</button>
+      <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger listuser" title="Study will be send to only whitelisted user" *ngIf="study?.only_whitelisted == null" (click)="openLarge(notselected)">Only Whitelisted</button>
+      <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/studyaudience/{{study_id}}">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      
+      <div class="main-card mb-3 card termscondition">
+        <div class="card-header">White Listed User
+          <div class="btn-actions-pane-right">
+          </div>
+        </div>
+        <div class="table-responsive study">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">Research Worker Id</th>
+                <th class="text-center">Study Name</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let whitelist of whitelistuser; let i=index;">
+              <td class="text-center">{{ whitelist?.research_worker_id }}</td>
+              <td class="text-center">{{ study.name }}</td>
+              <td class="text-center">
+                <button class="border-0 btn-transition btn btn-outline-success" title="Blacklist user" (click)="acceptWhiteListUser(whitelist.id);"><fa name="check" class="faicons"></fa></button>
+                <button class="border-0 btn-transition btn btn-outline-danger rejected" title="Reject user" (click)="openLarge(deletewhitelistuser)"><fa name="trash" class="faicons"></fa></button>
+              </td>
+
+              <!-- delete modal -->
+                <ng-template #deletewhitelistuser let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Delete User</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button> 
+                  </div>
+                    <div class="modal-body"> 
+                      <div class="col-md-12 mb-3 form-group">
+                        <h4>Sure! You want to delete whitelist user?</h4>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                      <button type="submit" class="btn submitbutton" (click)="rejectWhiteListUser(whitelist.id);">Yes</button>
+                    </div>
+                </ng-template>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- whitelist modal -->
+  <ng-template #list let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">White List</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.whitelist" (validSubmit)="this.whiteList()" class="needs-validation" novalidate>
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Researcher Worker Id</label>
+          <input formControlName="research_worker_id" type="text" title="You can add multiple participant ids comma separated" class="form-control" id="validationCustom01" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn submitbutton" (click)="c('Close click')">Cancel</button>
+        <button type="submit" class="btn submitbutton">Submit</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+<!-- whitelist user selected modal -->
+  <ng-template #selected let-c="close" let-d="dismiss">
+    <div class="modal-header bg-dark">
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <h4>Sure! You want to select both whitelisted users and filtered users.</h4>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn submitbutton" (click)="c('Close click')">Cancel</button>
+        <button type="submit" class="btn submitbutton" (click)="whitelistedUserNotSelect();">Submit</button>
+      </div>
+  </ng-template>
+
+
+<!-- whitelist user not selected modal -->
+  <ng-template #notselected let-c="close" let-d="dismiss">
+    <div class="modal-header bg-dark">
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <h4>Sure! You want to select only whitelisted users</h4>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn submitbutton" (click)="c('Close click')">Cancel</button>
+        <button type="submit" class="btn submitbutton" (click)="whitelistedUserSelect();">Submit</button>
+      </div>
+  </ng-template>

@@ -1,0 +1,189 @@
+<style>
+
+  .addcate{
+    margin:3%;
+  }
+  .tablequestion {
+    display: block;overflow-y:scroll;padding:1%;
+  }
+  .addcategory{
+    background-color: #1f4988;border: #1f4988;color:white;float:right;
+  }
+  table{
+    width:100%;
+  }
+  a{
+    text-decoration: none;
+  }
+  .categorylist{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .actionbutton{
+    width:35%;
+  }
+  .deletebutton{
+    margin-left:2%;
+  }
+  .submitbutton{
+    background-color: #0a2956;border: #0a2956;color:white;
+  }
+  
+  </style>
+
+  <div class="main-card mb-3 card">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card-header">Question Category List
+        <div class="btn-actions-pane-right">
+          <div role="group" class="btn-group-sm btn-group">
+            <button class="btn categorylist" (click)="openLarge(content10)">Add New Category</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="card-body">
+        <div class="table-responsive tablequestion">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">Image</th>
+                <th class="text-center">Category Name</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let category of categories; let i=index;">
+              <td class="text-center" *ngIf="category.image_url == null" >
+                <img width="45" height="45" src="./assets/images/family.jpg" (click)="openLarge(content31)">
+              </td>
+              <td class="text-center" *ngIf="category.image_url != null" >
+                <img width="45" height="45" src="{{ category.image_url }}" (click)="openLarge(content31)">
+              </td>
+              <td class="text-center"><a routerLink="/questionlist/{{category.question_category.id}}"> {{category.question_category.name}} </a></td>
+              <td class="text-center actionbutton">
+                <button class="btn-icon btn-icon-only btn btn-outline-primary" title="Edit" (click)="openLarge(content6)"><i class="lnr-pencil"></i></button>
+                <span><button class="btn-icon btn-icon-only btn btn-outline-danger deletebutton" title="Delete" (click)="openLarge(deletequestions)"><i
+                  class="lnr-trash"></i></button></span>
+                <span><button class="btn-icon btn-icon-only btn btn-outline-success deletebutton" title="Order of Category" (click)="openLarge(order)"><i
+                    class="lnr-layers"></i></button></span>
+              </td>
+
+
+              <!-- delete modal -->
+                <ng-template #deletequestions let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Delete Category</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button> 
+                  </div>
+                    <div class="modal-body"> 
+                      <div class="col-md-12 mb-3 form-group">
+                        <h4>Sure! You want to delete category?</h4>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                      <button type="submit" class="btn submitbutton" (click)="deleteCategory(category.question_category.id);">Yes</button>
+                    </div>
+                </ng-template>
+
+
+                <!-- order category modal -->
+                <ng-template #order let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Order of Category</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="this.ordercategory" class="needs-validation" novalidate
+                          (validSubmit)="this.orderCategory(category.question_category.id)">
+                      <div class="modal-body">
+                          <div class="col-md-12 mb-3 form-group">
+                            <input *ngIf="category" formControlName="order_number" type="number" class="form-control" id="validationCustom01"
+                            [(ngModel)]="category.question_category.order_number" required>
+                          </div>
+                      </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn categorylist" (click)="c('Close click')">Close</button>
+                      <button type="submit" class="btn categorylist">Save changes</button>
+                    </div>
+                  </form>
+                </ng-template>
+
+            <!-- Edit category -->
+            
+                <ng-template #content6 let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Edit Category</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="this.editcategory" class="needs-validation" novalidate
+                          (validSubmit)="this.editCategory(category.question_category.id)">
+                    <div class="modal-body">
+                        <div class="col-md-12 mb-3 form-group">
+                          <input *ngIf="category" formControlName="name" type="text" class="form-control" id="validationCustom01"
+                          [(ngModel)]="category.question_category.name" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn categorylist" (click)="c('Close click')">Close</button>
+                      <button type="submit" class="btn categorylist">Save changes</button>
+                    </div>
+                  </form>
+                </ng-template>
+
+            <!-- image upload modal -->
+                <ng-template #content31 let-c="close" let-d="dismiss">
+                  <div class="modal-header bg-dark text-warning">
+                    <h5 class="modal-title text-uppercase">Upload Image</h5>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="this.uploadImage" class="needs-validation"(validSubmit)="this.updateImage(category.question_category.id)" novalidate>
+                    <div class="modal-body">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input name="file" type="file" (change)="onFileChange($event)" id="validationCustom01" accept="image/png,image/jpg,image/jpeg"/>
+                        <input type="hidden" name="fileHidden" formControlName="image_url"/> 
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn categorylist">Submit</button>
+                    </div>
+                  </form>
+                </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>  
+  </div>
+  
+
+ 
+  <!-- ADD CATEGORY MODAL -->
+
+
+    <ng-template #content10 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Category</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="needs-validation addcate" [formGroup]="addcategory" (ngSubmit)="addCategory()" novalidate>
+         
+          <div class="form-row">
+          <div class="col-md-12 mb-3 form-group">
+              <input formControlName="name" type="text" class="form-control" id="validationCustom02"
+                  placeholder="Category Name" required>
+          </div>
+          </div>
+          <button class="btn ml-2 addcategory" [disabled]="!addcategory.valid" type="submit">Submit</button>
+        </form>
+    </ng-template>
+  

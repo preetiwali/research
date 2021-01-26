@@ -1,0 +1,86 @@
+
+<style>
+  .mat-form-field-infix {
+    display: block;position: relative;flex: auto;min-width: 100%;max-width: 100%;width: 103em;
+  }
+  .card-header{
+    background-color: white;
+  }
+  .card-body{
+    background-color: white;
+  }
+  .create-message{
+    color: black;margin:auto;font-size:16px;border-right:1px solid gray;font-weight: bold;font-family: sharp sans,Arial,sans-serif;
+  }
+  .create-message2{
+    color: black;margin:auto;font-size:15px; font-family: sharp sans,Arial,sans-serif;
+  }
+  .create-message1{
+    color: black;margin:auto;font-size:15px;border-right:1px solid gray;font-family: sharp sans,Arial,sans-serif;
+  }
+  label{
+    color:black;font-family: sharp sans,Arial,sans-serif;
+  }
+  .tab-message{
+    background-color: white;color: black;margin:auto;font-size:16px;font-weight: bold;
+    font-family: sharp sans,Arial,sans-serif;
+  }
+  .tab-message1{
+    background-color: white;color: black;margin:auto;font-size:15px;border-right:1px solid gray;font-family: sharp sans,Arial,sans-serif;
+  }
+  .sendtab{
+    color: black;margin:auto;font-size:15px;font-family: sharp sans,Arial,sans-serif;border-right:1px solid gray;
+  }
+  .helptab{
+    color: black;margin:auto;font-size:15px;font-family: sharp sans,Arial,sans-serif;border-right:1px solid gray;
+  }
+  button{
+    font-family: sharp sans,Arial,sans-serif;background-color: black;border: black;color:white;float: right;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 col-lg-4 col-xl-4 col-sm-12 col-xs-12">
+    <div class="main-card mb-3">
+      <div class="card-header">
+        <a class="btn btn-lg helptab" routerLink="/participantcreatenewmessage">New</a>
+        <span><a class="btn btn-lg tab-message1" routerLink="/participantinbox">Inbox</a></span>
+        <span><a class="btn btn-lg sendtab" routerLink="/participantsent">Sent</a></span>
+        <span><a class="btn btn-lg tab-message" routerLink="/participanthelpmessage">Help</a></span>
+      </div>
+    </div>
+  </div>
+  <br>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <form [formGroup]="this.helpmessage" (validSubmit)="participantHelpMessage()" class="needs-validation" novalidate>
+            <div class="form-row">
+              <div class="col-md-12">
+                <div class="position-relative form-group"><label for="exampleCity">Email</label>
+                  <input id="exampleEmail" type="text" class="form-control" value="help@researchsquare.ae" readonly>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="position-relative form-group"><label for="exampleState">Subject</label>
+                  <input id="exampleSubject" type="text" class="form-control" formControlName="subject" required>
+                </div>
+              </div>
+              <div class="col-md-12"><label for="exampleState">Message</label>
+                <angular-editor [(ngModel)]="htmlContent" formControlName="description" [config]="config"></angular-editor>
+                <div class="divider"></div>
+              </div>
+              </div>
+            <button class="mt-2 btn" [disabled]="!helpmessage.valid">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+    

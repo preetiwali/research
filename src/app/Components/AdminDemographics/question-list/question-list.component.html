@@ -1,0 +1,218 @@
+<style>
+  .modalbuttons{
+    background-color: #0a2956;border: #0a2956;color:white;
+  }
+  .backbutton{
+    margin-bottom: 1%;font-size: 14px;
+  }
+  .addnewquestion{
+    background-color: #0a2956;border: #0a2956;color:white;float:right;margin-bottom: 1%;
+  }
+  .submitbutton{
+    background-color: #0a2956;border: #0a2956;color:white;
+  }
+  .modal-footer {
+    background: white;
+  }
+</style>
+
+<button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/question-categoryadmin"><i class="fa fa-arrow-left"></i></button>
+<span><button class="btn addnewquestion" (click)="openLarge(content6)">Add New Question</button></span>
+
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xs-12" *ngFor="let question of questionList; let i=index;">
+    <div>
+      <div class="main-card mb-3 card">
+        <div class="card-header">
+          <i class="header-icon lnr-question-circle icon-gradient bg-love-kiss"></i>
+          {{ question['title'] }}
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="position-relative form-group"><h5>
+              {{ question['description'] }}
+            </h5>
+            </div>
+          </div>
+        </div>
+        <div class="d-block text-right card-footer">
+            <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" title="Delete" (click)="openLarge(deletequestion)"><i class="pe-7s-trash btn-icon-wrapper"></i></button>
+            <span>
+              <button class="mr-2 btn-icon btn-icon-only btn btn-outline-primary" title="Edit" (click)="openLarge(content5)"><i class="lnr-pencil"></i></button>
+            </span>
+            <span>
+              <button class="btn-icon btn-icon-only btn btn-outline-success mr-2" title="Order of Question" (click)="openLarge(orderquestion)"><i class="lnr-layers"></i></button>
+            </span>
+            <span><button class="mr-2 btn-icon btn-icon-only btn btn-outline-primary" title="Upload Picture" (click)="openLarge(picture)"><i class="lnr-picture"></i></button></span>
+            <span><button type="submit" class="btn btn-lg modalbuttons" *ngIf="question.question_type_id != '4' && question.question_type_id != '5'" routerLink="/answerlist/{{question['id']}}">Answers</button></span>
+            <span><button type="submit" class="btn btn-lg modalbuttons"  *ngIf="question.question_type_id == '4'" routerLink="/rangeansewerlist/{{question['id']}}">Answers</button></span>
+        </div>
+      </div>
+
+      <!-- delete modal -->
+        <ng-template #deletequestion let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Delete Question</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button> 
+          </div>
+            <div class="modal-body"> 
+              <div class="col-md-12 mb-3 form-group">
+                <h4>Sure! You want to delete question?</h4>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+              <button type="submit" class="btn submitbutton" (click)="deleteQuestionInfo(question['id']);">Yes</button>
+            </div>
+        </ng-template>
+
+
+        <!-- order question modal -->
+        <ng-template #orderquestion let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Order of Question</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="this.ordercategory" class="needs-validation" novalidate
+                  (validSubmit)="this.orderOfQuestions(question['id'])">
+              <div class="modal-body">
+                  <div class="col-md-12 mb-3 form-group">
+                    <input *ngIf="question" formControlName="order_number" type="number" class="form-control" id="validationCustom01"
+                    [(ngModel)]="question['order_number']" required>
+                  </div>
+              </div>
+            <div class="modal-footer">
+              <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+              <button type="submit" class="btn submitbutton">Save changes</button>
+            </div>
+          </form>
+        </ng-template>
+
+
+        <!-- image upload modal -->
+        <ng-template #picture let-c="close" let-d="dismiss">
+          <div class="modal-header bg-dark text-warning">
+            <h5 class="modal-title text-uppercase">Upload Picture</h5>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="this.uploadImage" class="needs-validation"(validSubmit)="this.updateQuestionImage(question['id'])" novalidate>
+            <div class="modal-body">
+              <div class="col-md-12 mb-3 form-group">
+                <input name="file" type="file" (change)="onFileChange($event)" id="validationCustom01" accept="image/png,image/jpg,image/jpeg"/>
+                <input type="hidden" name="fileHidden" formControlName="file"/> 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn modalbuttons" (click)="c('Close click')">Close</button>
+              <button type="submit" class="btn modalbuttons">Save</button>
+            </div>
+          </form>
+        </ng-template>
+
+      <!-- edit question modal -->
+        <ng-template #content5 let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit Question</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="this.editquestion" class="needs-validation" novalidate
+                  (validSubmit)="this.editQuestion(question['id'])">
+            <div class="modal-body">
+              <div class="form-row">
+                <div class="col-md-12 mb-3 form-group">
+                  <label for="validationCustom01">Title</label>
+                  <input *ngIf="question" formControlName="title" type="text" class="form-control" id="validationCustom01"
+                  [(ngModel)]="question['title']" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-12 mb-3 form-group">
+                  <label for="validationCustom01">Description For Participant</label>
+                  <input *ngIf="question" formControlName="description" type="text" class="form-control" id="validationCustom01"
+                  [(ngModel)]="question['description']" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-12 mb-3 form-group">
+                  <label for="validationCustom01">Description For Researcher</label>
+                  <input *ngIf="question" formControlName="description2" type="text" class="form-control" id="validationCustom01"
+                  [(ngModel)]="question['description2']" required>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn modalbuttons" (click)="c('Close click')">Close</button>
+              <button type="submit" class="btn modalbuttons">Save changes</button>
+            </div>
+          </form>
+        </ng-template>
+    </div>
+  </div>
+</div>
+    
+
+<!-- Add new question modal -->
+
+  <ng-template #content6 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Add New Question</h4>
+      <button type="button" class="close"Cross  aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="addquestions" class="needs-validation addmodal" novalidate>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="col-md-12 mb-3 form-group">
+            <select formControlName="question_type_id" placeholder="Question Type" id="validationCustom01" class="form-control">
+              <option value="">Question Type</option>
+              <option value="1">Single choice</option>
+              <option value="2">Multiple choice</option>
+              <option value="3">Text filled</option>
+              <option value="4">Range Type</option>
+              <option value="5">Date Type</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12 mb-3 form-group">
+            <input formControlName="title" type="text" class="form-control" id="validationCustom01"
+                  placeholder="Title"
+                  required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12 mb-3 form-group">
+              <input formControlName="description" type="text" class="form-control" id="validationCustom02"
+                    placeholder="Description for participant"
+                    required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12 mb-3 form-group">
+              <input formControlName="description2" type="text" class="form-control" id="validationCustom02"
+                    placeholder="Description for researcher"
+                    required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn modalbuttons" (click)="c('Close click')">Close</button>
+          <button class="btn modalbuttons" (click)="addQuestions()" [disabled]="!addquestions.valid">Save</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+
+
+

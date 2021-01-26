@@ -1,0 +1,88 @@
+<style>
+  button{
+    margin-bottom:2%;
+  }
+  .confirm{
+    float:right;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+</style>
+  
+  <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/admincompletestudy"><i class="fa fa-arrow-left"></i></button>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Basic Details
+          <div class="btn-actions-pane-right">
+            <div role="group" class="btn-group-sm btn-group">
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <form>
+            <div class="table-responsive">
+              <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                <tr>
+                  <th class="text-left">Researcher Name</th>
+                  <td class="text-right">{{ user?.first_name }} {{ user?.last_name }}</td>
+                </tr> 
+                <tr>
+                  <th class="text-left">Study Name</th>
+                  <div class="text-right">{{ study?.name }}</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Completion URL</th>
+                  <td class="text-right">{{ study?.completionurl }}</td>
+                </tr>
+                <tr>
+                  <th class="text-left">Completion Code</th>
+                  <td class="text-right">{{ study?.completioncode }}</td>
+                </tr>
+                <tr>
+                  <th class="text-left">Study URL</th>
+                  <div class="text-right">{{ study?.studyurl }}</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Estimated Completion Time</th>
+                  <div class="text-right">{{ study?.estimatetime }} Minutes</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Maximum Allowed Time</th>
+                  <div class="text-right">{{ study?.allowedtime }} Minutes</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Maximum Submissions</th>
+                  <div class="text-right">{{ study?.submission }}</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Reward Per Participant</th>
+                  <div class="text-right">{{ study?.reward }}</div>
+                </tr>
+              </table>
+            </div>
+          </form>  
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- study published -->
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Study Details</div>
+        <div class="card-body">
+          <form>
+            <p class="mb-0" [innerHTML]="study?.description"></p>
+          </form>  
+        </div>
+      </div>
+    </div>
+  </div>
+        
+  

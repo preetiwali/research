@@ -1,0 +1,146 @@
+
+<style>
+  img{
+    border-radius: 50%;width:18%;height:20%;
+  }
+  .envelope{
+    text-align: center;
+  }
+  button{
+    margin:auto;
+  }
+  h3{
+    margin-top:2%;color:black;
+  }
+  .card-header{
+    background-color: white;
+  }
+  .tab-message{
+    background-color: white;color: black;margin:auto;font-size:15px;border-right:1px solid gray;
+  }
+  .tab{
+    color: black;margin:auto;font-size:16px;font-weight: bold;border-right:1px solid gray;
+  }
+  li{
+    background-color: white;
+  }
+  .scroll-area-lg{
+    background-color: white;
+  }
+  .widget-heading{
+    color:black;
+  }
+  .widget-subheading{
+    font-family: sharp sans,Arial,sans-serif;color:black;
+  }
+  .card-header-title{
+    color:black;
+  }
+  .aboutmail{
+    margin-top:5%;
+  }
+  .submitbutton{
+    background-color: black;border: black;color:white;
+  }
+  .modal-header{
+    background-color: black;color: white;
+  }
+  .crossbutton{
+    color: white;
+  }
+  .helptab{
+    background-color: white;color: black;margin:auto;font-size:15px;font-family: sharp sans,Arial,sans-serif;
+  }
+</style>
+
+
+<div class="aboutmail" *ngIf="message == 'no-mail-found'">
+  <div class="envelope">
+    <img src="assets/images/envelopess.jpeg">
+  </div>
+  <h3 class="text-center">Nothing here.Enjoy that</h3>
+</div>
+
+
+<!-- when messages in inbox -->
+
+<div clas="container">
+  <div class="row">
+    <div class="col-md-5 col-lg-4 col-xl-4 col-sm-12 col-xs-12" *ngIf="message == 'archive-mails'">
+      <div class="main-card mb-3">
+        <div class="card-header">
+          <button class="btn btn-lg tab-message" routerLink="/participantcreatenewmessage">New</button>
+          <span><button class="btn btn-lg tab-message" routerLink="/participantinbox">Inbox</button></span>
+          <span><button class="btn btn-lg tab" routerLink="/participantsent">Sent</button></span>
+          <span><a class="btn btn-lg helptab" routerLink="/participanthelpmessage">Help</a></span>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-lg-12" *ngIf="message == 'archive-mails'">
+      <div class="card-hover-shadow-2x mb-3 card">
+        <div class="card-header-tab card-header">
+          <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+            class="header-icon lnr-envelope icon-gradient bg-malibu-beach"> </i>Archive Mails
+          </div>
+        </div>
+        <div class="scroll-area-lg">
+          <perfect-scrollbar [autoPropagation]="true">
+            <ul class="todo-list-wrapper list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let message of messages; let i=index;">
+                <div class="todo-indicator bg-info"></div>
+                <div class="widget-content p-0">
+                  <div class="widget-content-wrapper">
+                    <div class="widget-content-left mr-2">
+                    </div>
+                    <div class="widget-content-left">
+                      <div class="widget-heading">{{message.subject}}
+                      </div>
+                      <div class="widget-subheading"><i>{{message.created_at | date }}</i></div>
+                    </div>
+                    <div class="widget-content-right widget-content-actions">
+                      <button class="border-0 btn-transition btn btn-outline-danger" title="Delete">
+                        <fa name="trash" (click)="openLarge(participantarchive)"></fa>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                  <!-- delete modal -->
+                  <ng-template #participantarchive let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Delete Message</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true" class="crossbutton">&times;</span>
+                      </button> 
+                    </div>
+                      <div class="modal-body"> 
+                        <div class="col-md-12 mb-3 form-group">
+                          <h4>Sure! You want to delete FAQ?</h4>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                        <button type="submit" class="btn submitbutton" (click)="deleteArchiveMail(message.id);">Yes</button>
+                      </div>
+                  </ng-template>
+              </li>
+            </ul>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+    
+    
+    
+    
+    

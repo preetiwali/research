@@ -1,0 +1,82 @@
+<style>
+  .card {
+    margin: 0 auto;width: 530px;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  button{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+</style>
+
+<div class="h-150 bg-plum-plate">
+    <div class="d-flex h-100 justify-content-center align-items-center">
+      <div class="mx-auto app-login-box col-md-8 login_page_container">
+        <ngb-tabset>
+          <ngb-tab>
+            <ng-template ngbTabTitle class="nav-item"><span>Bootstrap Validation</span></ng-template>
+            <ng-template ngbTabContent>
+              <div class="card main-card mb-3 row">
+                <div class="card-body col-md-12">
+                  <h2 class="text-center">Add Question</h2>
+                  <form [formGroup]="addquestions" (ngSubmit)="addQuestions()" class="needs-validation" novalidate>
+                    
+                    <div class="form-row">
+                      <div class="col-md-12 mb-3 form-group">
+                        <select formControlName="question_category_id" id="validationCustom01" class="form-control">
+                          <option value="">Question Category</option>
+                          <option>Basic variables</option>
+                          <option>Education</option>
+                          <option>Family</option>
+                          <option>Health</option>
+                          <option>Basic</option>
+                          <option>Intrests and Hobbies</option>
+                          <option>Other</option>
+                          <option>Research works</option>
+                          <option>Beliefs</option>
+                          <option>Shopping and personal finance</option>
+                          <option>Socio economic</option>
+                          <option>Work</option>
+                          <option>Agriculture</option>
+                          <option>Environment</option>
+                        </select></div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-12 mb-3 form-group">
+                        <select formControlName="question_type_id" id="validationCustom01" class="form-control">
+                          <option value="">Question Type</option>
+                          <option value="1">Single choice</option>
+                          <option value="2">Multiple choice</option>
+                          <option value="3">Text filled</option>
+                        </select></div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input formControlName="title" type="text" class="form-control" id="validationCustom01"
+                              placeholder="Title"
+                              required>
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="col-md-12 mb-3 form-group">
+                        <input formControlName="description" type="text" class="form-control" id="validationCustom02"
+                              placeholder="Description"
+                              required>
+                    </div>
+                    </div>
+                    <button class="btn ml-2" type="submit">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+</div>
+        
+        

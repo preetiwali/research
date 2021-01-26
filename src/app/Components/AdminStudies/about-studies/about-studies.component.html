@@ -1,0 +1,153 @@
+<style>
+
+  img{
+    border-radius: 50%; width:18%; height:20%;
+  }
+  .envelope{
+    text-align: center;
+  }
+  button{
+    margin:auto;
+  }
+  h3{
+    margin-top:2%;
+  }
+  div.description{
+    overflow: hidden;height: 128px;color:#0a2956;
+  }
+  .studymessage{
+    margin-top:5%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;float: right;margin-left: 1%;
+  }
+  a, i{
+    color:#0a2956;
+  }
+  .cardcolor{
+    background-color: #B1B69D;
+  }
+  .modal-footer{
+    float:right;
+  }
+  p{
+    color: #1f4988;font-weight: bold;text-align: center;
+  }
+
+</style>
+
+<!-- when study not found -->
+
+<div  class="studymessage" *ngIf="message == 'no-study-found'">
+  <div class="envelope">
+    <img src="assets/images/study.png">
+  </div>
+  <h3 class="text-center">Nothing here.Enjoy that</h3>
+</div>
+
+
+<div class="row" *ngIf="message == 'new-studies'">
+  <div class="col-sm-12 col-xs-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let study of studies; let i=index;">
+    <div class="mb-3 text-white card-border card cardcolor">
+      <div class="card-header"><i class="header-icon lnr-graduation-hat"></i>
+        <a routerLink="/adminstudyDetails/{{study.study.id}}">{{ study.study.name }}</a>
+      </div>
+      <div class="card-body description" [innerHTML]="study.study.description"></div>
+      <div class="d-block card-footer">
+        <p class="text-left">Pool {{study.study.submission}} : {{study.available_candidate}}
+          <button class="mr-2 btn btn-lg submitbutton" (click)="openLarge(content11)">Reject</button>
+          <button class="btn btn-lg submitbutton" *ngIf="study.study.submission > study.available_candidate" (click)="openLarge(studyaccept)">Accept</button>
+          <button class="btn btn-lg submitbutton" *ngIf="study.study.submission < study.available_candidate 
+                  && (study.study.submission * 3)" (click)="openLarge(adminstudyaccept)">Accept</button>
+          <button class="btn btn-lg submitbutton" *ngIf="study.study.submission == study.available_candidate" (click)="openLarge(studyequalaccept)">Accept</button>
+
+        </p>
+      </div>
+ 
+      <!-- reject modal -->
+
+      <ng-template #content11 let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Reject Reason</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="this.rejectstudy" class="needs-validation" novalidate (validSubmit)="this.rejectStudy(study.study.id)">
+          <div class="modal-body">
+            <div class="col-md-12 mb-3 form-group">
+              <input formControlName="deactivate_reason" type="text" class="form-control" id="validationCustom02"
+                  placeholder="Reject Reason" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+            <button type="submit" class="btn submitbutton">Save</button>
+          </div>
+        </form>
+      </ng-template>
+ 
+       <!-- study accept modal -->
+       <ng-template #studyaccept let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Accept Study</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <div class="col-md-12 mb-3 form-group">
+              <h5 class="text-danger">Available participants are less</h5>
+              <h4>Sure! You want to accept the study</h4>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+            <button type="submit" class="btn submitbutton" (click)="acceptStudy(study.study.id);">Accept</button>
+          </div>
+      </ng-template>
+
+
+      <!-- study studyequalaccept modal -->
+      <ng-template #studyequalaccept let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Accept Study</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <div class="col-md-12 mb-3 form-group">
+              <h5 class="text-success">Available participants are equal</h5>
+              <h4>Sure! You want to accept the study</h4>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+            <button type="submit" class="btn submitbutton" (click)="acceptStudy(study.study.id);">Accept</button>
+          </div>
+      </ng-template>
+
+
+      <ng-template #adminstudyaccept let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title">Accept Study</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <div class="col-md-12 mb-3 form-group">
+              <h5 class="text-success">Available participants are three times greater than total submission</h5>
+              <h4>Sure! You want to accept the study</h4>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+            <button type="submit" class="btn submitbutton" (click)="acceptStudy(study.study.id);">Accept</button>
+          </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+   

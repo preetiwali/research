@@ -1,0 +1,104 @@
+<style>
+  .card {
+    margin: 0 auto;width: 70%;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  .height{
+      height:100%;
+  }
+  .study{
+    margin-top:5%;
+  }
+  .main-card{
+    box-shadow: none;padding:2%;border:1px solid black;
+  }
+  .backbutton{
+    background-color: #1f4988;border: #1f4988;color:white;float: right;font-size: 14px;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;float:right;
+  }
+</style>
+
+  <button class="btn btn-lg backbutton" title="Forward" routerLink="/studydescription/{{study?.id}}"><i class="fa fa-arrow-right"></i></button>
+
+  <div class="container card">
+    <div class="height">
+      <div class="d-flex justify-content-center align-items-center study">
+        <div class="mx-auto app-login-box col-md-12 login_page_container">
+          <div class="card main-card mb-3 row">
+            <div class="card-body col-md-12">
+              <h2 class="text-center"> Edit Basic Details</h2>
+              <form [formGroup]="this.editstudyform"  (validSubmit)="this.editStudy(study.id)" class="needs-validation" novalidate>
+                
+                <div class="form-row">
+                    <div class="col-md-6 mb-3 form-group">
+                      <label for="validationCustomUsername">Completion URL</label>
+                      <input type="url" *ngIf="study" formControlName="completionurl" class="form-control" id="validationCustomUsername"
+                      [(ngModel)]="study.completionurl" aria-describedby="inputGroupPrepend">
+                    </div>
+                    <div class="col-md-6 mb-3 form-group">
+                      <label for="validationCustomUsername">Completion Code</label>
+                      <input type="text" *ngIf="study" formControlName="completioncode" class="form-control" id="validationCustomUsername"
+                      [(ngModel)]="study.completioncode" aria-describedby="inputGroupPrepend">
+                    </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 mb-3 form-group">
+                    <label for="validationCustomUsername">Study Name</label>
+                    <input type="text" *ngIf="study" formControlName="name" class="form-control" id="validationCustomUsername"
+                    [(ngModel)]="study.name" aria-describedby="inputGroupPrepend">
+                  </div>
+                  <div class="col-md-6 mb-3 form-group">
+                    <label for="validationCustomUsername">Study URL</label>
+                    <input type="url" *ngIf="study"  formControlName="studyurl" class="form-control" id="validationCustomUsername"
+                    [(ngModel)]="study.studyurl" aria-describedby="inputGroupPrepend">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 mb-3 form-group">
+                    <label for="validationCustomUsername">Estimated Completion Time</label>
+                    <input type="number" *ngIf="study"  formControlName="estimatetime" class="form-control" id="validationCustomUsername"
+                    [(ngModel)]="study.estimatetime" aria-describedby="inputGroupPrepend">
+                  </div>
+                  <div class="col-md-6 mb-3 form-group">
+                    <label for="validationCustomUsername">Maximum Allowed Time</label>
+                    <input type="number" *ngIf="study"  class="form-control" formControlName="allowedtime" id="validationCustomUsername"
+                    [(ngModel)]="study.allowedtime" aria-describedby="inputGroupPrepend">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-4 mb-3 form-group">
+                    <label for="validationCustomUsername">Maximum Submissions</label>
+                    <input type="number" *ngIf="study"  class="form-control" formControlName="submission" id="validationCustomUsername"
+                    [(ngModel)]="study.submission" aria-describedby="inputGroupPrepend">
+                  </div>
+                  <div class="col-md-4 mb-3 form-group">
+                    <label for="validationCustomUsername">Reward Per Participant</label>
+                    <input type="text" *ngIf="study"  class="form-control" formControlName="reward" min="0" id="validationCustomUsername"
+                    [(ngModel)]="study.reward" aria-describedby="inputGroupPrepend">
+                  </div>
+                  <div class="col-md-4 mb-3 form-group">
+                    <label for="validationCustomUsername">Maximum completion date</label>
+                    <div class="input-group">
+                      <input type="date" class="form-control" *ngIf="study" [(ngModel)]="max_participation_date" min="{{min_to_date}}" id="userdate" formControlName="max_participation_date">
+                    </div>
+                  </div>
+                </div> 
+                
+                <button class="btn ml-2 submitbutton" [disabled]="!editstudyform.valid" type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+          
+          

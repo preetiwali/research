@@ -1,0 +1,47 @@
+<style>
+  .firstpage{
+    margin-top: -10%;margin-left: -2%;margin-right: -2%;  }
+  img{
+    margin:auto;width:100%;
+  }
+  a{
+    margin-left:40%;
+  }
+  body{
+    overflow: hidden;
+  }
+</style>
+
+
+<div class="h-93">
+  <div class="row h-92 no-gutters firstpage">
+    <div class="d-none d-lg-block col-lg-7">
+      <div class="slider-light">
+        <ngx-slick-carousel class="slick-slider slick-dotted" #slickModal="slick-carousel"
+                            [config]="slideConfig2">
+          <div ngxSlickItem *ngFor="let content of contentList; let i=index;">
+            <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-plum-plate">
+              <div class="slide-img-bg"></div>
+              <div class="slider-content text-light" *ngIf="content.page_content.content_type != 'image'">
+                <h3>{{content.page_content.title}}</h3>
+                <p [innerHTML]="content.page_content.content">
+                </p>
+              </div>
+            </div>
+          </div>
+        </ngx-slick-carousel>
+      </div>
+    </div>
+    <div class="h-95 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-5">
+      <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
+        <img src="assets/images/firstpage.png" alt="assets/images/firstpage.png" *ngIf="image_url == null"/>
+        <img src="{{image_url}}" alt="assets/images/firstpage.png" *ngIf="image_url != null"/>
+        <span>
+          <a (click)="changeLoginCount();">
+            <button class="btn-shadow-dark btn-wider btn bg-plum-plate text-white">Go to home page</button>
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

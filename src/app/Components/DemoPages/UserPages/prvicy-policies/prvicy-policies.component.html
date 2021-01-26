@@ -1,0 +1,29 @@
+
+<style>
+
+  .forgot{
+    background-color: #1f4988;
+  }
+  h3{
+    margin:auto;
+    padding:10px;
+    text-transform: uppercase;
+  }
+</style>
+
+
+<div class="h-100 d-flex justify-content-center align-items-center forgot">
+  <div class="container">
+    <div class="row">
+      <h3 class="text-white">Privacy Policy</h3>
+      <div class="col-md-12" *ngFor="let policy of policies; let i=index;">
+        <div class="main-card mb-3 card">
+          <div class="card-header font-weight-bold">Privacy Policy For {{policy.user_type}}</div>
+          <div class="card-body" [innerHTML]="policy.description"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

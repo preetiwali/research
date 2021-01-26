@@ -1,0 +1,178 @@
+<style>
+  .addanswer{
+    margin:3%;
+  }
+  table{
+    width:100%;
+  }
+  button.addnew{
+    background-color: #1f4988;border: #1f4988;color:white;float: right;
+  }
+  .rangeanswer{
+    margin:auto;font-size:14px;margin-bottom:1%;
+  }
+  .aboutquestion{
+    margin-top:1%;
+  }
+  .table-responsive{
+    padding:1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  
+</style>
+  
+  
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <button class="btn btn-lg addnew" (click)="openLarge(content3)">Add New Answer</button>
+    <span>
+      <button class="btn btn-lg bg-white rangeanswer" title="Back" routerLink="/questionlist/{{question?.question_category_id}}">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+    </span>
+  </div>
+</div>
+          
+<div class="row aboutquestion">
+  <div class="col-md-12 col-lg-12 col-xs-12">
+    <div class="main-card mb-3 card">
+      <div class="card-header">
+        <table class="align-middle mb-0 table table-borderless">
+          <tbody>
+            <tr>
+              <td class="text-left">
+                <i class="header-icon lnr-question-circle icon-gradient bg-love-kiss"> </i>{{ question?.title }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="position-relative form-group"><h5>
+            {{ question?.description }}
+          </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-header text-black">
+        <i class="header-icon lnr-location icon-gradient bg-love-kiss"> </i>
+        Answer1
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="text-center"> Minimum Limit </th>
+                <th class="text-center"> Maximum Limit </th>
+                <th class="text-center"> Action </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center"> {{answerList?.min_limit}} </td>
+                <td class="text-center"> {{answerList?.max_limit}} </td>
+                <td class="text-center">
+                  <button class="btn-icon btn-icon-only btn btn-outline-primary" title="Edit" (click)="openLarge(edit)"><i class="lnr-pencil"></i></button>
+                </td>
+      
+              <!-- Edit category -->
+              
+                  <ng-template #edit let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Edit Answer</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form [formGroup]="this.editanswer" class="needs-validation" novalidate (validSubmit)="this.editAnswer(answerList.id)">
+                      <div class="modal-body">
+                        
+                        <div class="col-md-12 mb-3 form-group">
+                            <label for="validationCustomdescription">Minimum Limit</label>
+                            <input *ngIf="answerList" formControlName="min_limit" type="number" class="form-control" id="validationCustom02" [(ngModel)]="answerList.min_limit" required>
+                        </div>
+                    
+                        <div class="col-md-12 mb-3 form-group">
+                            <label for="validationCustomdescription">Maximum Limit</label>
+                            <input *ngIf="answerList" formControlName="max_limit" type="number" class="form-control" id="validationCustom02" [(ngModel)]="answerList.max_limit" required>
+                        </div>
+
+                        <div class="position-relative col-md-12 mb-3 form-group">
+                          <label for="validationCustomdescription">Follow_up_question</label>
+                          <select type="select" id="exampleCustomMutlipleSelect"
+                                  formControlName="follow_up_question" class="custom-select" [(ngModel)]="answerList.follow_up_question">
+                            <option *ngFor="let question of follow_up_questions; let i=index;" [selected]="question.id == answerList.follow_up_question"
+                                     value="{{question.id}}">{{ question.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+                        <button type="submit" class="btn submitbutton">Save</button>
+                      </div>
+                    </form>
+                  </ng-template>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+<!-- ADD ANSWERS MODAL -->
+  
+  <ng-template #content3 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Add New Answer1</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form class="needs-validation addanswer" [formGroup]="addanswer" (ngSubmit)="addAnswer()" novalidate>
+      <div class="form-row">
+        <div class="col-md-12 mb-3 form-group">
+          <input type="hidden" class="form-control" id="validationCustom01" formControlName="question_id"
+              [(ngModel)]="question.id">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustomdescription">Minimum</label>
+            <input formControlName="min_limit" type="number" class="form-control" id="validationCustom02" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustomdescription">Maximum</label>
+            <input formControlName="max_limit" type="number" class="form-control" id="validationCustom02" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="position-relative col-md-12 mb-3 form-group">
+          <label for="validationCustomdescription">Follow_up_question</label>
+          <select type="select" id="exampleCustomMutlipleSelect" formControlName="follow_up_question" class="custom-select">
+            <option  *ngFor="let question of follow_up_questions; let i=index;" value="{{question.id}}">{{ question.description }}</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn ml-2 submitbutton"[disabled]="!addanswer.valid" type="submit">Submit</button>
+    </form>
+  </ng-template>
+      
+      
+      
+      
+      

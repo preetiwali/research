@@ -1,0 +1,154 @@
+
+<style>
+.backbutton{
+  background-color: #1f4988;border: #1f4988;color:white;margin-bottom: 1%;font-size: 14px;
+}
+.submitbutton{
+  background-color: #1f4988;border: #1f4988;color:white;
+}
+.table-responsive{
+  padding:1%;
+}
+</style>
+
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xs-12">
+  <div class="main-card mb-3 card termscondition">
+    <div class="card-header">Privacy Policy
+      <div class="btn-actions-pane-right">
+        <div role="group" class="btn-group-sm btn-group">
+          <button type="button" class="btn-icon btn-icon-only btn backbutton" (click)="openLarge(addpolicy)">Add</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">Country</th>
+              <th class="text-center">User Type</th>
+              <th class="text-center">Title</th>
+              <th class="text-center">Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let policy of policies; let i=index;">
+              <td class="text-center">{{policy?.country}}</td>
+              <td class="text-center">{{policy?.user_type}}</td>
+              <td class="text-center">
+                <div class="text-black">{{policy?.title}}</div>
+              </td>
+              <td class="text-center">
+                <button type="button" class="btn-icon btn-icon-only btn btn-outline-primary" (click)="openLarge(policies)"><i class="lnr-pencil"></i></button>
+
+                <span><button class="btn-icon btn-icon-only btn btn-outline-danger ml-2" title="Delete" (click)="openLarge(deletepolicy)"><i
+                  class="lnr-trash"></i></button></span>
+              </td>
+
+
+
+              <!-- delete modal -->
+              <ng-template #deletepolicy let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete Privacy Policy</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button> 
+                </div>
+                  <div class="modal-body"> 
+                    <div class="col-md-12 mb-3 form-group">
+                      <h4>Sure! You want to delete privacy policy?</h4>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                    <button type="submit" class="btn submitbutton" (click)="deletePrivacyPolicy(policy.id);">Yes</button>
+                  </div>
+              </ng-template>
+
+              <!-- edit description modal -->
+                <ng-template #policies let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Privacy Policy</h5>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="this.editpolicy" class="needs-validation" novalidate (validSubmit)="this.editPolicy(policy.id)">
+                    <div class="modal-body">
+                      <div class="form-row">
+                        <div class="col-md-12 mb-3 form-group">
+                          <input *ngIf="policy?.country" type="text" class="form-control" [value]="policy?.country" readonly>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-12 mb-3 form-group">
+                          <input *ngIf="policy" formControlName="title" type="text" class="form-control" id="validationCustom01"
+                              [(ngModel)]="policy.title" required>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="col-md-12 mb-3 form-group">
+                            <input *ngIf="policy" formControlName="user_type" type="text" class="form-control" id="validationCustom02"
+                                [(ngModel)]="policy.user_type" readonly>
+                        </div>
+                      </div>
+                      <angular-editor  *ngIf="policy" [(ngModel)]="policy.description" formControlName="description" [config]="config"></angular-editor>
+                      <div class="divider">{{ policy?.description }}</div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+                        <button type="submit" class="btn submitbutton">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- add policy -->
+
+  <ng-template #addpolicy let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h5 class="modal-title">Add Privacy Policy</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.addpolicies" class="needs-validation" novalidate (validSubmit)="this.addPolicy()">
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="col-md-12 mb-3 form-group">
+            <input type="text" class="form-control" formControlName="country" placeholder="Country" id="validationCustom01" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12 mb-3 form-group">
+            <input formControlName="title" type="text" placeholder="Title" class="form-control" id="validationCustom01" required>
+          </div>
+        </div>
+        <div class="form-row">
+        <div class="col-md-12 mb-3 form-group">
+            <!-- <input formControlName="user_type" type="text" placeholder="User Type" class="form-control" id="validationCustom02" required> -->
+          <select class="form-control" formControlName="user_type" required>
+            <option value="">User Type</option>
+            <option value="Participant">Participant</option>
+            <option value="Researcher">Researcher</option>
+          </select>
+        </div>
+        </div>
+        <angular-editor  [(ngModel)]="htmlContent" formControlName="description" [config]="config" required></angular-editor>
+        <div class="divider"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>

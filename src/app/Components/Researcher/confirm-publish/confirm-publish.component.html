@@ -1,0 +1,296 @@
+
+<style>
+  .publish-conditions{
+    color:black;padding-top:0.5%;padding-bottom:0.5%;
+  }
+  p{
+    width:100%;margin-top:3%;
+  }
+  .container{
+    width:100%;margin-bottom: 3%;
+  }
+  .progressbar{
+    counter-reset: step;
+  }
+  .progressbar li{
+    list-style-type: none;float: left;width:18%;position: relative;text-align: center;
+  }
+  .progressbar li:before{
+    content: counter(step);counter-increment:step;width:30px;height:30px;line-height: 31px;/* border:2px solid #ddd; */
+    display: block;text-align: center;margin:0 auto 10px auto;border-radius: 50%;
+  }
+  .progressbar li.green:before{
+    background-color: green;
+  }
+  .progressbar li.white:before{
+    background-color: green;
+  }
+  .progressbar li:after{
+    content: '';position: absolute;width:100%;height:1px;background-color: green;top:15px;left:-57%;z-index: -1;
+  }
+  .progressbar li:first-child:after{
+    content: none;
+  }
+  .progressbar li.active{
+    color:black;
+  }
+  .progressbar li.active:before{
+    border-color: green;background-color: green;
+  }
+  .progressbar li.active + li:after{
+    background-color: green;
+  }
+  h6{
+    color: black;
+  }
+  .checkvalidation{
+    margin: 1%;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .confirm{
+    float:right;background-color: #1f4988;border: #1f4988; margin-bottom: 1%;
+  }
+  .countbar{
+    font-size: 25px;
+  }
+  .cardpayment{
+    height: 92%;
+  }
+  .showmodal{
+    display: none;
+  }
+  .candidatecount{
+    height: 85%;
+  }
+
+  label {
+    color: #d92550;display: block;margin-bottom: 0px;
+  }
+  input:checked + label{
+    color: #3ac47d;
+  }
+  .checklabel{
+    margin-left: 5px;
+  }
+  .checkinput{
+    margin-top: 3px;
+  }
+  .checkvalidations{
+    margin-left: 3%;
+  }
+
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/studypublished/{{study_id}}"><i class="fa fa-arrow-left"></i></button>
+      <button class="btn btn-lg confirm text-white" [disabled]="!formGroup.valid" (click)="confirmStudy(study?.id);"> Publish</button>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="container">
+      <ul class="progressbar">
+        <li class="white text-white" routerLink="/editstudy/{{study_id}}"><h6>Basic Details</h6></li>
+        <li class="white text-white" routerLink="/researcherstudyDescription/{{study_id}}"><h6>Study Description</h6></li>
+        <li class="white text-white" routerLink="/studyaudience/{{study_id}}"><h6>Audience</h6></li>
+        <li class="green text-white" routerLink="/studypublished/{{study_id}}"><h6>Review Study</h6></li>
+        <li class="active text-white"><h6>Confirm & Publish</h6></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+       <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h6 class="text-uppercase publish-conditions">Please agree in order to proceed</h6>
+          <form [formGroup]="this.formGroup" class="needs-validation" novalidate>
+            <div class="mb-3 form-group" onclick="showDropDown();"> 
+              <select formControlName="term9" id="description" class="form-control" required>
+                <option value="">I use deception in my study</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div class="mb-3 form-group" onclick="showpublishbutton();">
+              <select formControlName="term10" id="showbutton" class="form-control showmodal" >
+                <option value="">I explain and clarify the use deception at the end of the study to the participants</option>
+                <option value="yes" selected>Yes</option>
+                <option value="no" id="selectno">No</option>
+              </select>
+            </div>
+            <div class="form-group checkvalidation">
+              <div class="row mb-2">
+                <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="term1" required>
+                <label for="opt-in" class="checklabel"> I have got ethical approval from my university
+                </label>
+              </div>
+            </div>
+            <div class="form-group checkvalidation">
+              <div class="row mb-2">
+                <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="term2" required>
+                <label for="opt-in" class="checklabel"> I have filled basic details of the study and the number of participants</label>
+              </div>
+            </div>
+            <div class="form-group checkvalidation">
+              <div class="row mb-2">
+                <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="term3" required>
+                <label for="opt-in" class="checklabel"> I have described details of the study</label>
+              </div>
+            </div>
+            <div class="form-group checkvalidation">
+              <div class="row mb-2">
+                <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="term4" required>
+                <label for="opt-in" class="checklabel"> I have included the survey link</label>
+              </div>
+            </div>
+            <div class="form-group checkvalidation">
+              <div class="row mb-2">
+                <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="term5" required>
+                <label for="opt-in" class="checklabel"> I have added the completion URL at the end of survey form</label>
+              </div>
+            </div>
+            <div class="form-group checkvalidation">
+              <div class="row mb-2">
+                <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="term6" required>
+                <label for="opt-in" class="checklabel"> I have given space in the survey form for the participants to fill
+                   in the completion code</label>
+              </div>
+            </div>
+            <div class="form-group checkvalidation">
+              <div class="row mb-2">
+                <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="term7" required>
+                <label for="opt-in" class="checklabel"> I have adequate resources to publish the study</label>
+              </div>
+            </div>
+            <div class="form-group checkvalidation">
+              <div class="row mb-2">
+                <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="term8" required>
+                <label for="opt-in" class="checklabel"> I do not have any material on my survey that will cause the participants to feel 
+                                              awkward or cause harm to any of the participants or to any entity</label>
+              </div>
+
+              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Basic Details
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+              <tr>
+                <th class="text-left">Completion URL</th>
+                <td class="text-right">{{ study?.completionurl }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Completion Code</th>
+                <td class="text-right">{{ study?.completioncode }}</td>
+              </tr> 
+              <tr>
+                <th class="text-left">Study Name</th>
+                <div class="text-right">{{ study?.name }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Study URL</th>
+                <div class="text-right">{{ study?.studyurl }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Estimated Completion Time</th>
+                <div class="text-right">{{ study?.estimatetime }} Minutes</div>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Allowed Time</th>
+                <div class="text-right">{{ study?.allowedtime }} Minutes</div>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Submissions</th>
+                <div class="text-right">{{ study?.submission }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Reward Per Participant</th>
+                <div class="text-right">{{ study?.reward }}</div>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Audeience count -->
+  
+  <div class="row">
+    <div class="col-lg-3 col-md-12 col-xs-12 col-sm-12">
+      <div class="card main-card mb-3">
+        <div class="card-body text-center text-warning countbar">
+          <mwl-gauge
+            class="two candidatecount"
+            [max]="100"
+            [dialStartAngle]="180"
+            [dialEndAngle]="0"
+            [value]="filteredCandidateCount"
+            [animated]="true"
+            [animationDuration]="2">
+          </mwl-gauge>
+          Eligible Candidate Count
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="col-lg-9 col-md-12 col-xs-12 col-sm-12">
+      <div class="main-card mb-3 card cardpayment">
+        <div class="card-body">
+          <h5 class="card-title">Payment</h5>
+          <div class="table-responsive">
+            <table class="mb-0 table table-bordered">
+              <tbody>
+                <tr>
+                  <th scope="row"><b>Number of Participants</b></th>
+                  <td>{{ study?.submission }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>Reward per Participant</b></th>
+                  <td>{{ study?.reward }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>Amount</b></th>
+                  <td>{{ study?.reward * study?.submission }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>Taxes & Commissions</b></th>
+                  <td>{{ study?.reward * study?.submission * 0.30 | number: '.2' }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>Order Id</b></th>
+                  <td>{{ transactions?.order_id }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>Payment Id</b></th>
+                  <td>{{ transactions?.transaction_id }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><b>Total Amount</b></th>
+                  <td>{{ study?.reward * study?.submission * 1.30 | number: '.2' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

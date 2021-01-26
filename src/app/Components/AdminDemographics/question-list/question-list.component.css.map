@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "question-list.component.sass"
+    ],
+    "names": [],
+    "file": "question-list.component.css"
+}

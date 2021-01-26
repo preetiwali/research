@@ -1,0 +1,70 @@
+<style>
+  .mat-form-field-infix {
+    display: block;position: relative;flex: auto;min-width: 100%;max-width: 100%;width: 103em;
+  }
+  .submitbutton{
+    background-color: #0a2956;border: #0a2956;color:white;float:right;
+  }
+  .newmessage{
+    color:#0a2956;margin:auto;font-size:15px;border-right:1px solid gray;    
+  }
+  .inboxmessage{
+    color:#0a2956;margin:auto;font-size:15px;border-right:1px solid gray;
+  }
+  .sentmessage{
+    color:#0a2956;margin:auto;font-size:15px;border-right:1px solid gray;
+  }
+  .helpmessaage{
+    color:#0a2956;margin:auto;font-size:16px;font-weight: bold;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 col-lg-4 col-xl-4 col-sm-12 col-xs-12">
+      <div class="main-card mb-3">
+        <div class="card-header">
+          <a class="btn btn-lg bg-white newmessage" routerLink="/newmessage">New</a>
+          <span><a class="btn btn-lg bg-white inboxmessage" routerLink="/inboxmessage">Inbox</a> </span>
+          <span><a class="btn btn-lg bg-white sentmessage" routerLink="/sentmessage">Sent</a></span>
+          <span><a class="btn btn-lg bg-white helpmessaage" routerLink="/researcherhelpmessage">Help</a></span>
+        </div>
+      </div>
+    </div><br>
+  </div>
+  
+  
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <form [formGroup]="this.helpmessage" (validSubmit)="helpMessage()" class="needs-validation" novalidate>
+            <div class="form-row">
+              <div class="col-md-12">
+                <div class="position-relative form-group"><label for="exampleCity">Email</label>
+                  <input id="exampleEmail" type="text" class="form-control" value="help@researchsquare.ae" readonly>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="position-relative form-group"><label for="exampleState">Subject</label>
+                  <input id="exampleSubject" type="text" class="form-control" formControlName="subject" required>
+                </div>
+              </div>
+              <div class="col-md-12"><label for="exampleState">Message</label>
+                <angular-editor [(ngModel)]="htmlContent" formControlName="description" [config]="config"></angular-editor>
+                <div class="divider"></div>
+              </div>
+              </div>
+            <button class="mt-2 btn submitbutton" [disabled]="!helpmessage.valid">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  

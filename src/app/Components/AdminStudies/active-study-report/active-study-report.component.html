@@ -1,0 +1,59 @@
+<style>
+  .study{
+    display: block;height: 700px;overflow-y: scroll;overflow-x: scroll;padding:1%;
+  }
+  .action{
+    display: flex;
+  }
+  button{
+    margin:2px;
+  }
+  a{
+    text-decoration: none;
+  }
+  .backbutton{
+    font-size: 14px;margin-bottom:10px;float:right;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <button class="btn-icon btn-icon-only btn btn-outline-success backbutton" title="Download excel sheet" (click)="goToLink('http://13.233.112.57:3000/active_study_tracker.xlsx')"><i class="fa fa-file-excel-o"></i></button>
+    
+    <div class="main-card mb-3 card termscondition">
+      <div class="card-header">Active Study List</div>
+      <div class="table-responsive study">
+        <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">Id</th>
+              <th class="text-center">Study Name</th>
+              <th class="text-center">Completion Code</th>
+              <th class="text-center">Estimated Completion Time</th>
+              <th class="text-center">Maximum Allowed Time</th>
+              <th class="text-center">Maximum Submissions</th>
+              <th class="text-center">Reward Per Participant</th>
+              <th class="text-center activestudy">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let study of studies; let i=index;">
+              <td class="text-center">{{ study.id }}</td>
+              <td class="text-center">{{ study.name }}</td>
+              <td class="text-center">{{ study.completioncode }}</td>
+              <td class="text-center">{{ study.allowedtime }}</td>
+              <td class="text-center">{{ study.estimatetime }}</td>
+              <td class="text-center">{{ study.submission }}</td>
+              <td class="text-center">{{ study.reward }}</td>
+              <td class="text-center action">
+                <button class="btn-icon btn-icon-only btn btn-outline-success" (click)="goToStudyLink(study.id)">
+                  <i class="fa fa-file-excel-o btn-icon-wrapper"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

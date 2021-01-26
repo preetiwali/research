@@ -1,0 +1,63 @@
+<style>
+  .mat-form-field-infix {
+    display: block;position: relative;flex: auto;min-width: 100%;max-width: 100%;width: 103em;
+  }
+  .main-card{
+    background-color: white;
+  }
+  .card-header{
+    background-color: white;
+  }
+  .editor-message{
+    background-color: white;
+  }
+  .backbutton{
+    margin:1%;background-color: white;font-size: 14px;
+  }
+  .newmessage{
+    margin-left: -1%;
+  }
+  .submitbutton{
+    background-color: black;border: black;color:white;float: right;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 newmessage">
+      <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/participanttotalstudysubmission/{{userid}}"><i class="fa fa-arrow-left"></i></button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <form [formGroup]="this.newmessage" (validSubmit)="participantNewMessage()" class="needs-validation" novalidate>
+            <div class="form-row">
+              <div class="col-md-12">
+                <div class="position-relative form-group"><label for="exampleCity">Recipient ID</label>
+                  <input id="exampleEmail" type="text" class="form-control" formControlName="reciever_id" *ngIf="researcher_id" [(ngModel)]="researcher_id" readonly>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="position-relative form-group"><label for="exampleState">Subject</label>
+                  <input id="exampleSubject" type="text" class="form-control" formControlName="subject">
+                </div>
+              </div>
+              <div class="col-md-12 editor-message"><label for="exampleState">Message</label>
+                <angular-editor [(ngModel)]="htmlContent" formControlName="description" [config]="config"></angular-editor>
+                <div class="divider"></div>
+              </div>
+              </div>
+            <button class="mt-2 btn submitbutton" [disabled]="!newmessage.valid">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+    

@@ -1,0 +1,60 @@
+<style>
+  .researcheruserlist{
+    display: block;overflow-y:scroll;height:755px;
+  }
+  a{
+    text-decoration: none;
+  }
+  .table-responsive{
+    padding: 1%;
+  }
+  .pagination{
+    margin-top: 1.5%;
+  }
+  .request{
+    background-color: #66c566;
+  }
+</style>
+
+  <div class="main-card mb-3 card termscondition">
+    <div class="card-header">Researcher User List
+      <div class="btn-actions-pane-right">
+        <div role="group" class="btn-group-sm btn-group">
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive researcheruserlist">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+      </div>
+      <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+          <th class="text-center">Research Work id</th>
+          <th class="text-center">Name</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Country</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Deactivate Request</th>
+
+        </tr>
+        </thead>
+        <tbody>
+          <!--  | paginate: config -->
+        <tr *ngFor="let userresearch of researcherusers | filter:term; let i=index; ">
+          <td class="text-center">{{userresearch?.research_worker_id}}</td>
+          <td class="text-center"><a routerLink="/overviewresearcheruser/{{ userresearch?.id }}">{{userresearch?.first_name}} {{ userresearch?.last_name }}</a></td>
+          <td class="text-center">{{userresearch?.email}}</td>
+          <td class="text-center text-black">{{userresearch?.country}}</td>
+          <td class="text-center text-black" *ngIf="userresearch.status == 'active'">Active</td>
+          <td class="text-center text-black" *ngIf="userresearch.status == 'deactive'">Deactive</td>
+          <td class="text-center text-black request" *ngIf="userresearch.deactivate_requested === true">Yes</td>
+          <td class="text-center text-black" *ngIf="userresearch.deactivate_requested === false">No</td>
+        </tr>
+        </tbody>
+      </table>
+      <!-- <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6 pagination">
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+      </div> -->
+    </div>
+  </div>

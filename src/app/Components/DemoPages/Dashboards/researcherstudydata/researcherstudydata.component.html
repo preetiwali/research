@@ -1,0 +1,91 @@
+<style>
+    button{
+      margin-bottom:2%;
+    }
+    .confirm{
+      float:right;
+    }
+ </style>
+    
+  <ngb-tabset class="tabs-animated tabs-animated-shadow">
+    <ngb-tab>
+      <ng-template ngbTabTitle><span>About Study</span></ng-template>
+      <ng-template ngbTabContent>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="main-card mb-3 card">
+              <div class="card-header">Basic Details</div>
+              
+              <div class="card-body">
+                <form>
+                  <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                      <tr>
+                        <th class="text-left">Completion URL</th>
+                        <td class="text-right">{{ study?.completionurl }}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Completion Code</th>
+                        <td class="text-right">{{ study?.completioncode }}</td>
+                      </tr> 
+                      <tr>
+                        <th class="text-left">Study Name</th>
+                        <div class="text-right">{{ study?.name }}</div>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Study URL</th>
+                        <div class="text-right">{{ study?.studyurl }}</div>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Estimated Completion Time</th>
+                        <div class="text-right">{{ study?.estimatetime }} Minutes</div>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Maximum Allowed Time</th>
+                        <div class="text-right">{{ study?.allowedtime }} Minutes</div>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Maximum Submissions</th>
+                        <div class="text-right">{{ study?.submission }}</div>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Reward Per Participant</th>
+                        <div class="text-right">{{ study?.reward }}</div>
+                      </tr>
+                    </table>
+                  </div>
+                </form>  
+              </div>
+              <div class="d-block text-right card-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+    
+    <!-- study published -->
+    
+  <ngb-tabset class="tabs-animated tabs-animated-shadow">
+      <ngb-tab>
+        <ng-template ngbTabTitle><span>Study Description</span></ng-template>
+        <ng-template ngbTabContent>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="main-card mb-3 card">
+                <div class="card-header">Study Details</div>
+                <div class="card-body">
+                  <form>
+                      <p class="mb-0">{{ study?.description }}</p>
+                  </form>  
+                </div>
+                <div class="d-block text-right card-footer">
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+  </ngb-tabset>
+    

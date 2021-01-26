@@ -1,0 +1,44 @@
+<style>
+  .max__header{padding: 60px 0 0 0px;}
+  .participant-main-inner{
+    background-color: #3498db;
+  }
+</style>
+  <div [ngClass]="{
+    'closed-sidebar' : globals.toggleSidebar,
+    'closed-sidebar-md' : globals.toggleSidebarMobile,
+    'settings-open' : globals.toggleThemeOptions,
+    'closed-sidebar-open': globals.sidebarHover || globals.toggleSidebarMobile,
+    'header-menu-open' : globals.toggleHeaderMobile,
+    'drawer-open' : globals.toggleDrawer,
+    'fixed-footer' : globals.toggleFixedFooter
+    }" [class]="'app-container app-theme-white'">
+      <app-header></app-header>
+      <app-sidebar></app-sidebar>
+
+ 
+      <div class="app-main__outer max__header" *ngIf="user_type == 'Participant'">
+        <div class="app-main__inner participant-main-inner">
+          <div style="margin-top:5%;">
+            <router-outlet #o="outlet"></router-outlet>
+          </div>
+        </div>
+        <app-footer></app-footer>
+      </div>
+
+
+      <div class="app-main__outer" *ngIf="user_type == 'Admin' || user_type == 'Researcher'">
+        <div class="app-main__inner">
+          <div>
+            <router-outlet #o="outlet"></router-outlet>
+          </div>
+        </div>
+        <app-footer></app-footer>
+      </div>
+
+      
+      <!-- <app-options-drawer></app-options-drawer> -->
+      <app-drawer></app-drawer>
+      <div class="sidebar-menu-overlay" (click)="toggleSidebarMobile()"></div>
+    </div>
+<ngx-loading-bar [color]="'var(--primary)'"></ngx-loading-bar>

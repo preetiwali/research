@@ -1,0 +1,31 @@
+
+<style>
+  button{
+    float:right;margin-bottom:1%;margin-right:1%;background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .add{
+    float:left;
+  }
+</style>
+
+<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+
+<div class="card main-card mb-3" *ngIf="message == 'terms-of-uses-not-present'">
+  <form [formGroup]="this.adddescriptionform" (validSubmit)="this.addTermsOfUse()" class="needs-validation" novalidate>
+    <div class="card-body">
+      <angular-editor formControlName="description" [config]="config"></angular-editor>
+      <div class="divider"></div>
+    </div>
+    <button class="btn ml-2" [disabled]="!descriptionform.valid" type="submit">Add</button>
+  </form>
+</div>
+
+<div class="card main-card mb-3" *ngIf="message != 'terms-of-uses-not-present'">
+  <form [formGroup]="this.descriptionform" (validSubmit)="this.editTermsOfUse(id)" class="needs-validation" novalidate>
+    <div class="card-body">
+      <angular-editor *ngIf="termsofuse" [(ngModel)]="description" formControlName="description" [config]="config"></angular-editor>
+      <div class="divider">{{ description }}</div>
+    </div>
+    <button class="btn ml-2" [disabled]="!descriptionform.valid" type="submit">Update</button>
+  </form>
+</div>

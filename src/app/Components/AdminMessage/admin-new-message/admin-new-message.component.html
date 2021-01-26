@@ -1,0 +1,45 @@
+<style>
+  .mat-form-field-infix {
+      display: block;
+      position: relative;
+      flex: auto;
+      min-width: 100%;
+      max-width: 100%;
+      width: 103em;
+  }
+  button{
+    background-color: #1f4988;border: #1f4988;color:white; 
+  }
+</style>
+
+<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+  
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <form [formGroup]="this.newmessage" (validSubmit)="newMessage()" class="needs-validation" novalidate>
+            <div class="form-row">
+              <div class="col-md-12">
+                <div class="position-relative form-group"><label for="exampleCity">Recipient ID</label>
+                  <input id="exampleEmail" type="text" class="form-control" formControlName="reciever_id">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="position-relative form-group"><label for="exampleState">Subject</label>
+                  <input id="exampleSubject" type="text" class="form-control" formControlName="subject">
+                </div>
+              </div>
+              <div class="col-md-12"><label for="exampleState">Message</label>
+                <angular-editor [(ngModel)]="htmlContent" formControlName="description" [config]="config"></angular-editor>
+                <div class="divider"></div>
+              </div>
+              </div>
+            <button class="mt-2 btn" [disabled]="!newmessage.valid">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    

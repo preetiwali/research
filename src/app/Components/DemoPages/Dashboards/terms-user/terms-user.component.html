@@ -1,0 +1,20 @@
+
+<h1>hello</h1>
+
+      <div class="row" *ngIf="user_type != 'Participant' && user_type != 'Researcher' && user_type != 'Admin'">
+        <div class="col-md-12">
+          <div class="card main-card mb-3">
+            <div class="card-body">
+              <ngb-tabset [justify]="currentJustify">
+                <ngb-tab *ngFor="let term of terms; let i=index;" title="{{term.title}}">
+                  <ng-template ngbTabContent>
+                    <p>{{term.description}}</p>
+                  </ng-template>
+                </ngb-tab>
+              </ngb-tabset>
+            </div>
+          </div>
+        </div>
+      </div>
+
+

@@ -1,0 +1,658 @@
+<style>
+
+  .logo{
+    margin-left: 4%;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 0%;
+    }
+
+  .left-participant{
+    margin-left: -210%;
+    }
+    .participantmobilemenu{
+      background-color: white;
+      border: white;
+      color:#3498db;
+    }
+    .menu1{
+      color: white!important;
+    }
+    a{
+      text-decoration: none;
+    }
+
+    .app-header__content{
+      background-color:#0a2956;
+    }
+    
+    .right-participant{
+    margin-top: 0%;
+    }
+    
+    .header-btn-lg::before{
+    color:black;
+    }
+    
+    .app-header__content-participant{
+    height:97px;
+    }
+    
+    #participantheader{
+    transition: all ease-out .5s;
+    height:97px;
+    background-color: #3498db;
+    }
+    
+    #participantheadercontent{
+    transition: all ease-out .5s;
+    color:black;
+    background-color: #3498db;
+    }
+    
+    .active {
+    background-color: rgba(34,34,34,0.8);
+    } 
+
+    @media screen and (max-width: 991px){
+      #participantheadercontent{
+      background-color: #272525;
+      }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 389px) {
+    .app-header__content{
+    height: 60px !important;
+    }
+    
+    .app-header{
+    height: 60px !important;
+    }
+    
+    img{
+    width:65%;
+    }
+    
+    }
+    
+    @media screen and (min-width: 390px) and (max-width: 500px) {
+    .app-header__content{
+    height: 60px !important;
+    }
+    
+    .app-header{
+    height: 60px !important;
+    }
+    
+    img{
+    width:50%;
+    }
+    
+    }
+    
+    @media screen and (min-width: 501px) and (max-width: 700px) {
+    .app-header__content{
+    height: 60px !important;
+    }
+    
+    .app-header{
+    height: 60px !important;
+    }
+    
+    img{
+    width:35%;
+    }
+    
+    }
+    
+    @media screen and (min-width: 700px) and (max-width: 764px) {
+    .app-header__content{
+    height: 60px !important;
+    }
+    
+    .app-header{
+    height: 60px !important;
+    }
+    
+    img{
+    width:35%;
+    }
+    
+    }
+
+    @media screen and (min-width: 765px) and (max-width: 991px) {
+    .app-header__content{
+    height: 60px !important;
+    }
+    
+    .app-header{
+    height: 60px !important;
+    }
+    
+    img{
+    width:26%;
+    }
+    
+    }
+    
+    @media screen and (min-width: 992px) and (max-width: 1050px) {
+    img{
+    width:29%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -88%;
+    }
+    }
+    
+    @media screen and (min-width: 1051px) and (max-width: 1100px) {
+    img{
+    width:31%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -88%;
+    }
+    }
+    
+    @media screen and (min-width: 1101px) and (max-width: 1199px) {
+    img{
+    width:31%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -92%;
+    }
+    }
+    
+    @media screen and (min-width: 1200px) and (max-width: 1300px) {
+    img{
+    width:35%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -116%;
+    }
+    }
+    
+    @media screen and (min-width: 1301px) and (max-width: 1439px) {
+    img{
+    width:31%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -125%;
+    }
+    }
+    
+    @media screen and (min-width: 1440px) and (max-width: 1558px) {
+    img{
+      width:30%;
+    }
+    a{
+      font-size: 17px;
+    }
+    .logo{
+      margin-left: 1%;
+    }
+    .left-participant{
+      margin-left: -135%;
+    }
+  }
+    
+    @media screen and (min-width: 1559px) and (max-width: 1700px) {
+    img{
+      width:25%;
+    }
+    .logo{
+      margin-left: 1%;
+    }
+    .left-participant{
+      margin-top: 1%;
+      margin-left: -150%;
+      }
+    }
+    
+    @media screen and (min-width: 1701px) and (max-width: 1800px) {
+    img{
+    width:25%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -175%;
+    }
+    }
+    
+    @media screen and (min-width: 1801px) and (max-width: 1891px) {
+    img{
+    width:20%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -210%;
+    }
+    }
+    
+    @media screen and (min-width: 1892px) and (max-width: 2050px) {
+    img{
+    width:19%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -160%;
+    }
+    }
+    
+    @media screen and (min-width: 2051px) and (max-width: 2200px) {
+    img{
+    width:16%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -180%;
+    }
+    }
+    
+    @media screen and (min-width: 2201px) and (max-width: 2350px) {
+    img{
+    width:16%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -200%;
+    }
+    }
+    
+    @media screen and (min-width: 2351px) and (max-width: 2450px) {
+    img{
+    width:16%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -235%;
+    }
+    }
+    
+    @media screen and (min-width: 2450px) and (max-width: 2500px) {
+    img{
+    width:16%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -270%;
+    }
+    }
+    
+    @media screen and (min-width: 2501px) and (max-width: 2650px) {
+    img{
+    width:14%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -285%;
+    }
+    
+    }
+    @media screen and (min-width: 2651px) and (max-width: 2750px) {
+    img{
+    width:14%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -290%;
+    }
+  }
+  @media screen and (min-width: 2751px) and (max-width: 2850px) {
+    img{
+    width:14%;
+    }
+    
+    .logo{
+    margin-left: 1%;
+    }
+    
+    .left-participant{
+    margin-top: 1%;
+    margin-left: -310%;
+    }
+  }
+  @media screen and (min-width: 2851px) and (max-width: 2950px) {
+  img{
+    width:16%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -325%;
+  }
+  }
+  @media screen and (min-width: 2951px) and (max-width: 3050px) {
+  img{
+    width:16%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -350%;
+  }
+  }
+  @media screen and (min-width: 3051px) and (max-width: 3200px) {
+  img{
+    width:16%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -340%;
+  }
+  }
+  @media screen and (min-width: 3201px) and (max-width: 3300px) {
+  img{
+    width:16%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -300%;
+  }
+  }
+  @media screen and (min-width: 3301px) and (max-width: 3400px) {
+  img{
+    width:16%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -290%;
+  }
+  }
+  @media screen and (min-width: 3401px) and (max-width: 3500px) {
+  img{
+    width:16%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -245%;
+  }
+  }
+  @media screen and (min-width: 3501px) and (max-width: 3650px) {
+  img{
+    width:16%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -190%;
+  }
+  }
+  @media screen and (min-width: 3651px) and (max-width: 3850px) {
+  img{
+    width:16%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -150%;
+  }
+  }
+  @media screen and (min-width: 3851px) and (max-width: 4050px) {
+  img{
+    width:18%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -140%;
+  }
+  }
+  @media screen and (min-width: 4051px) and (max-width: 4350px) {
+  img{
+    width:18%;
+  }
+    
+  .logo{
+    margin-left: 1%;
+  }
+    
+  .left-participant{
+    margin-top: 1%;margin-left: -135%;
+  }
+  }
+
+
+</style>
+
+   <div>
+    <div [class]="'app-header' + (config$ | async).headerTheme" id="participantheader" *ngIf="user_type == 'Participant'">
+      <div class="logo text-primary">
+        <a class="text-white" routerLink="/">
+          <img class="participantlogo" src="assets/images/ResearchSquareLogo.png">
+        </a>
+      </div>
+      <div class="app-header__content app-header__content-participant" id="participantheadercontent">
+        <div class="app-header-left left-participant">
+       <!-- <app-participant-left-menu></app-participant-left-menu> -->
+          <app-mega-menu></app-mega-menu> 
+        </div>
+        <div class="app-header-right right-participant">
+          <app-dots></app-dots>
+          <app-help></app-help>
+          <app-user-box-participant></app-user-box-participant>
+        </div>
+      </div>
+      <div class="app-header__mobile-menu">
+        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                [ngClass]="{'is-active' : globals.toggleSidebarMobile}" (click)="toggleSidebarMobile()">
+          <span class="hamburger-box">
+              <span class="hamburger-inner menu1"></span>
+          </span>
+        </button>
+      </div>
+      <div class="app-header__menu">
+        <span>
+          <button class="btn-icon btn-icon-only btn participantmobilemenu" [ngClass]="{'is-active' : globals.toggleHeaderMobile}"
+                  (click)="toggleHeaderMobile()">
+            <div class="btn-icon-wrapper">
+              <fa name="ellipsis-v"></fa>
+            </div>
+          </button>
+        </span>
+      </div>
+    </div>
+  
+  
+    <div [class]="'app-header header-shadow ' + (config$ | async).headerTheme" *ngIf="user_type == 'Researcher' && login_count != 1 ">
+      <!-- <div class="logo text-primary">Research Work</div> -->
+      <div class="app-header__content">
+        <div class="app-header-left">
+        <app-search-box></app-search-box>
+          <!-- <app-mega-menu></app-mega-menu>  -->
+        </div> 
+        <div class="app-header-right">
+          <app-dots></app-dots>
+          <app-researcher-help-header></app-researcher-help-header>
+          <app-user-box></app-user-box>
+        </div>
+      </div>
+      <div class="app-header__mobile-menu">
+        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                [ngClass]="{'is-active' : globals.toggleSidebarMobile}" (click)="toggleSidebarMobile()">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+      </div>
+      <div class="app-header__menu">
+        <span>
+            <button class="btn-icon btn-icon-only btn btn-primary" [ngClass]="{'is-active' : globals.toggleHeaderMobile}"
+                    (click)="toggleHeaderMobile()">
+                <div class="btn-icon-wrapper">
+                    <fa name="ellipsis-v"></fa>
+                </div>
+            </button>
+        </span>
+      </div>
+    </div>
+  
+    <div [class]="'app-header header-shadow ' + (config$ | async).headerTheme" *ngIf="user_type == 'Admin'">
+      <!-- <div class="logo text-primary">Research Work</div> -->
+      <div class="app-header__content">
+        <div class="app-header-left">
+        <!-- <app-search-box></app-search-box>
+          <app-mega-menu></app-mega-menu>  -->
+        </div> 
+        <div class="app-header-right">
+          <app-dots></app-dots>
+          <app-user-box-admin></app-user-box-admin>
+        </div>
+      </div>
+      <div class="app-header__mobile-menu">
+        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                [ngClass]="{'is-active' : globals.toggleSidebarMobile}" (click)="toggleSidebarMobile()">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+      </div>
+      <div class="app-header__menu">
+        <span>
+            <button class="btn-icon btn-icon-only btn btn-primary" [ngClass]="{'is-active' : globals.toggleHeaderMobile}"
+                    (click)="toggleHeaderMobile()">
+                <div class="btn-icon-wrapper">
+                    <fa name="ellipsis-v"></fa>
+                </div>
+            </button>
+        </span>
+      </div>
+    </div>
+  
+    <div [class]="'app-header header-shadow ' + (config$ | async).headerTheme" *ngIf="user_type != 'Participant' && user_type != 'Researcher' && user_type != 'Admin'">
+      <!-- <div class="logo text-primary">Research Work</div> -->
+      <div class="app-header__content">
+        <div class="app-header-left">
+        <!-- <app-search-box></app-search-box> -->
+          <!-- <app-mega-menu></app-mega-menu> -->
+        </div> 
+        <div class="app-header-right">
+          <app-dots></app-dots>
+          <app-user-box-common></app-user-box-common>
+        </div>
+      </div>
+      <div class="app-header__mobile-menu">
+        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                [ngClass]="{'is-active' : globals.toggleSidebarMobile}" (click)="toggleSidebarMobile()">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+      </div>
+      <div class="app-header__menu" >
+        <span>
+          <button class="btn-icon btn-icon-only btn btn-primary" [ngClass]="{'is-active' : globals.toggleHeaderMobile}"
+                  (click)="toggleHeaderMobile()">
+            <div class="btn-icon-wrapper">
+                <fa name="ellipsis-v"></fa>
+            </div>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>

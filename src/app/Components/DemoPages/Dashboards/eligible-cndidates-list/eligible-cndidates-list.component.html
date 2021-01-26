@@ -1,0 +1,58 @@
+<style>
+  .study{
+    display: block;height: 757px;overflow-y: scroll;overflow-x: scroll;padding:1%;
+  }
+  .backbutton{
+    margin-bottom: 1%;font-size: 14px;
+  }
+  .sentemails{
+    background-color: #0a2956;border: #0a2956;color:white;float:right;margin: 1%;
+  }
+</style>
+
+<button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/adminactivestudydetails/{{study_id}}">
+  <i class="fa fa-arrow-left"></i>
+</button>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card mb-3 card termscondition">
+        <form [formGroup]="reportform">
+          <div class="card-header">Eligible Candidates List
+          <div class="btn-actions-pane-right">
+            <div role="group" class="btn-group-sm btn-group">
+              <button type="submit" class="btn sentemails" (click)="SendMailToParticipants(study_id);">Send Email</button>
+            </div>
+          </div>
+        </div>
+          <div class="table-responsive study">
+            <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center" id="selectall" >
+                    <input type="checkbox" [(ngModel)]="masterSelected" [ngModelOptions]="{standalone: true}"
+                            value="m1" (change)="checkUncheckAll()"/>
+                  </th>
+                  <th class="text-center">RW Id</th>
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Email</th>
+                </tr>
+              </thead>
+              <tbody id="showcheckbox">
+                <tr *ngFor="let users of notattempted_user; let i=index;">
+                  <td class="text-center">
+                    <input type="checkbox" [(ngModel)]="users.isSelected" [ngModelOptions]="{standalone: true}" value="{{users.id}}" 
+                            (change)="userSelect(users.id)"/>
+                    <!-- <input type="hideen" value="{{users.id}}" id="user_{{id}}"/> -->
+                  </td>
+                  <td class="text-center">{{ users?.research_worker_id }}</td>
+                  <td class="text-center">{{ users?.first_name }} {{ users?.last_name }}</td>
+                  <td class="text-center">{{ users?.email }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,136 @@
+<style>
+  .addcate{
+    margin:3%;
+  }
+  .tablequestion {
+    display: block;overflow-y:scroll;padding:1%;
+  }
+  table{
+    width:100%;
+  }
+  a{
+    text-decoration: none;
+  }
+  .pagelist{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .actionbutton{
+    width:35%;
+  }
+  .deletebutton{
+    margin-left:2%;
+  }
+  .addpage{
+    background-color: #1f4988;border: #1f4988;color:white;float:right;
+  }
+  .submitbutton{
+    background-color: #0a2956;border: #0a2956;color:white;
+  }
+</style>
+
+  <div class="main-card mb-3 card">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card-header">Page Type List
+        <div class="btn-actions-pane-right">
+          <div role="group" class="btn-group-sm btn-group">
+            <button class="btn pagelist" (click)="openLarge(pages)">Add Page Type</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive tablequestion">
+        <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">Page Type</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let page of pageList; let i=index;">
+            <td class="text-center"><a routerLink="/dashboards/addfirstpagedetails/{{page.id}}">{{page.name}}</a></td>
+            <td class="text-center actionbutton">  
+              <span>
+                <button class="btn-icon btn-icon-only btn btn-outline-primary" title="Edit" (click)="openLarge(pagesedit)"><i class="lnr-pencil"></i></button>
+                <button class="btn-icon btn-icon-only btn btn-outline-danger deletebutton" title="Delete" (click)="openLarge(slidercontent)"><i
+                class="lnr-trash"></i></button>
+              </span>
+            </td>
+
+            <!-- delete modal -->
+              <ng-template #slidercontent let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete Content</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button> 
+                </div>
+                  <div class="modal-body"> 
+                    <div class="col-md-12 mb-3 form-group">
+                      <h4>Sure! You want to delete slider content?</h4>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                    <button type="submit" class="btn submitbutton" (click)="deletePageType(page.id);">Yes</button>
+                  </div>
+              </ng-template>
+
+            <!-- Edit page -->
+            
+              <ng-template #pagesedit let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title">Edit Page</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form [formGroup]="this.editpage" class="needs-validation" novalidate
+                      (validSubmit)="this.editPage(page.id)">
+                  <div class="modal-body">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input formControlName="name" type="text" class="form-control" id="validationCustom01"
+                        *ngIf="page" [(ngModel)]="page.name" required>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn pagelist" (click)="c('Close click')">Close</button>
+                    <button type="submit" class="btn pagelist">Save changes</button>
+                  </div>
+                </form>
+              </ng-template>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>  
+  </div>
+  
+
+  <!-- ADD PAGE MODAL -->
+  
+    <ng-template #pages let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Page Type</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="needs-validation addcate" [formGroup]="addpagetype" (ngSubmit)="addPageType()" novalidate>
+        <div class="form-row">
+          <div class="col-md-12 mb-3 form-group">
+            <select formControlName="name" id="validationCustom01" class="form-control">
+              <option value="">Page Type</option>
+              <option value="Participant Help Section">Participant Help Section</option>
+              <option value="Researcher First Page">Researcher First Page</option>
+              <option value="Researcher First Page">Researcher Help Section</option>
+              <option value="Researcher First Page">Participant First Page</option>
+            </select>
+          </div>
+        </div>
+          <button class="btn ml-2 addpage" [disabled]="!addpagetype.valid" type="submit">Submit</button>
+        </form>
+    </ng-template>
+  
+  

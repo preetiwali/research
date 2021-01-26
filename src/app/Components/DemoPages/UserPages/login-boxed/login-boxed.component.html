@@ -1,0 +1,97 @@
+<style>
+  .card {
+    margin: 0 auto; width: 330px;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  .height{
+      height:100%;
+  }
+  .form-row{
+    margin-bottom: -1%;
+  }
+  .login{ 
+    background-color: #1f4988;  
+  }
+
+  .leftbutton{
+    float:right;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .modal-title .activateaccount{
+    color:black;
+  }
+</style>
+
+<div class="height">
+    <div class="d-flex h-100 justify-content-center align-items-center login">
+      <div class="mx-auto app-login-box col-md-8 login_page_container">
+        <ngb-tabset>
+          <ngb-tab>
+            <ng-template ngbTabTitle class="nav-item"><span>Bootstrap Validation</span></ng-template>
+            <ng-template ngbTabContent>
+              <div class="card main-card mb-3 row">
+                <div class="card-body col-md-12">
+                  <span class="leftbutton"><button class="btn ml-2 submitbutton" routerLink="http://winpower-website.s3-website.ap-south-1.amazonaws.com/">Home</button></span>
+                  <h2 class="text-center">Login</h2>
+                  <form [formGroup]="this.formGroup" class="needs-validation" novalidate
+                        (validSubmit)="this.handleValidSubmit()">
+                    
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3 form-group">
+                          <label for="validationCustomUsername">Email</label>
+                          <input formControlName="email" type="email" class="form-control" id="validationemail"
+                              placeholder="Email" aria-describedby="inputGroupPrepend" (keyup)="ValidateLogin();">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-12 mb-3 form-group">
+                        <label for="validationCustom01">Password</label>
+                        <input formControlName="password" type="password" class="form-control" id="validationCustom01"
+                                placeholder="Password" (keyup)="ValidateLogin();" required>
+                      </div>
+                    </div>
+                    <button class="btn ml-2 submitbutton" type="submit">Sign In</button>
+                    <a class="text-primary forgotpassword" routerLink="/pages/forgot-password-boxed">Forgot your password?</a>
+                  </form>
+
+                  <a class="text-primary register" routerLink="/pages/signup">Need an account?</a>
+                  <!-- <a class="text-primary" (click)="openLarge(activateaccount)">To activate an account</a> -->
+        
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+</div>
+        
+        
+
+<!-- ADD activate account MODAL -->
+
+<!-- <ng-template #activateaccount let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title pl-2">To activate your account</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5 class="activateaccount pl-2">To activate your account please email to below link </h5>
+    <a class="text-primary"><h5 class="pl-2">help@winpower.ae</h5></a>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template> -->

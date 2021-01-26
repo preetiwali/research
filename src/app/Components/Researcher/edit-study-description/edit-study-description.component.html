@@ -1,0 +1,28 @@
+
+<style>
+  button{
+    float:right;margin-bottom:1%;margin-right:1%;margin-top:1%;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+</style>
+
+
+<div class="container">
+  <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/studypublished/{{ studydescription?.id }}"><i class="fa fa-arrow-left"></i></button>
+
+  <div class="card main-card mb-3 study">
+    <form [formGroup]="this.editstudydescription"  (validSubmit)="this.editStudyDescription(studydescription?.id)" class="needs-validation" novalidate>
+      <div class="card-body">
+        <angular-editor *ngIf="studydescription" [(ngModel)]="studydescription.description" formControlName="description" [config]="config"></angular-editor>
+        <div class="divider">{{ studydescription?.description }}</div>
+      </div>
+      <button class="btn ml-2 submitbutton" [disabled]="!editstudydescription.valid" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+

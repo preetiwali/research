@@ -1,0 +1,108 @@
+
+<style>
+  .widget-subheading{
+    color: black;
+  }
+  .studyparticipated{
+    color: black;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <form>
+        <a routerLink="/studyparticipation">
+          <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+            <div class="widget-chat-wrapper-outer">
+              <div class="widget-chart-content">
+                <h6 class="widget-subheading">Two studies or less</h6>
+                <div class="widget-chart-flex">
+                  <div class="widget-numbers mb-0 w-100">
+                    <div class="widget-chart-flex">
+                      <div class="fsize-4 studyparticipated" *ngIf="less_than_two_count">
+                        {{less_than_two_count}}
+                      </div>
+                      <div class="fsize-4" *ngIf="less_than_two_count == 0">
+                        0
+                      </div>
+                      <div class="ml-auto">
+                        <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </form>
+    </div>
+  
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <form>
+        <a routerLink="/studyparticipation">
+          <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+            <div class="widget-chat-wrapper-outer">
+              <div class="widget-chart-content">
+                <h6 class="widget-subheading">Four studies or less</h6>
+                <div class="widget-chart-flex">
+                  <div class="widget-numbers mb-0 w-100">
+                    <div class="widget-chart-flex">
+                      <div class="fsize-4 studyparticipated" *ngIf="between_two_four">
+                        {{between_two_four}}
+                      </div>
+                      <div class="fsize-4" *ngIf="between_two_four == 0">
+                        0
+                      </div>
+                      <div class="ml-auto">
+                        <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </form>
+    </div>
+  
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <form>
+        <a routerLink="/studyparticipation">
+          <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+            <div class="widget-chat-wrapper-outer">
+              <div class="widget-chart-content">
+                <h6 class="widget-subheading">More than four studies</h6>
+                <div class="widget-chart-flex">
+                  <div class="widget-numbers mb-0 w-100">
+                    <div class="widget-chart-flex">
+                      <div class="fsize-4 studyparticipated" *ngIf="more_than_four">
+                        {{more_than_four}}
+                      </div>
+                      <div class="fsize-4" *ngIf="more_than_four == 0">
+                        0
+                      </div>
+                      <div class="ml-auto">
+                        <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </form>
+    </div>
+  </div>
+</div>

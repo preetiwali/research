@@ -1,0 +1,150 @@
+
+<style>
+  .card {
+        margin: 0 auto; /* Added */
+        width: 800px;
+  }
+  .forgotpassword{
+    float:right;
+  }
+
+  .register{
+    float:right;
+  }
+
+  /* .register-participant{
+    background-color: #555;
+    height:100%;
+  } */
+
+  button{
+    text-align: center;
+  }
+
+</style>
+
+
+<div class="h-150 bg-premium-dark">
+    <div class="d-flex h-100 justify-content-center align-items-center">
+      <div class="mx-auto app-login-box col-md-8">
+        <ngb-tabset>
+            <ngb-tab>
+              <ng-template ngbTabContent>
+                <div class="card main-card mb-3 row">
+                  <div class="card-body col-md-12">
+                    <h2 class="text-center">Researcher</h2>
+                    <form [formGroup]="this.formGroup" class="needs-validation" novalidate
+                          (validSubmit)="this.handleValidSubmit()">
+                      <div class="form-row">
+                        <div class="col-md-12 mb-3 form-group"> 
+                            <select formControlName="area" id="validationCustom01" class="form-control">
+                                <option value="">How would you describe the area in which you work?</option>
+                                <option>Academia</option>
+                                <option>Marketing</option>
+                                <option >Market Research</option>
+                                <option >Health or health tech</option>
+                                <option >Human resource or recuriment</option>
+                                <option >Research servive or Consultancy</option>
+                                <option >Business Consultancy</option>
+                                <option >Technology or Sofrware Development</option>
+                                <option >Finalcial Services</option>
+                                <option >Policy, Charity or Substainbility</option>
+                              </select> 
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3 form-group">                            
+                                <input formControlName="first_name" type="text" class="form-control" id="validationCustom01"
+                                          placeholder="First name"
+                                          required>
+                              </div>
+                              <div class="col-md-6 mb-3 form-group">                             
+                                    <input formControlName="last_name" type="text" class="form-control" id="validationCustom02"
+                                            placeholder="Last name"
+                                            required>
+                              </div>
+                        </div>
+
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3 form-group">
+                          <input formControlName="first_name" type="text" class="form-control" id="validationCustom01"
+                                   placeholder="First name"
+                                   required>
+                        </div>
+                          <div class="col-md-6 mb-3 form-group">
+                              <input formControlName="last_name" type="text" class="form-control" id="validationCustom02"
+                                     placeholder="Last name"
+                                     required>
+                          </div>
+                      </div>
+                        
+                      <div class="form-row">
+                          <div class="col-md-6 mb-3 form-group">
+                            <input formControlName="email" type="email" class="form-control" id="validationCustomUsername"
+                                placeholder="Email" aria-describedby="inputGroupPrepend">
+                          </div>
+                        <div class="col-md-6 mb-3 form-group">
+                          <input formControlName="referral_code" type="text" class="form-control" id="validationCustom05" placeholder="Referral_code"
+                                 required>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3 form-group">
+                          <input formControlName="organisation" type="text" class="form-control" id="validationCustomUsername"
+                              placeholder="Organisation" aria-describedby="inputGroupPrepend">
+                        </div>
+                          <div class="col-md-6 mb-3 form-group">
+                            <input formControlName="department" type="text" class="form-control" id="validationCustomUsername"
+                                placeholder="Department" aria-describedby="inputGroupPrepend">
+                          </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3 form-group">
+                            <select formControlName="country" id="validationCustom01" class="form-control">
+                                <option value="">Country Of Residency</option>
+                                <option>India</option>
+                                <option>UAE</option>
+                              </select>            
+                          </div>
+                          <div class="col-md-6 mb-3 form-group">  
+                            <select formControlName="job" id="validationCustom01" class="form-control">
+                              <option value="">Type of job</option>
+                              <option>Student</option>
+                              <option>Academic</option>
+                              <option >Individual</option>
+                            </select></div>
+                        </div>
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3 form-group">
+                         
+                          <input formControlName="password" type="password" class="form-control" id="validationCustom01"
+                                placeholder="password" required>
+                        </div>
+                        <div class="col-md-6 mb-3 form-group">
+                          
+                          <input formControlName="confirmpassword" type="password" class="form-control" id="validationCustom01"
+                                placeholder="ConfirmPassword" 
+                                required>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                          <div class="col-md-12 mb-3 form-group">
+                            <label class="checkbox-inline text-black"><input type="checkbox" value="" formControlName="terms">I have read & agree to the <a class="text-primary" routerLink="/participanttermsconditions">Terms & Conditions</a> and the <a class="text-primary" routerLink="/participantprivacypolicy">Privacy Policy</a> documents</label>
+                          </div>
+                      </div>
+                      <input type="hidden" class="form-control" formControlName="user_type" value="Researcher">
+                      <button class="btn btn-success ml-2" type="submit">Register</button>
+                    </form>
+                    
+                    <a class="text-primary register text-center" routerLink="/pages/login-boxed">Already have an account?</a>
+          
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+      </div>
+    </div>
+</div>

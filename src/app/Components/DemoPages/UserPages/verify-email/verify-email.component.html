@@ -1,0 +1,67 @@
+<style>
+  .card {
+    margin: 0 auto;width: 500px;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  .height{
+      height:100%;
+  }
+  h4{
+    font-size: 18px;
+  }
+  span a{
+    float:right;
+  }
+  .verify{
+    background-color: #1f4988;
+  }
+</style>
+
+<div class="height verify">
+  <div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="mx-auto app-login-box col-md-8 login_page_container">
+      <div class="card main-card mb-3 row">
+        <div class="card-body col-md-12">
+          <h2 class="text-center">Welcome</h2>
+          <div class="form-row">
+            <div class="col-md-12 mb-3 form-group" *ngIf="user_token === 'user-activated'">      
+              <h4 class="text-black text-center text-success">Your email has been verified please 
+                <a routerLink="/pages/login-boxed" class="text-primary">
+                  Login
+                </a>
+              </h4>
+            </div>
+            <div class="col-md-12 mb-3 form-group" *ngIf="user_token === 'already-activated-account'">      
+              <h4 class="text-black text-center text-warning">Your email has been already activated please
+                <a routerLink="/pages/login-boxed" class="text-primary">
+                  Login
+                </a>
+              </h4>
+            </div>
+            <div class="col-md-12 mb-3 form-group" *ngIf="user_token === 'Link-expired'">      
+              <h4 class="text-black text-center text-danger">Verification link has been expired please 
+                <a routerLink="/pages/login-boxed" class="text-primary">
+                  Login
+                </a> to get new verification link.
+              </h4>
+            </div>
+            <div class="col-md-12 mb-3 form-group" *ngIf="user_token === 'Not-a-valid-token'">      
+              <h4 class="text-black text-center text-danger">Verification link is not valid please 
+                <a routerLink="/pages/login-boxed" class="text-primary">
+                  Login
+                </a>
+              </h4>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+        

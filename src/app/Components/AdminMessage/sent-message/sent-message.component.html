@@ -1,0 +1,102 @@
+
+<style>
+  img{
+    border-radius: 50%;
+    width:18%;
+    height:20%;
+  }
+  .envelope{
+    text-align: center;
+  }
+  button{
+    margin:auto;
+  }
+  h3{
+    margin-top:2%;
+  }
+  .sentmail{
+    margin-top:5%;
+  }
+  .sent-mails{
+    height:50%;
+  }
+  .widget-subheading,.widget-subheading{
+    font-weight:bold;
+  }
+  a{
+    text-decoration: none;
+  }
+  .icons{
+    font-size:15px;
+  }
+  .submitbutton{
+    background-color: #0a2956;border: #0a2956;color:white;
+  }
+</style>
+    
+<div class="sentmail" *ngIf="message == 'no-mail-found'">
+  <div class="envelope">
+    <img src="assets/images/inbox.png">
+  </div>
+  <h3 class="text-center">Nothing here.Enjoy that</h3>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 sent-mails" *ngIf="message == 'sent-mails'">
+    <div class="card-hover-shadow-2x mb-3 card">
+      <div class="card-header-tab card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">Sent Mails</div>
+      </div>
+      <div class="scroll-area-lg">
+        <perfect-scrollbar [autoPropagation]="true">
+          <ul class="todo-list-wrapper list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let message of messages; let i=index;">
+              <div class="todo-indicator bg-warning"></div>
+              <div class="widget-content p-0">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left mr-2">
+                  </div>
+                  <a routerLink="/adminsentdetails/{{message.id}}">
+                    <div class="widget-content-left">
+                      <div class="widget-heading text-primary">{{message.subject}} </div>
+                      <div class="widget-subheading"><i>Recipant {{message.reciever_id}}</i></div>
+                      <div class="widget-subheading">{{message.created_at | date:'short' }}</div>
+                    </div>
+                  </a>
+                  <div class="widget-content-right widget-content-actions">
+                    <button class="border-0 btn-transition btn btn-outline-success">
+                      <fa name="archive" class="icons" (click)="archiveMail(message.id);"></fa>
+                    </button>
+                    <button class="border-0 btn-transition btn btn-outline-danger" title="Delete">
+                      <fa name="trash" class="icons" (click)="openLarge(deletesentmessage)"></fa>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- delete modal -->
+                <ng-template #deletesentmessage let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Delete Message</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button> 
+                  </div>
+                    <div class="modal-body"> 
+                      <div class="col-md-12 mb-3 form-group">
+                        <h4>Sure! You want to delete message?</h4>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                      <button type="submit" class="btn submitbutton" (click)="deleteMail(message.id);">Yes</button>
+                    </div>
+                </ng-template>
+
+            </li>
+          </ul>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>

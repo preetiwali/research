@@ -1,0 +1,68 @@
+<style>
+  .card {
+    margin: 0 auto;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  .forgot{ 
+    background-color: #1f4988;  
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;border:1px solid black;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;float: right;
+  }
+  .leftbutton{
+    float:right;
+  }
+</style>
+
+<div class="h-150">
+  <div class="d-flex h-100 justify-content-center align-items-center forgot">
+    <div class="container">
+      <div class="mx-auto app-login-box col-md-8 login_page_container">
+        <div class="card main-card mb-3 row bg-white">
+          <div class="card-body col-md-12">
+            <span class="leftbutton">
+              <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/"><i class="fa fa-arrow-left"></i>
+              </button>
+            </span>
+            <h4 class="text-left">Update Password</h4>
+            <form [formGroup]="this.changepassword" class="needs-validation" novalidate
+                  (validSubmit)="this.changePassword()">
+              <div class="form-row">
+                <div class="col-md-12 mb-3 form-group">
+                  <label for="validationCustomUsername">Current Password</label>
+                  <input formControlName="currentpassword" type="password" class="form-control password1"
+                          placeholder="Current Password" id="currentpass" (focusout)="CheckPassword()" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-12 mb-3 form-group">
+                  <label for="validationCustomUsername">New Password</label>
+                  <input formControlName="newpassword" type="password" (change)="Password();" class="form-control password2" 
+                          id="changepassword" placeholder="New Password" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-12 mb-3 form-group">
+                  <label for="validationCustomUsername">Confirm Password</label>
+                  <input formControlName="confirmpassword" type="password" (keyup)="ConfirmPassword();" class="form-control password2" 
+                          id="changeconfirmpassword" placeholder="Confirm Password" required>
+                </div>
+              </div>
+              <button class="btn ml-2 submitbutton" type="submit" [disabled]="passwordmatch === false">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+        

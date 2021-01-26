@@ -1,0 +1,369 @@
+ <style>
+  h3{
+    margin-top: 24%;font-size: 75px;
+  }
+  .studyimage{
+    border-radius: 50%; width:18%;height:14%;
+  }
+  .profileimage{
+    border-radius: 50%; width:18%;height:14%;
+  }
+  .envelope{
+    text-align: center;
+  }
+  .images{
+    width:82%;
+  }
+  h3{
+    color: #0a2956;
+  }
+  .adminimage{
+    width: 65%; margin-top: 2%; margin:auto;
+  }
+  @media screen and (max-width: 400px) {
+    h4{
+      font-size:12px;
+    }
+    p{
+      font-size: 20px;
+    }
+    img{
+      width:50%;
+    }
+  }
+    @media screen and (max-width: 380px) {
+    .study-found{
+      margin-left:12%!important;
+    }
+    .study-about-profle{
+      margin-left:12%!important;
+    }
+  }
+  .participantcard{
+    width: 80%; margin: auto;
+  }
+  p{
+    color:#0a2956;font-size: 25px;
+  }
+  .participantimage{
+    margin-top:5%;
+  }
+  a{
+    text-decoration: none;
+  }
+  .helpbutton{
+    margin:2%;color:#0a2956;
+  }
+  .aboutprofile{
+    color:white;margin-top:1%;
+  }
+  .studystatus{
+    color:black;margin-top: 5%;
+  }
+  .aboutstatus{
+    margin-top: 15%;
+  }
+  .profile-responsive{
+    height:96%;background-color: white;margin-left: 12%;width: 77%;float: left;
+  }
+  .imagediv{
+    margin-top: 5%;
+  }
+  .participanthome{
+    background-color: white;border-radius: 0.5%;
+  }
+  .backgroundbody{
+    background-color: white;
+  }
+  .firstcardstyle{
+    width: 75%;margin-left: 12%;float:left;
+  }
+  .secondcardstyle{
+    width: 77%;margin-left: 12%;float: left;
+  }
+  .studyimage{
+    width:77%;
+  }
+  .profileimage{
+    width:10%;
+  }
+  .bars{
+    margin-top: 10%;
+  }
+  .maincontent{
+    margin-top:1%;
+  }
+  .imagebox{
+    margin-top: 5%;
+  }
+  .studycontent{
+    padding:10%;
+  }
+  #modal2{
+    display: none;
+  }
+  .crossbutton{
+    color:white;
+  }
+  .crossbutton:hover{
+    color:white;
+  }
+  .loginmodal{
+    width:100%;border-radius: none!important;margin-left: 25px;
+  }
+  .nextmodal{
+    width:98%;border-radius: none!important;
+  }
+  .handicon{
+    width:20%;border-radius: none!important;margin-left: 24%;margin-top: -4%;
+  }
+  .handiconnext{
+    width:20%;border-radius: none!important;margin-left: 15%;margin-top: -6%;
+  }
+  .handiconclose{
+    width:6%;border-radius: none!important;
+  }
+  .lastmodal{
+    width:58%;margin-left:25%;border-radius: none!important;
+  }
+  .modal-footer {
+    border-top: none;
+    background-color: white;
+  }
+  .modal-header {
+    border-bottom: none;
+    background-color: white;
+  }
+  .nextbutton{
+    background-color: #3498db ;
+    border: 1px solid #3498db ;
+    color:white;
+  }
+  .loginfirstmodal{
+    height:360px;
+  }
+</style>
+  
+
+  <div class="container" *ngIf ="message == 'admin'">
+    <h3 class="text-center">
+      <img src="assets/images/ResearchSquare.png" class="adminimage">
+    </h3>
+  </div>
+
+  <!-- <div class="row">
+    <div class="main-card card participantcard">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="participantimage">
+          <div class="envelope">
+            <img src="assets/images/crack.gif">
+          </div><br>
+          <p class="text-center">Welcome to Winpower</p>
+        </div>    
+      </div>
+
+      <div class="text-center">
+        <a routerLink="/helpcontent" target="_blank">
+          <button class="btn helpbutton">Click here for help</button>
+        </a>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Subscribe our Newsletter</h4>
+            </div>
+            <div class="modal-body">
+				<p>Subscribe to our mailing list to get the latest updates straight in your inbox.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div> -->
+
+
+  <!-- (click)="c('Save click')" -->
+
+  <ng-template #content let-c="close" let-d="dismiss" id="modal1">
+    <div>
+      <div class="modal-header">
+        <!-- <h4 class="modal-title" id="modal-basic-title">You will be notify when new study is published</h4> -->
+        <img class="loginmodal" src="assets/images/header.png" alt="assets/images/header.png" />
+        <button type="button" class="close crossbutton" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body loginfirstmodal">
+        <img class="handicon" src="assets/images/arrowicon.png" alt="assets/images/arrowicon.png" />   
+        <h6 class="text-info text-center">Click on “About You” link button </h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn nextbutton" (click)="openLarge(contents)">Next</button>
+      </div>
+    </div>
+  </ng-template>
+
+
+  <ng-template #contents let-c="close" let-d="dismiss" id="modal2">
+    <div class="modal-header">
+      <img class="nextmodal" src="assets/images/questions.png" alt="assets/images/questions.png" />
+      <button type="button" class="close crossbutton" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img class="handiconnext" src="assets/images/arrowicon.png" alt="assets/images/arrowicon.png" /> 
+      <h6 class="text-info text-center">Click on any <b>Category</b> and fill in details about yourself</h6>    
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn nextbutton" (click)="openLarge(content)">Previous</button>
+      <button type="button" class="btn nextbutton" (click)="openLarge(content1)">Next</button>
+    </div>
+  </ng-template>
+
+  <ng-template #content1 let-c="close" let-d="dismiss" id="modal2">
+    <div class="modal-header">
+      <img class="lastmodal" src="assets/images/modalpagestudy.png">
+      <button type="button" class="close crossbutton" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body thirdmodal">
+      <h4 class="text-info" style="margin-left: 16%;">You will be notified when a new study is published</h4>
+    </div>
+    <div class="modal-footer">
+      <h6 class="text-info text-center">Click on “Close” button</h6>
+      <img class="handiconclose" src="assets/images/crossarrow.jpeg" alt="assets/images/crossarrow.jpeg" /> 
+      <button type="button" class="btn nextbutton" (click)="openLarge(contents)">Previous</button>
+      <button type="button" class="btn nextbutton" (click)="closemodal();">Close</button>
+    </div>
+  </ng-template>
+
+
+
+  <div class="row" *ngIf="message =='study-not-found'">
+    <div class="col-sm-12 col-lg-6">
+      <div class="mb-3 card firstcardstyle">
+        <div class="card-body participanthome">
+          <!-- when study not found -->
+          <div class="imagebox">
+            <div class="text-center envelope studycontent">
+              <img src="assets/images/waiting.gif" class="studyimage">
+              <h4 class="text-center studystatus">Waiting For Studies</h4>
+            </div><br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      <div class="mb-3 profile-responsive card">
+        <div class="dropdown-menu-header">
+          <div class="dropdown-menu-header-inner bg-dark">
+            <div class="menu-header-image opacity-4 dd-header-bg-2"></div>
+            <div class="imagebox">
+              <div class="text-center envelope">
+                <img src="assets/images/waiting.gif" class="profileimage">
+                <h4 class="text-center aboutprofile">About Profile</h4>
+              </div><br>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="main-card bars">
+              <div class="card-body backgroundbody">
+                <mwl-gauge
+                  [max]="total_question"
+                  [label]="percentageValue"
+                  [value]="total_response"
+                  [animated]="true"
+                  [animationDuration]="1">
+                </mwl-gauge>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="imagediv">
+              <div class="text-center envelope aboutstatus">
+                <img class="images" *ngIf="status == 'less-than-25'" src="assets/images/aboutstudy.gif">
+                <img class="images" *ngIf="status == 'less-than-50'" src="assets/images/aboutstudy.gif">
+                <img class="images" *ngIf="status == 'less-than-75'" src="assets/images/aboutstudy.gif">
+                <img class="images" *ngIf="status == 'more-than-75'" src="assets/images/aboutstudy.gif">
+              </div><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- study found  -->
+
+  <div class="row maincontent" *ngIf="message =='study-found'">
+    <div class="col-sm-12 col-lg-6">
+      <div class="mb-3 card study-found secondcardstyle">
+        <div class="card-body participanthome">
+          <!-- when study not found -->
+          <div>
+            <div class="text-center envelope studycontent">
+              <img src="assets/images/studies.jpg" class="studyimage">
+              <h4 class="text-center studystatus">Studies are available for you. Check them out now!</h4>
+            </div><br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-6 col-xl-6">
+      <div class="mb-3 profile-responsive card study-about-profle">
+        <div class="dropdown-menu-header">
+          <div class="dropdown-menu-header-inner bg-dark">
+            <div class="menu-header-image opacity-4 dd-header-bg-2"></div>
+            <div class="imagebox">
+              <div class="text-center envelope">
+                <img src="assets/images/waiting.gif" class="profileimage">
+                <h4 class="text-center aboutprofile">About Profile</h4>
+              </div><br>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="main-card bars">
+              <div class="card-body backgroundbody">
+                <mwl-gauge
+                  [max]="total_question"
+                  [label]="percentageValue"
+                  [value]="total_response"
+                  [animated]="true"
+                  [animationDuration]="1">
+                </mwl-gauge>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="imagediv">
+              <div class="text-center envelope aboutstatus">
+                <img class="images" *ngIf="status == 'less-than-25'" src="assets/images/aboutstudy.gif">
+                <img class="images" *ngIf="status == 'less-than-50'" src="assets/images/aboutstudy.gif">
+                <img class="images" *ngIf="status == 'less-than-75'" src="assets/images/aboutstudy.gif">
+                <img class="images" *ngIf="status == 'more-than-75'" src="assets/images/aboutstudy.gif">
+              </div><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

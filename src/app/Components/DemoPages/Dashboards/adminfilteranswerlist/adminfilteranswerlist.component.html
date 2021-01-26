@@ -1,0 +1,148 @@
+<style>
+  .addanswer{
+    margin:3%;
+  }
+  .table-responsive{
+    padding: 1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .filterlist{
+    margin-top:1%;
+  }
+  .savecard{
+    height:200px;
+  }
+  .backbutton{
+    font-size: 14px;
+  }
+  .answerlist{
+    display: block;height: 450px;overflow-y: scroll;overflow-x: scroll;
+  }
+  .userlist{
+    display: block;height: 350px;overflow-y: scroll;overflow-x: scroll;
+  }
+</style>
+  
+  <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/dashboards/adminfilterquestionlist/{{question.question_category_id}}"><i class="fa fa-arrow-left"></i></button>   
+
+  <div class="row filterlist">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">
+          <table class="align-middle mb-0 table table-borderless">
+            <tbody>
+              <tr>
+                <td class="text-left">
+                  <i class="header-icon lnr-question-circle icon-gradient bg-love-kiss"> </i>
+                  {{ question?.title }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="position-relative form-group"><h5>
+              {{ question?.description }}
+            </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="question_type_id == 1 || question_type_id == 2">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card answerlist">
+        <div class="card-header text-black">
+          <i class="header-icon lnr-location icon-gradient bg-love-kiss"> </i>
+          Answer
+        </div>
+          <div class="card-body">
+            <div class="table-responsive">
+                <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let answer of answerList; let i=index;">
+                    <td class="text-center" (click)="adminFilter(question.id,answer.id);">{{answer.description}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+       
+      
+  <div class="row" *ngIf="question_type_id == 4 || question_type_id == 5">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header text-black">
+          <i class="header-icon lnr-location icon-gradient bg-love-kiss"> </i>
+          Answer
+        </div>
+          <div class="card-body">
+            <form  [formGroup]="saverangeanswer" (ngSubmit)="saveRangeAnswer(question['id'], study_id)" class="needs-validation addmodal" novalidate>
+              <div class="card-body savecard">
+                <div class="tab-content">
+  
+                  <div class="row rangequestion">
+                    <div class="col-md-6 mb-3 form-group">
+                      <input formControlName="min_limit" type="number" min="0" title="Min Value" class="form-control rangeinput col-md-12 col-lg-12 col-sm-12" id="validationCustom01">
+                    </div>
+                    <div class="col-md-6 mb-3 form-group">
+                      <span><input formControlName="max_limit" min="0" type="number" title="Max Value" class="form-control rangeinput col-md-12 col-lg-12 col-sm-12" id="validationCustom01"></span>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="d-block text-right card-footer">
+                <button type="submit" class="btn-wide btn submitbutton">Save</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="users">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header text-black">
+          <i class="header-icon lnr-users icon-gradient bg-love-kiss"> </i>
+          User List
+        </div>
+          <div class="card-body">
+            <div class="table-responsive userlist">
+                <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Research Work Id</th>
+                      <th class="text-center">Email</th>
+                      <th class="text-center">UserName</th>
+                      <th class="text-center">Country</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let user of users; let i=index;">
+                    <td class="text-center"> {{user.research_worker_id}}</td>
+                    <td class="text-center"> {{user.email}}</td>
+                    <td class="text-center"> {{user.first_name}} {{user.last_name}}</td>
+                    <td class="text-center"> {{user.country}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

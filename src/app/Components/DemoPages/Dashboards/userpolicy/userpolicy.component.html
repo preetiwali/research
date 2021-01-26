@@ -1,0 +1,24 @@
+
+<style>
+  .card{
+    background-color: white;
+  }
+  .description{
+    padding: 1%;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let policy of policies; let i=index;">
+      <div class="mb-3 card main-card">
+        <div class="card-body">
+          <div>
+            <div [innerHTML]="policy?.description" class="description"></div>
+          </div>    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+  

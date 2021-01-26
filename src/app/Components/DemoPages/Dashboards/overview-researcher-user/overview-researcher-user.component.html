@@ -1,0 +1,156 @@
+
+<style>
+  .study{
+    display: block;height: 490px;overflow-x: scroll;overflow-y: scroll;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .dropdown-menu-header-inner{
+    background-color: #B1B69D;
+  }
+  .menu-header-title,.menu-header-subtitle{
+    color:#0a2956;
+  }
+  .activebutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .table-responsive{
+    padding: 1%;
+  }
+  .graph{
+    height: 90%;
+  }
+  .card-header{
+    padding:2%;
+  }
+</style>
+
+<button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/researcheruserlist"><i class="fa fa-arrow-left"></i></button>
+
+<div class="row">
+  <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+    <div class="card-shadow-primary card-border mb-3 card">
+      <div class="dropdown-menu-header">
+        <div class="dropdown-menu-header-inner">
+          <div class="menu-header-content">
+            <div class="avatar-icon-wrapper mb-3 avatar-icon-xl">
+              <div class="avatar-icon" *ngIf="image_url == null" >
+                  <img src="./assets/images/profile.jpg">
+              </div>
+              <div class="avatar-icon" *ngIf="image_url != null" >
+                <img src="{{ image_url }}">
+              </div>
+            </div>
+            <div><h5 class="menu-header-title">{{ user?.first_name }} {{ user?.last_name }}</h5>
+              <h6 class="menu-header-subtitle">{{ user?.user_type }}</h6>
+            </div>
+            <div class="menu-header-btn-pane pt-1">
+              <button class="btn btn-lg activebutton">
+                <a *ngIf="user?.status == 'active'" (click)="updateResearcherUserDeactiveStatus(user.id);">Deactivate</a>
+                <a *ngIf="user?.status == 'deactive'" (click)="updateResearcherUserActiveStatus(user.id);" >Activate</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-3"><h6 class="text-black text-center text-uppercase font-size-md font-weight-bold">Basic Details</h6>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <tr>
+              <th class="text-left">Name</th>
+              <td class="text-right"> {{ user?.first_name }} </td>
+            </tr>
+            <tr>
+              <th class="text-left">Email</th>
+              <td class="text-right">{{ user?.email }}</td>
+            </tr> 
+            <tr>
+              <th class="text-left">Country</th>
+              <td class="text-right">{{ user?.country }}</td>
+            </tr> 
+            <tr>
+              <th class="text-left">Organisation</th>
+              <td class="text-right">{{ user?.university }}</td>
+            </tr> 
+            <tr>
+              <th class="text-left">Department</th>
+              <td class="text-right">{{ user?.department }}</td>
+            </tr> 
+            <tr>
+              <th class="text-left">Specialisation Area</th>
+              <td class="text-right">{{ user?.specialisation }}</td>
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="col-md-12 col-lg-8 col-xl-8 col-sm-12 col-xs-12">
+    <div class="card main-card mb-3 graph">
+      <div class="card-header">
+       Total Amount - {{total_paid_amount}}
+      </div>
+      <div class="card-body">
+        <apx-chart
+          [series]="[
+            {
+              name: 'Monthly Payment',
+              data: monthly_payment
+            }
+          ]"
+          [xaxis]="{categories: months}"
+          [chart]="{
+            height: '430',
+            type: 'area'
+          }"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xl-12 col-xs-12 col-sm-12">
+    <div class="main-card mb-3 card termscondition">
+      <div class="card-header">Study List
+        <div class="btn-actions-pane-right">
+        </div>
+      </div>
+      <div class="table-responsive study">
+        <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">Id</th>
+              <th class="text-center">Study Name</th>
+              <th class="text-center">Completion URL</th>
+              <th class="text-center">Completion Code</th>
+              <th class="text-center">Study URL</th>
+              <th class="text-center">Reward Per Participant</th>
+              <th class="text-center">Number Of Participants</th>
+              <th class="text-center">Cost Of Study</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let study of studies; let i=index;">
+            <td class="text-center">{{ study?.id }}</td>
+            <td class="text-center"><a> {{ study?.name }} </a></td>
+            <td class="text-center">{{ study?.completionurl }}</td>
+            <td class="text-center">{{ study?.completioncode }}</td>
+            <td class="text-center">{{ study?.studyurl }}</td>
+            <td class="text-center">{{ study?.reward }}</td>
+            <td class="text-center">{{ study?.submission }}</td>
+            <td class="text-center">{{ study?.reward * study?.submission * 1.20 }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>  
+</div>
+
+
+

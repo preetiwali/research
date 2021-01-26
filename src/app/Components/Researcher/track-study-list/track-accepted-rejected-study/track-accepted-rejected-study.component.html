@@ -1,0 +1,67 @@
+<style>
+  .study{
+    display: block;height: 720px;overflow-y: scroll;overflow-x: scroll;padding:1%;
+  }
+  .action{
+    display: flex;
+  }
+  .trackstudy{
+    width:100%;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+      <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/researchertrackactivestudy">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+        <div class="main-card mb-3 card trackstudy">
+          <div class="card-header">Accepted User List</div>
+          <div class="table-responsive study">
+            <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">Research Work id</th>
+                  <!-- <th class="text-center">Name</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of accepted_users; let i=index;">
+                  <td class="text-center">{{ user?.research_worker_id }}</td>
+                  <!-- <td class="text-center">{{ user?.first_name }} {{ user?.last_name }}</td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card mb-3 card trackstudy">
+        <div class="card-header">Rejected User List</div>
+        <div class="table-responsive study">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">Research Work id</th>
+                <!-- <th class="text-center">Name</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of rejected_users; let i=index;">
+                <td class="text-center">{{ user?.research_worker_id }}</td>
+                <!-- <td class="text-center">{{ user?.first_name }} {{ user?.last_name }}</td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

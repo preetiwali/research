@@ -1,0 +1,124 @@
+
+<style>
+  .widget-subheading{
+    color: black;
+  }
+  .studyparticipated{
+    color: black;
+  }
+  a{
+    text-decoration: none;color: black;
+  }
+  .backbutton{
+    margin-bottom:1%;font-size: 14px;
+  }
+  .ratinglist{
+    margin-bottom: 2%;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row ratinglist">
+    <div class="col-lg-6 col-md-6 col-xs-6">
+      <button class="btn btn-md bg-white backbutton" title="Back" routerLink="/participantratinglist/{{study_id}}">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <form [formGroup]="this.formGroup" (click)="studyparticipated(1);">
+        <a routerLink="/participantstudylist/{{study_id}}">
+          <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+            <div class="widget-chat-wrapper-outer">
+              <div class="widget-chart-content">
+                <h6 class="widget-subheading">Two studies or less</h6>
+                <div class="widget-chart-flex">
+                  <div class="widget-numbers mb-0 w-100">
+                    <div class="widget-chart-flex">
+                      <div class="fsize-4 studyparticipated" *ngIf="less_than_two_count">
+                        {{less_than_two_count}}
+                      </div>
+                      <div class="fsize-4" *ngIf="less_than_two_count == 0">
+                        0
+                      </div>
+                      <div class="ml-auto">
+                        <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </form>
+    </div>
+  
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <form [formGroup]="this.formGroup" (click)="studyparticipated(2);">
+        <a routerLink="/participantstudylist/{{study_id}}">
+          <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+            <div class="widget-chat-wrapper-outer">
+              <div class="widget-chart-content">
+                <h6 class="widget-subheading">Four studies or less</h6>
+                <div class="widget-chart-flex">
+                  <div class="widget-numbers mb-0 w-100">
+                    <div class="widget-chart-flex">
+                      <div class="fsize-4 studyparticipated" *ngIf="between_two_four">
+                        {{between_two_four}}
+                      </div>
+                      <div class="fsize-4" *ngIf="between_two_four == 0">
+                        0
+                      </div>
+                      <div class="ml-auto">
+                        <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </form>
+    </div>
+  
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+      <form [formGroup]="this.formGroup" (click)="studyparticipated(3);">
+        <a routerLink="/participantstudylist/{{study_id}}">
+          <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+            <div class="widget-chat-wrapper-outer">
+              <div class="widget-chart-content">
+                <h6 class="widget-subheading">More than four studies</h6>
+                <div class="widget-chart-flex">
+                  <div class="widget-numbers mb-0 w-100">
+                    <div class="widget-chart-flex">
+                      <div class="fsize-4 studyparticipated" *ngIf="more_than_four">
+                        {{more_than_four}}
+                      </div>
+                      <div class="fsize-4" *ngIf="more_than_four == 0">
+                        0
+                      </div>
+                      <div class="ml-auto">
+                        <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </form>
+    </div>
+  </div>
+</div>

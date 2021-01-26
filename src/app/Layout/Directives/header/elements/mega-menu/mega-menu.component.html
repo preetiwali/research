@@ -1,0 +1,64 @@
+<style>
+  a{
+    font-size:19px;color:white; font-weight: bold;text-decoration: none;margin-left: 5px;
+  }
+  a::after {
+    content: '';display: block;width: 0;height: 2px;background: #fff;transition: width .3s;
+  }
+  a:hover::after {
+    width: 100%;
+  }
+  .vsm-icon{
+    font-size: 20px;color:white;margin-top:-3px;
+  }
+
+  @media screen and (min-width: 992px) and (max-width: 1440px) {
+    a{
+      font-size:15px;
+    }
+  }
+
+</style>
+
+<ul class="header-megamenu nav">
+  <li class="nav-item">
+    <div class="btn-group">
+      <button class="btn btn-link">
+        <span class="text-black">
+          <div class="vsm-icon lnr-graduation-hat"></div>
+          <a class="headerlinks" routerLink="/participantstudy">Studies</a>
+        </span>
+      </button>
+    </div>
+  </li>
+  <li class="nav-item">
+    <div class="btn-group">
+      <button class="btn btn-link">
+        <span class="text-black">
+          <div class="vsm-icon lnr-users"></div>
+          <a class="headerlinks" routerLink="/aboutyou">About You</a>
+        </span>
+      </button>
+    </div>
+  </li>
+  <li class="nav-item">
+    <div class="btn-group">
+      <button class="btn btn-link">
+        <span class="text-black">
+          <div class="vsm-icon lnr-file-empty"></div>
+          <a class="headerlinks" routerLink="/participantstudysubmission/{{user_id}}">My Dashboard</a>
+        </span>
+      </button>
+    </div>
+  </li>
+  <li class="nav-item">
+    <div  class="dropdown-menu-rounded btn-group">
+      <button type="button" class="btn btn-link">
+        <span class="text-black">
+          <i class="vsm-icon lnr lnr-list"></i>
+          <a class="headerlinks" routerLink="/participanttransactions">Transaction Details</a>
+        </span>
+      </button>
+    </div>
+  </li>
+</ul>

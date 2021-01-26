@@ -1,0 +1,155 @@
+<style>
+  button{
+    margin-bottom:2%;
+  }
+  .confirm{
+    float:right;background-color: #1f4988;border: #1f4988;color:white;margin-left: -1%;
+  }
+  .widget-subheading{
+    margin-top: 1%;font-size:20px;
+  }
+  .backbutton{
+    margin:auto;float:left;font-size: 14px;margin-bottom:1%;
+  }
+  .copyicon{
+    float:right;margin:auto;font-size:18px;margin-bottom:1%;
+  }
+  .actionbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .progress-bar{
+    width: 65%;
+  }
+  .widget-number{
+    font-size: 20px;
+  }
+  a{
+    text-decoration: none;
+  }
+  .lnr-envelope{
+    color:#1f4988;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/studyactive"><i class="fa fa-arrow-left"></i></button>
+      <button class="btn btn-lg bg-white copyicon" title="Copy Study" (click)="copyStudy(study?.id)"><i class="fa fa-copy"></i></button>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Basic Details
+          <div class="btn-actions-pane-right">
+            <div role="group" class="btn-group-sm btn-group"> </div>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+              <tr>
+                <th class="text-left">Completion URL</th>
+                <td class="text-right">{{ study?.completionurl }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Completion Code</th>
+                <td class="text-right">{{ study?.completioncode }}</td>
+              </tr> 
+              <tr>
+                <th class="text-left">Study Name</th>
+                <td class="text-right">{{ study?.name }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Study URL</th>
+                <td class="text-right">{{ study?.studyurl }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Estimated Completion Time</th>
+                <td class="text-right">{{ study?.estimatetime }} Minutes</td>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Allowed Time</th>
+                <td class="text-right">{{ study?.allowedtime }} Minutes</td>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Submissions</th>
+                <td class="text-right">{{ study?.submission }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Reward Per Participant</th>
+                <td class="text-right">{{ study?.reward }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum completion date</th>
+                <td class="text-right">{{ study?.max_participation_date | date:'mediumDate' }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="d-block text-right card-footer">
+          <button class="btn btn-lg actionbutton" (click)="openLarge(name)" title="Edit" *ngIf="new_date > study?.max_participation_date"><i class="lnr lnr-pencil"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <!-- study published -->
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Study Details</div>
+        <div class="card-body">
+            <p class="mb-0" [innerHTML]="study?.description"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- edit modal -->
+  <ng-template #name let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.editDateform" class="needs-validation" novalidate
+          (validSubmit)="this.editDate(study.id)">
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustomUsername">Maximum completion date</label>
+          <div class="input-group">
+            <input type="date" *ngIf="study" [(ngModel)]="max_participation_date" class="form-control" min="{{min_to_date}}" id="userdate" formControlName="max_participation_date">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn actionbutton" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn actionbutton">Update</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+
+<!-- reply modal -->
+  <!-- <ng-template #name let-c="close" let-d="dismiss">
+    <div class="modal-header bg-arielle-smile">
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body"> 
+      <h5>You want to republish a study?</h5>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn actionbutton" (click)="c('Close click')">Close</button>
+      <button type="submit" class="btn actionbutton" (click)="republishStudy(study?.id);">Yes</button>
+    </div>
+  </ng-template> -->

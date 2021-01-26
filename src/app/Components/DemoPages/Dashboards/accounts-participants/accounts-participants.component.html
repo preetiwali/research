@@ -1,0 +1,358 @@
+<style>
+ .main-card{
+  background-color: white;
+ }
+ li, .example-card{
+  background-color: white;
+ }
+ button.account-page{
+  background-color: black;
+  border: black;
+  color:white;
+ }
+ button.account-page:hover{
+   color:white;
+ }
+ th{
+   color:black;
+ }
+ .widget-heading{
+   color:black;
+ }
+ h6, h4{
+   color:black;
+ }
+ .imagecard{
+   margin:auto!important;
+ }
+ .actionbutton{
+  width: 100px;
+ }
+ .badge{
+  font-size:12px;
+ }
+ .basicdetails{
+  margin:auto;
+ }
+ .cashbutton{
+   width: 95px;
+ }
+ .accountcard
+ {
+  height:185px;
+ }
+ .icons{
+  font-weight: bold;
+ }
+ h6 span{
+  float:right;
+ }
+ .submitbutton{
+   background-color: black;
+ }
+ .modalcolor{
+   background-color: black;
+ }
+ .imageupload{
+   color:white;
+ }
+ .close{
+   color: white;
+ }
+</style>
+
+<!-- basic info -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <div class="card main-card mb-3">
+        <div class="card-body">
+          <div class="row"> 
+            <div class="col-md-3 imagecard">
+              <mat-card class="example-card">
+                  <mat-card-header>
+                    <div mat-card-avatar>
+                        <button class="btn account-page" title="Edit" (click)="openLarge(content30)"><i class="lnr-pencil"></i></button>
+                    </div>
+                    <mat-card-title>{{ participantusers?.first_name }} {{ participantusers?.last_name }}</mat-card-title>
+                  </mat-card-header>
+                  <img mat-card-image *ngIf="image_url == null" src="./assets/images/profile.jpg" alt="Photo of a user">
+                  <img mat-card-image *ngIf="image_url != null" src="{{ image_url }}" alt="Photo of a Shiba Inu">
+                </mat-card>
+            </div>
+            <div class="col-md-9 basicdetails">
+              <div class="p-3">
+                  <h6 class="text-black text-left text-uppercase font-size-md font-weight-bold">Basic Details<span>
+                    <button type="button" title="Edit" class="btn text-white account-page" (click)="openLarge(name)"><i class="lnr-pencil icons"></i></button></span>
+                  </h6><br>
+                  
+                  <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped">
+                      <tr>
+                        <th class="text-left">Account Status</th>
+                        <td class="text-right"><div class="badge badge-warning">{{ participantusers?.status }}</div></td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Research Work Id</th>
+                        <td class="text-right">{{ participantusers?.research_worker_id }}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Name</th>
+                        <td class="text-right">{{ participantusers?.first_name }} {{ participantusers?.last_name }}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Email</th>
+                        <td class="text-right">{{ participantusers?.email }}</td>
+                      </tr> 
+                      <tr>
+                        <th class="text-left">Country</th>
+                        <td class="text-right">{{ participantusers?.country }}</td>
+                      </tr> 
+                      <tr>
+                        <th class="text-left">Contact  Number</th>
+                        <td class="text-right">{{ participantusers?.contact_number }}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Date of Birth</th>
+                        <td class="text-right">{{ participantusers?.date_of_birth | date:'shortDate' }}</td>
+                      </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+     <!-- security table -->
+     <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h6 class="text-uppercase font-size-md opacity-7 mb-3 font-weight-normal">Security</h6>
+          <div class="border-light scroll-area-md card accountcard">
+           
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left">
+                        <div class="widget-heading">Password</div>
+                      </div>
+                      <div class="widget-content-right">
+                        <div class="fsize-2 text-success">
+                          <button type="button" class="btn btn-lg border border-black account-page actionbutton" (click)="openLarge(content20)">Change</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left">
+                        <div class="widget-heading">Deactivate Account</div>
+                      </div>
+                      <div class="widget-content-right">
+                        <div class="fsize-2 text-success">
+                          <button type="button" class="btn btn-lg border border-black account-page actionbutton" (click)="openLarge(content22)" >Deactivate</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left">
+                        <div class="widget-heading">Refer to your friend</div>
+                      </div>
+                      <div class="widget-content-right">
+                        <div class="fsize-2 text-success">
+                          <button type="button" class="btn btn-lg border border-black account-page actionbutton" (click)="openLarge(refer)">Refer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- balance table -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h6 class="text-uppercase font-size-md opacity-7 mb-3 font-weight-normal"> Cashout Details</h6>
+          <div class="border-light card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="widget-content p-0">
+                  <div class="widget-content-wrapper">
+                    <div class="widget-content-left">
+                      <div class="widget-heading">Balance</div>
+                    </div>
+                    <div class="widget-content-right">
+                      <div class="fsize-2 text-success">
+                        <a routerLink="/walletparticipant">
+                          <button type="button" class="btn btn-lg border border-black account-page cashbutton">Cash Out</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- edit modal -->
+  <ng-template #name let-c="close" let-d="dismiss">
+    <div class="modal-header text-warning modalcolor">
+      <h5 class="modal-title">EDIT PROFILE</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.editinfo" class="needs-validation" novalidate
+            (validSubmit)="this.editNameInfo(participantusers.id)">
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">First Name</label>
+          <input *ngIf="participantusers" formControlName="first_name" type="text" class="form-control" id="validationCustom01"
+          [(ngModel)]="participantusers.first_name" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Last Name</label>
+          <input *ngIf="participantusers" formControlName="last_name" type="text" class="form-control" id="validationCustom01"
+          [(ngModel)]="participantusers.last_name" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Email</label>
+          <input *ngIf="participantusers" formControlName="email" type="text" class="form-control" id="validationCustom01"
+          [(ngModel)]="participantusers.email" readonly>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Country</label>
+        <input *ngIf="participantusers" formControlName="country" type="text" class="form-control" id="validationCustom01"
+        [(ngModel)]="participantusers.country">
+      </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Contact Number</label>
+          <input *ngIf="participantusers" formControlName="contact_number" type="number" class="form-control" id="validationCustom01"
+          [(ngModel)]="participantusers.contact_number" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Date of Birth</label>
+          <input *ngIf="participantusers" formControlName="date_of_birth" type="date" class="form-control" id="dob"
+          [(ngModel)]="participantusers.date_of_birth" max="{{min_to_date}}" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn account-page" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn account-page submitbutton">Save changes</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+<!-- change password -->
+
+  <ng-template #content20 let-c="close" let-d="dismiss">
+    <div class="modal-header text-warning modalcolor">
+      <h5 class="modal-title">CHANGE PASSWORD</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.changeparticipantpassword" class="needs-validation" novalidate
+            (validSubmit)="this.changePassword()">
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Current Password</label>
+          <input formControlName="currentpassword" type="password" class="form-control" id="currentpass" (focusout)="CheckPassword()" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">New Password</label>
+          <input formControlName="newpassword" (change)="changeUserPassword();" type="password" class="form-control" id="changeuserpassword" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Confirm Password</label>
+          <input formControlName="confirmpassword" (keyup)="changeUserConfirmPassword();" type="password" class="form-control" id="userchangeconfirmpassword" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn account-page" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn account-page submitbutton" [disabled]="passwordmatch === false">Save changes</button>
+      </div>
+    </form>
+  </ng-template>
+
+ <!-- delete modal -->
+  <ng-template #content22 let-c="close" let-d="dismiss">
+    <div class="modal-header text-warning modalcolor">
+      <h5 class="modal-title">DEACTIVATE ACCOUNT</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body"> 
+      <div class="col-md-12 mb-3 form-group">
+        <h4>You want to deactivate your account?</h4>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn account-page" routerLink="/accountparticipant">No</button>
+      <button type="submit" class="btn account-page" (click)="deleteAccountParticipant(participantusers?.id);">Yes</button>
+    </div>
+  </ng-template>
+
+
+<!-- refer modal -->
+  <ng-template #refer let-c="close" let-d="dismiss">
+    <div class="modal-header text-warning modalcolor">
+      <h5 class="modal-title text-uppercase">Refer to your friend</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.referinfo" class="needs-validation"(validSubmit)="this.referInfo()" novalidate>
+      <div class="modal-body">
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Email</label>
+          <input formControlName="email" type="text" class="form-control" id="validationCustom01">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn account-page" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn account-page">Submit</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+<!-- image upload modal -->
+    <ng-template #content30 let-c="close" let-d="dismiss">
+      <div class="modal-header text-warning modalcolor">
+        <h5 class="modal-title text-uppercase">Upload Profile Image</h5>
+        <button type="button" class="close imageupload" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="this.uploadImage" class="needs-validation"(validSubmit)="this.updateProfileImage(participantusers?.id)" novalidate>
+        <div class="modal-body">
+          <div class="col-md-12 mb-3 form-group">
+            <input name="file" type="file" (change)="onFileChange($event)" id="validationCustom01" accept="image/png,image/jpg,image/jpeg"/>
+            <input type="hidden" name="fileHidden" formControlName="image_url"/> 
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn account-page">Submit</button>
+        </div>
+      </form>
+    </ng-template>

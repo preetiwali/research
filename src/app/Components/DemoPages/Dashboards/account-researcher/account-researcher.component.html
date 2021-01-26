@@ -1,0 +1,344 @@
+<style>
+  .accountresearcher{
+    margin:auto;
+  }
+  h6 span{
+    float:right;
+  }
+  .badge{
+    font-size:12px;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .actionbutton{
+    width:95px;
+  }
+  .actions{
+    width:97px;
+  }
+  .cardaction{
+   height:190px;
+  }
+  .editaction{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <div class="card main-card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar>
+                      <button class="btn btn-warning" title="Edit" (click)="openLarge(content30)"><i class="lnr-pencil"></i></button>
+                  </div>
+                  <mat-card-title>{{ researcherusers?.first_name }} {{ researcherusers?.last_name }}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image *ngIf="image_url == null" src="./assets/images/profile.jpg" alt="Photo of a user">
+                <img mat-card-image *ngIf="image_url != null" src="{{ image_url }}" alt="Photo of a Shiba Inu">
+              </mat-card>
+            </div>
+            <div class="col-md-9 accountresearcher">
+              <div class="p-3">
+                  <h6 class="text-black text-left text-uppercase font-size-md font-weight-bold">Basic Details<span>
+                    <button type="button" title="Edit" class="btn text-white editaction" (click)="openLarge(name)"><i class="lnr-pencil"></i></button></span>
+                  </h6><br>
+                  
+                  <div class="table-responsive">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                      <tr>
+                        <th class="text-left">Account Status</th>
+                        <td class="text-right"><div class="badge badge-warning">{{ researcherusers?.status }}</div></td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Research Worker Id</th>
+                        <td class="text-right">{{ researcherusers?.research_worker_id }}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Name</th>
+                        <td class="text-right">{{ researcherusers?.first_name }} {{ researcherusers?.last_name }}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Email</th>
+                        <td class="text-right">{{ researcherusers?.email }}</td>
+                      </tr> 
+                      <tr>
+                        <th class="text-left">Country</th>
+                        <td class="text-right">{{ researcherusers?.country }}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Contact  Number</th>
+                        <td class="text-right">{{ researcherusers?.contact_number }}</td>
+                      </tr>
+                      <tr>
+                        <th class="text-left">Billing Address</th>
+                        <td class="text-right">{{ researcherusers?.billingaddress }}</td>
+                      </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- security -->
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h6 class="text-muted text-uppercase font-size-md opacity-7 mb-3 font-weight-normal">Security</h6>
+          <div class="border-light card-border card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="widget-content p-0">
+                  <div class="widget-content-wrapper">
+                    <div class="widget-content-left">
+                      <div class="widget-heading">Password</div>
+                    </div>
+                    <div class="widget-content-right">
+                      <div class="fsize-2 text-success">
+                        <button type="button" class="btn btn-lg border border-primary bg-white text-primary actions" (click)="openLarge(contents)">Change</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!-- <li class="list-group-item">
+                <div class="widget-content p-0">
+                  <div class="widget-content-wrapper">
+                    <div class="widget-content-left">
+                      <div class="widget-heading">Delete Account</div>
+                    </div>
+                    <div class="widget-content-right">
+                      <div class="fsize-2 text-success">
+                        <button type="button" class="btn btn-lg border border-danger text-danger bg-white actions" (click)="openLarge(contents1)">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li> -->
+              <li class="list-group-item">
+                <div class="widget-content p-0">
+                  <div class="widget-content-wrapper">
+                    <div class="widget-content-left">
+                      <div class="widget-heading">Request To Deactivate Account</div>
+                    </div>
+                    <div class="widget-content-right">
+                      <div class="fsize-2 text-success">
+                        <button type="button" class="btn btn-lg border border-danger text-danger bg-white actions" (click)="openLarge(contents1)">Deactivate</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left">
+                        <div class="widget-heading">Refer to your friend</div>
+                      </div>
+                      <div class="widget-content-right">
+                        <div class="fsize-2 text-success">
+                          <button type="button" class="btn btn-lg border border-warning text-warning bg-white actions" (click)="openLarge(refer)">Refer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- balance -->
+    <!-- <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h6 class="text-muted text-uppercase font-size-md opacity-7 mb-3 font-weight-normal"> Balance</h6>
+          <div class="border-light card-border card">
+          
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left">
+                        <div class="widget-heading">Available Balance</div>
+                      </div>
+                      <div class="widget-content-right">
+                        <div class="fsize-2 text-success">
+                          <a routerLink="/walletresearcher">
+                            <button type="button" class="btn btn-lg border border-success bg-white text-success actionbutton">Cash Out</button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+
+
+
+<!-- refer modal -->
+    <ng-template #refer let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h5 class="modal-title">Refer to your friend</h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="this.referinfo" class="needs-validation"(validSubmit)="this.referInfo()" novalidate>
+        <div class="modal-body">
+          <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Email</label>
+            <input formControlName="email" type="text" class="form-control" id="validationCustom01">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+          <button type="submit" class="btn submitbutton">Submit</button>
+        </div>
+      </form>
+    </ng-template>
+
+
+
+<!-- edit modal -->
+    <ng-template #name let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit</h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="this.editnameinfo" class="needs-validation" novalidate
+              (validSubmit)="this.editNameInfo(researcherusers.id)">
+        <div class="modal-body"> 
+          <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">First Name</label>
+            <input *ngIf="researcherusers" formControlName="first_name" type="text" class="form-control" id="validationCustom01"
+            [(ngModel)]="researcherusers.first_name" required>
+          </div>
+          <div class="col-md-12 mb-3 form-group">
+              <label for="validationCustom01">Last Name</label>
+            <input *ngIf="researcherusers" formControlName="last_name" type="text" class="form-control" id="validationCustom01"
+            [(ngModel)]="researcherusers.last_name" required>
+          </div>
+          <div class="col-md-12 mb-3 form-group">
+              <label for="validationCustom01">Email</label>
+            <input *ngIf="researcherusers" formControlName="email" type="text" class="form-control" id="validationCustom01"
+            [(ngModel)]="researcherusers.email" readonly>
+          </div>
+          <div class="col-md-12 mb-3 form-group">
+              <label for="validationCustom01">Country</label>
+            <input *ngIf="researcherusers" formControlName="country" type="text" class="form-control" id="validationCustom01"
+            [(ngModel)]="researcherusers.country" required>
+          </div>
+          <div class="col-md-12 mb-3 form-group">
+              <label for="validationCustom01">Contact Number</label>
+            <input *ngIf="researcherusers" formControlName="contact_number" type="number" class="form-control" id="validationCustom01"
+            [(ngModel)]="researcherusers.contact_number" required>
+          </div>
+          <div class="col-md-12 mb-3 form-group">
+              <label for="validationCustom01">Billing Address</label>
+            <input *ngIf="researcherusers" formControlName="billingaddress" type="text" class="form-control" id="validationCustom01"
+            [(ngModel)]="researcherusers.billingaddress" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+          <button type="submit" class="btn submitbutton">Save changes</button>
+          
+        </div>
+      </form>
+    </ng-template>
+  
+
+  <!-- change password -->
+
+  <ng-template #contents let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h5 class="modal-title">Change Password</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.changepassword" class="needs-validation" novalidate
+            (validSubmit)="this.changePassword()">
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Current Password</label>
+          <input formControlName="currentpassword" id="currentpass" type="password" (focusout)="CheckPassword()" class="form-control" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">New Password</label>
+          <input formControlName="newpassword" (change)="changeResearcherPassword();" type="password" class="form-control" id="changeresearcherpassword" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Confirm Password</label>
+          <input formControlName="confirmpassword" (keyup)="changeResearcherConfirmPassword();" type="password" class="form-control" id="researcherchangeconfirmpassword" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn submitbutton" [disabled]="passwordmatch === false">Save changes</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+
+  <!-- Deactivate  modal -->
+  <ng-template #contents1 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h5 class="modal-title">Deactivate Account</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button> 
+    </div>
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <h4>You want to deactivate your account?</h4>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn submitbutton" routerLink="/accountresearcher">No</button>
+        <button type="submit" class="btn submitbutton" (click)="deleteAccountResearcher(researcherusers?.id);">Yes</button>
+      </div>
+  </ng-template>
+
+
+<!-- image upload modal -->
+  <ng-template #content30 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h5 class="modal-title">Upload Profile Image</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.uploadImage" class="needs-validation"(validSubmit)="this.updateProfileImage(researcherusers.id)" novalidate>
+      <div class="modal-body">
+        <div class="col-md-12 mb-3 form-group">
+          <input name="file" type="file" (change)="onFileChange($event)" id="validationCustom01" accept="image/png,image/jpg,image/jpeg"/>
+          <input type="hidden" name="fileHidden" formControlName="image_url"/> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn submitbutton">Submit</button>
+      </div>
+    </form>
+  </ng-template> 

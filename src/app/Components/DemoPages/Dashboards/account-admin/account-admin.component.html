@@ -1,0 +1,231 @@
+<style>
+  .badge{
+    font-size:12px;
+  }
+  .actionbutton{
+    width: 90px;
+  }
+  h6 span{
+    float:right;
+  }
+  .accountadmin{
+    margin:auto;
+  }
+</style>
+
+<!-- basic info -->
+<div class="col-sm-12 col-xs-12 col-md-12 col-lg-12 col-xl-12">
+  <div class="card main-card mb-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar>
+                    <button class="btn btn-warning" title="Edit" (click)="openLarge(content30)"><i class="lnr-pencil"></i></button>
+                </div>
+                <mat-card-title>{{ adminusers?.first_name }} {{ adminusers?.last_name }}</mat-card-title>
+              </mat-card-header>
+              <img mat-card-image *ngIf="image_url == null" src="./assets/images/profile.jpg" alt="Photo of a user">
+              <img mat-card-image *ngIf="image_url != null" src="{{ image_url }}" alt="Photo of a Shiba Inu">
+            </mat-card>
+        </div>
+        <div class="col-md-8 accountadmin">
+          <div class="p-3">
+              <h6 class="text-black text-left text-uppercase font-size-md font-weight-bold">Basic Details<span>
+                <button type="button" title="Edit" class="btn bg-primary text-white" (click)="openLarge(name)"><i class="lnr-pencil"></i></button></span>
+              </h6><br>
+              
+              <div class="table-responsive">
+                <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                  <tr>
+                    <th class="text-left">Account Status</th>
+                    <td class="text-right"><div class="badge badge-warning">{{ adminusers?.status }}</div></td>
+                  </tr>
+                  <tr>
+                    <th class="text-left">Research Worker Id</th>
+                    <td class="text-right">{{ adminusers?.research_worker_id }}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-left">Name</th>
+                    <td class="text-right">{{ adminusers?.first_name }} {{ adminusers?.last_name }}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-left">Email</th>
+                    <td class="text-right">{{ adminusers?.email }}</td>
+                  </tr>
+                  <tr>
+                    <th class="text-left">Address</th>
+                    <td class="text-right">{{ adminusers?.address }}</td>
+                  </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- security table  -->
+<div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+  <div class="main-card mb-3 card">
+    <div class="card-body">
+      <h6 class="text-muted text-uppercase font-size-md opacity-7 mb-3 font-weight-normal">Security</h6>
+      <div class="border-light card-border card">
+        
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="widget-content p-0">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Password</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="fsize-2 text-success">
+                      <button type="button" class="btn btn-lg border border-success bg-white text-success actionbutton" (click)="openLarge(contents)">Change</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="widget-content p-0">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Delete Account</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="fsize-2 text-success">
+                      <button type="button" class="btn btn-lg border border-danger text-danger bg-white actionbutton" (click)="openLarge(contents1)">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- edit modal -->
+  <ng-template #name let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.editadminprofile" class="needs-validation" novalidate
+            (validSubmit)="this.editAdminProfile(adminusers.id)">
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">First Name</label>
+          <input *ngIf="adminusers" formControlName="first_name" type="text" class="form-control" id="validationCustom01"
+          [(ngModel)]="adminusers.first_name" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Last Name</label>
+          <input *ngIf="adminusers" formControlName="last_name" type="text" class="form-control" id="validationCustom01"
+          [(ngModel)]="adminusers.last_name" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Email</label>
+          <input *ngIf="adminusers" formControlName="email" type="text" class="form-control" id="validationCustom01"
+          [(ngModel)]="adminusers.email" readonly>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Address</label>
+          <input *ngIf="adminusers" formControlName="address" type="text" class="form-control" id="validationCustom01"
+          [(ngModel)]="adminusers.address" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+<!-- change password -->
+
+  <ng-template #contents let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Change Password</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.changepassword" class="needs-validation" novalidate
+            (validSubmit)="this.changePassword()">
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Current Password</label>
+          <input formControlName="currentpassword" id="currentpass" type="password" (focusout)="CheckPassword()" class="form-control" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">New Password</label>
+          <input formControlName="newpassword" (change)="changeAdminPassword();" type="password" class="form-control" id="changeresearcherpassword" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustom01">Confirm Password</label>
+          <input formControlName="confirmpassword" (keyup)="changeAdminConfirmPassword();" type="password" class="form-control" id="researcherchangeconfirmpassword" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn btn-primary" [disabled]="passwordmatch === false">Save changes</button>
+        
+      </div>
+    </form>
+  </ng-template>
+
+
+
+<!-- delete modal -->
+  <ng-template #contents1 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Delete Account</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <h4>You want to delete your account?</h4>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-danger" routerLink="/accountadmin">No</button>
+        <button type="submit" class="btn btn-primary" (click)="deleteAccountResearcher(adminusers?.id);">Yes</button>
+      </div>
+  </ng-template>
+
+
+<!-- image upload modal -->
+  <ng-template #content30 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h5 class="modal-title">Upload Profile Image</h5>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.uploadImage" class="needs-validation"(validSubmit)="this.updateProfileImage(adminusers.id)" novalidate>
+      <div class="modal-body">
+        <div class="col-md-12 mb-3 form-group">
+          <input name="file" type="file" (change)="onFileChange($event)" id="validationCustom01" accept="image/png,image/jpg,image/jpeg"/>
+          <input type="hidden" name="fileHidden" formControlName="image_url"/> 
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-warning">Submit</button>
+      </div>
+    </form>
+  </ng-template>

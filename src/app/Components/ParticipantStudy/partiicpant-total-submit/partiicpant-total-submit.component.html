@@ -1,0 +1,56 @@
+ <style>
+  .accept{
+    display: block;overflow-y:scroll;height:630px;padding:1%;
+  }
+  .main-card, .card-header{
+    background-color: white;
+  }
+  button{
+    background-color: white;margin:auto;font-size:18px;margin-bottom:1%;
+  }
+  th,td{
+    color:black;
+  }
+  .icon{
+    font-size:15px;
+  }
+  .backbutton{
+    font-size: 14px;
+  }
+</style>
+  
+
+<div class="container">
+  <button class="btn btn-lg backbutton" title="Back" routerLink="/participantstudysubmission/{{user_id}}">
+    <i class="fa fa-arrow-left"></i>
+  </button>
+  <div class="main-card mb-3 card termscondition">
+    <div class="card-header">Total Submitted Study</div>
+    <div class="table-responsive accept">
+      <table class="align-middle mb-0 table table-bordered table-striped table-hover activestudy">
+        <thead>
+        <tr>
+          <th class="text-center">Id</th>
+          <th class="text-center">Study Name</th>
+          <th class="text-center">Submission Date</th>
+          <th class="text-center">Rewards</th>
+          <th class="text-center">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let totslsubmission of total_submission_list; let i=index;">
+          <td class="text-center">{{ totslsubmission.study?.id }}</td>
+          <td class="text-center">{{ totslsubmission.study?.name }}</td>
+          <td class="text-center">{{ totslsubmission.submit_time | date : 'mediumDate' }}</td>
+          <td class="text-center">{{ totslsubmission.study?.reward }}</td>
+          <td class="text-center">
+            <button class="border-0 btn-transition btn btn-outline-danger" routerLink="/participantnewmessage/{{totslsubmission.study.id}}">
+              <fa name="envelope" class="icon"></fa>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

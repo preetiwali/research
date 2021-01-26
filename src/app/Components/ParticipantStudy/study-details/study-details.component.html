@@ -1,0 +1,136 @@
+<style>
+  button{
+    margin-bottom:2%;
+  }
+  .confirm{
+    float:right;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom: 1%;
+  }
+  h6{
+    text-align: center;
+  }
+  a{
+    text-decoration: none;
+  }
+  .counterright{
+    font-size: 18px; float:left;
+  }
+  .actionbutton{
+    background-color: black;color:white;float:right;
+  }
+  .closebutton{
+    background-color: black ;
+    border: 1px solid black ;
+    color:white;
+  }
+  .modal-header{
+    border-bottom:none;
+    background-color: white;
+  }
+  h4{
+    float: left;
+  }
+  .studydesc{
+    height:auto;
+  }
+  .copytext{
+    background-color: black;color:white;float:left;
+  }
+  #display{
+    cursor: pointer;
+  }
+</style>
+
+
+<div class="container">
+  <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/participantstudy"><i class="fa fa-arrow-left"></i></button>
+    
+  <div class="row">
+    <div class="col-md-12 col-lg-6 col-xl-6 col-xs-12 col-sm-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Basic Study Detail
+          <div class="btn-actions-pane-right">
+            <div role="group" class="btn-group-sm btn-group">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive col-md-12 col-lg-12 col-xs-12">
+            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+              <tr>
+                <th class="text-left">Study Name</th>
+                <td class="text-right">{{ study?.name }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Completion Code</th>
+                <td class="text-right" id='display' onClick='copyText(this)' title="Copy to clipboard">{{ study?.completioncode }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Estimated Completion Time</th>
+                <td class="text-right">{{ study?.estimatetime }} Minutes</td>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Allowed Time</th>
+                <td class="text-right">{{ study?.allowedtime }} Minutes</td>
+              </tr>
+              <!-- <tr>
+                <th class="text-left">Maximum Submissions</th>
+                <td class="text-right">{{ study?.submission }}</td>
+              </tr> -->
+              <tr>
+                <th class="text-left">Reward Per Participant</th>
+                <td class="text-right">{{ study?.reward }}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="d-block col-md-12 card-footer">
+          <div class="row">
+            <!-- <div class="col-md-8">
+              <input type="button" class="btn btn-lg text-left copytext" id="copycode" onclick="copy();" *ngIf="is_attempted == 'no' && study_status == 'active'" value="kcdsj" />
+            </div> -->
+            <p class="text-info col-md-8 text-left" *ngIf="is_attempted == 'no' && study_status == 'active'">Please copy completion code</p>
+            <div class="col-md-4">
+              <button class="btn btn-lg actionbutton" *ngIf="is_attempted == 'no' && study_status == 'active'">
+                <a class="text-white" href="javascript:void(0);" (click)="attemptStudy(study.id,study.studyurl);">Start Study</a>
+              </button>
+            </div>
+            <!-- (zeroTrigger)="yourOwnFunction()"  -->
+            <!-- <countdown-timer *ngIf="is_attempted == 'yes'" class="text-danger timer" [end]="'2020-08-10 16:42:45'"></countdown-timer> -->
+              <countdown-timer *ngIf="is_attempted == 'yes'" class="text-danger counterright col-md-12 text-left" [end]="datePipeString"></countdown-timer>
+
+            <!-- <countdown *ngIf="is_attempted == 'yes'" [config]="{leftTime: 20}"></countdown> -->
+            <!-- <countdown [config]="{leftTime: 60}"></countdown> -->
+            <!-- <countdown-timer style="font-size:30px;color:white;background-color:red;padding:30px;font-family:Roboto;" [end]="'2020-08-10 15:03:33'"></countdown-timer> -->
+              <p class="text-success col-md-12 text-right" *ngIf="is_attempted == 'completed'">Study Submitted</p>
+    
+            <!-- <h6 class="text-danger" *ngIf="datePipeString == '00:00:00'">Time Over</h6> -->
+            </div>
+          </div>
+      </div>
+    </div>
+    
+  <!-- study published -->
+    
+    <div class="col-md-12 col-lg-6 col-xl-6 col-xs-12 col-sm-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Study Description</div>
+        <div class="card-body studydesc" [innerHTML]="study?.description"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--       
+<ng-template #content let-c="close" let-d="dismiss" id="modal1">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h4 class="text-info text-center">Please complete your survey in one sitting, you can't re-enter the survey, stop and pause a study</h4>
+  </div>
+</ng-template> -->

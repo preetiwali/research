@@ -1,0 +1,60 @@
+<style>
+  .card {
+    margin: 0 auto;width:60%;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  .leftbutton{
+    float:right;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+</style>
+
+<div class="bg-plum-plate">
+    <div class="d-flex h-100 justify-content-center align-items-center">
+      <div class="mx-auto app-login-box col-md-12 login_page_container">
+          <div class="card main-card mb-3 row bg-white">
+            <div class="card-body col-md-12 bg-muted">
+              <span class="leftbutton"><button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/termsconditions"><i class="fa fa-arrow-left"></i></button></span>
+              <h2 class="text-center">Edit Terms & Conditions</h2>
+              <form [formGroup]="this.editterms" class="needs-validation" novalidate
+                    (validSubmit)="this.editTerms(terms.id)">
+                    <div class="form-row">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input *ngIf="terms?.country" type="text" class="form-control" id="validationCustom01"
+                           [value]="terms?.country" readonly>
+                    </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input *ngIf="terms" formControlName="title" type="text" class="form-control" id="validationCustom01"
+                            [(ngModel)]="terms.title"
+                          required>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="col-md-12 mb-3 form-group">
+                        <input *ngIf="terms" formControlName="user_type" type="text" class="form-control" id="validationCustom02"
+                           [(ngModel)]="terms.user_type" readonly>
+                    </div>
+                    </div>
+                  <angular-editor  *ngIf="terms" [(ngModel)]="terms.description" formControlName="description" [config]="config"></angular-editor>
+                  <div class="divider">{{ terms?.description }}</div>
+                <button class="btn ml-2 submitbutton" type="submit">Update</button>
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+        
+        

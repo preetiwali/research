@@ -1,0 +1,196 @@
+<style>
+.demo{
+  display: block;
+  height: 345px;
+  overflow-x: scroll;
+}
+.backbutton{
+  margin:auto;font-size: 14px;margin-bottom:1%;
+}
+.dropdown-menu-header-inner{
+  background-color: #B1B69D;
+}
+.menu-header-title,.menu-header-subtitle{
+  color:#0a2956;
+}
+.table-responsive{
+  padding: 1%;
+}
+a{
+  text-decoration: none;
+}
+.activebutton{
+  background-color: #1f4988;border: #1f4988;color:white;
+}
+b{
+  color:#0a2956;font-size:22px;
+}
+.studyoverview{
+  height:93%;
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: auto;
+}
+.btn-outline-dark:hover{
+  color: #fff;background-color: #343a40;border-color: #343a40;
+}
+.btn-outline-focus:hover{
+  color: #fff;border-color: #444054;background-color: #444054;
+}
+.btn-outline-danger:hover{
+  color: #fff;border-color: #d92550;background-color: #d92550;
+}
+.btn-outline-success:hover{
+  color: #fff;border-color: #3ac47d;background-color: #3ac47d;
+}
+</style>
+
+<button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/participantuserlist"><i class="fa fa-arrow-left"></i></button>
+
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-xl-6">
+    <div class="card-shadow-primary card-border mb-3 card"> 
+      <div class="dropdown-menu-header">
+        <div class="dropdown-menu-header-inner">
+          <div class="menu-header-content">
+            <div class="avatar-icon-wrapper mb-3 avatar-icon-xl">
+              <div class="avatar-icon" *ngIf="image_url == null" >
+                <img src="./assets/images/profile.jpg">
+              </div>
+              <div class="avatar-icon" *ngIf="image_url != null" >
+                <img src="{{ image_url }}">
+              </div>
+            </div>
+            <div><h5 class="menu-header-title">{{ user?.first_name }} {{ user?.last_name }}</h5>
+              <h6 class="menu-header-subtitle">{{ user?.user_type }}</h6>
+            </div>
+            <div class="menu-header-btn-pane pt-1">
+              <button class="btn btn-lg activebutton">
+                <a *ngIf="user?.status == 'active'" (click)="updateUserDeactiveStatus(user.id);">Deactivate</a>
+                <a *ngIf="user?.status == 'deactive'" (click)="updateUserActiveStatus(user.id);" >Activate</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-3"><h6 class="text-black text-center text-uppercase font-size-md font-weight-bold">Basic Details</h6>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <tr>
+              <th class="text-left">Name</th>
+              <td class="text-right">{{ user?.first_name }} </td>
+            </tr>
+            <tr>
+              <th class="text-left">Email</th>
+              <td class="text-right">{{ user?.email }}</td>
+            </tr> 
+            <tr>
+              <th class="text-left">Country</th>
+              <td class="text-right">{{ user?.country }}</td>
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="col-sm-12 col-xs-12 col-md-12 col-lg-6 col-xl-6">
+    <div class="mb-3 profile-responsive card studyoverview">
+      <div class="dropdown-menu-header">
+        <div class="dropdown-menu-header-inner">
+          <div class="menu-header-image opacity-1 dd-header-bg-4"></div>
+          <div class="menu-header-content btn-pane-right">
+            <div class="avatar-icon-wrapper mr-3 avatar-icon-xl btn-hover-shine">
+            </div>
+            <div class="menu-header-btn-pane">
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="widget-content pt-4 pb-4 pr-1 pl-1">
+            <div class="text-center">
+              <h5 class="mb-0">
+                <span class="pr-1">
+                  <b>Participant Study Details</b>
+                </span>
+              </h5>
+            </div>
+          </div>
+        </li>
+        <li class="p-0 list-group-item">
+          <div class="grid-menu grid-menu-2col overflow-hidden">
+            <div class="no-gutters row">
+              <div class="col-sm-6">
+                <div class="p-1">
+                  <button
+                    class="btn-icon-vertical btn-transition-text btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-dark">
+                    <i class="text-dark opacity-7 btn-icon-wrapper mb-2">{{ seenntudies }}</i>
+                    Visited
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="p-1">
+                  <button
+                    class="btn-icon-vertical btn-transition-text btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-danger">
+                    <i class="text-danger opacity-7 btn-icon-wrapper mb-2">{{attemptstudy}}</i>
+                    Attempted
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="p-1">
+                  <button
+                    class="btn-icon-vertical btn-transition-text btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-success">
+                    <i class="text-success opacity-7 btn-icon-wrapper mb-2"> {{submitted_studies}}</i>
+                    Submitted
+                  </button>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="p-1">
+                  <button
+                    class="btn-icon-vertical btn-transition-text btn-transition btn-transition-alt pt-2 pb-2 btn btn-outline-focus">
+                    <i class="text-focus opacity-7 btn-icon-wrapper mb-2">{{accepted_studies}}/{{rejected_studies}}</i>
+                    Accepted/Rejected
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xl-12 col-xs-12">
+    <div class="main-card mb-3 card">
+      <div class="card-header">Demographics List</div>
+        <div class="table-responsive demo">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+              <th class="text-center">Id</th>
+              <th class="text-center">Question Title</th>
+              <th class="text-center">Answer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let demo of demographics; let i=index;">
+              <td class="text-center">{{ demo.question?.id }}</td>
+              <td class="text-center"><a>{{ demo.question.title }}</a></td>
+              <td class="text-center">{{ demo.answer }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+</div>
+

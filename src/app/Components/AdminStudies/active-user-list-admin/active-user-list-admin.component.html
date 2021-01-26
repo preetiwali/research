@@ -1,0 +1,42 @@
+<style>
+  .table-responsive{
+    padding:1%;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+</style>
+<button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/adminactivestudydetails/{{study_id}}"><i class="fa fa-arrow-left"></i></button>
+
+<div class="main-card mb-3 card termscondition">
+  <div class="card-header">Candidate Information who started study 
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-bordered table-striped table-hover activestudy">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Country of Residency</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let Info of active_candidate_list; let i=index;">
+        <td>
+          <div class="widget-content p-0">
+            <div class="widget-content-wrapper">
+              <div class="widget-content-left flex2">
+                <div class="widget-heading">{{ Info?.id }}</div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="text-center">{{ Info?.first_name }} {{ Info?.last_name }}</td>
+        <td class="text-center">{{ Info?.email }}</td>
+        <td class="text-center">{{ Info?.country }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<style>
+  .center {
+    display: block;margin-left: auto; margin-right: auto;width: 16%;
+  }
+  .dropdown-menu-header .menu-header-content.btn-pane-right.menu-header-content{
+    padding-left: 1rem;
+  }
+  .lnr-checkmark-circle{
+    font-size: 35px;opacity: 1!important;
+  }
+  .dropdown-menu-header .dropdown-menu-header-inner{
+    margin:0px 0px 0;
+  }
+  button{
+    margin-top: -3%;
+  }
+  img.completed-questions{
+    width:15%;margin-bottom: 2%;float:right;
+  }
+  .container{
+    width:100%;margin-bottom: 3%;
+  }
+  h5{
+    color: black;
+  }
+  a{
+    text-decoration: none;
+  }
+  .dropdown-menu-header-inner{
+    background-color: white;
+  }
+  .avatar-icon{
+    width:50px;height:48px;
+  }
+  .widget-content{
+    background-color: white;
+  }
+  .grid-menu{
+    background-color: white;
+  }
+  @media screen and (min-width: 390px) and (max-width: 991px) {
+    img.completed-questions{
+      margin-left: 43%;
+      float: none;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xs-12">
+      <p>
+        <ngb-progressbar showValue="true" type="success" [value]="totalvalue" [striped]="true"></ngb-progressbar>
+      </p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="h-40 col-xs-12 col-sm-12 col-lg-4 col-xl-4 col-md-6" *ngFor="let category of categories; let i=index;">
+      <a routerLink="/questions/{{category.id}}">
+        <div class="mb-3 profile-responsive card">
+          <div class="dropdown-menu-header">
+            <div class="dropdown-menu-header-inner">
+              <div class="opacity-2 dd-header-bg-1"></div>
+              <div class="menu-header-content center">
+                <div class="avatar-icon-wrapper mr-3 avatar-icon-xl btn-hover-shine">
+                  <div class="avatar-icon rounded" *ngIf="category.image_url != null">
+                    <img src="{{category.image_url}}" alt="./assets/images/family.jpg">
+                  </div>
+                  <div class="avatar-icon rounded" *ngIf="category.image_url == null">
+                    <img src="./assets/images/family.jpg" alt="./assets/images/family.jpg">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <div class="widget-content pt-1">
+              <div class="text-center">
+                <h5>{{category.name}}</h5>
+              </div>
+            </div>
+            <div class="grid-menu grid-menu-2col overflow-hidden">
+              <div class="no-gutters row">
+                <div class="col-sm-12">
+                  <button class="btn-icon-vertical btn-square br-br btn btn-outline-link text-danger" *ngIf="category.response != category.question_count">
+                    {{category.response }} / {{ category.question_count}}
+                    <i class="lnr-checkmark-circle btn-icon-wrapper"></i>
+                  </button>
+                  <button class="btn-icon-vertical btn-square br-br btn btn-outline-link text-success" *ngIf="category.response == category.question_count">
+                      {{category.response }} / {{ category.question_count}}
+                      <i class="lnr-checkmark-circle btn-icon-wrapper"></i>
+                    </button>
+                </div>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+

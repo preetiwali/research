@@ -1,0 +1,101 @@
+
+<style>
+  div.description{
+    overflow: hidden;height: 128px;color:black;
+  }
+  .rewards{
+    float: right;
+  }
+  p{
+    font-size: 16px;
+  }
+  img{
+    border-radius: 43%;width:18%;height:20%;
+  }
+  .envelope{
+    text-align: center;
+  }
+  h3{
+    color:white;
+  }
+  i{
+    color:black;
+  }
+  .aboutstudy{
+    margin-top:5%;
+  }
+  .studylist{
+    background-color: white;
+  }
+  .studyname{
+    color:black!important;
+  }
+  a{
+    text-decoration: none;
+  }
+  .card-footer{
+    height:55px;
+  }
+  p{
+    color: black;
+  }
+  .endingstudy{
+    margin:auto;margin-right: 2%;
+  }
+  @media screen and (max-width: 390px) {
+    img{
+      width:50%;
+    }
+    h3{
+      font-size:15px;
+    }
+  }
+
+</style>
+
+<!-- when study is not found -->
+<div class="aboutstudy" *ngIf="message == 'study-not-found'">
+  <div class="envelope">
+    <img src="assets/images/study.png">
+  </div>
+  <h3 class="text-center">Nothing here.Enjoy that</h3>
+</div>
+
+
+<div class="container" *ngIf="message == 'new-studies'">
+  <div class="row">
+    <div class="col-md-12 col-lg-6 col-xl-6 col-sm-12 col-xs-12" *ngFor="let study of participantstudy; let i=index;">
+      <a (click)="seenStudy(study.eligible_study.id);" routerLink="/participantstudydetails/{{study.eligible_study.id}}">
+        <div class="mb-3 text-white card-border card studylist" *ngIf="(this.today | date: 'shortDate') != (study.eligible_study.max_participation_date | date: 'shortDate')">
+          <div class="card-header studyname">
+            <i class="header-icon lnr-checkmark-circle"></i>
+            {{ study.eligible_study.name }}
+          </div>
+          <div class="card-body description" [innerHTML]="study.eligible_study.description | slice:0:550"></div>
+          <div class="d-block card-footer">
+            <p class="text-left" *ngIf="study.eligible_study.max_participation_date">
+              Study Active Up to : {{ study.eligible_study.max_participation_date | date}}&nbsp;&nbsp;&nbsp;&nbsp; 
+              <b class="rewards">Reward : AED {{ study.eligible_study.reward }}</b></p>
+          </div>
+        </div>
+      </a>
+
+      <a (click)="seenStudy(study.eligible_study.id);" routerLink="/participantstudydetails/{{study.eligible_study.id}}">
+        <div class="mb-3 text-white card-border card" *ngIf="(this.today | date: 'shortDate') == (study.eligible_study.max_participation_date | date: 'shortDate')">
+          <div class="card-header studyname">
+            <i class="header-icon lnr-checkmark-circle"></i>
+            {{ study.eligible_study.name }}
+                <span class="text-danger endingstudy">Ending Soon</span>
+          </div>
+          <div class="card-body description" [innerHTML]="study.eligible_study.description | slice:0:550"></div>
+          <div class="d-block card-footer">
+            <p class="text-right" *ngIf="study.eligible_study.max_participation_date">
+              Active Upto : {{ study.eligible_study.max_participation_date | date}}&nbsp;&nbsp;&nbsp;&nbsp; <b>Reward : AED {{ study.eligible_study.reward }}</b></p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+      

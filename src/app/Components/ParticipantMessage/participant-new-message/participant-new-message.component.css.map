@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "participant-new-message.component.sass"
+    ],
+    "names": [],
+    "file": "participant-new-message.component.css"
+}

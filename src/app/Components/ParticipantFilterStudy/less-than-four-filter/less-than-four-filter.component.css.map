@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "less-than-four-filter.component.sass"
+    ],
+    "names": [],
+    "file": "less-than-four-filter.component.css"
+}

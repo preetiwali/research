@@ -1,0 +1,217 @@
+<style>
+  .backbutton{
+    background-color: #0a2956;margin-bottom: 1%;float:right;color:white;font-size: 14px;
+  }
+  .btn-icon{
+    margin:3px;float:right;
+  }
+  h6{
+    color:#0a2956;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .actionbutton{
+    float:right;width:100%;
+  }
+  .card-header{
+    border-bottom:none;
+  }
+  .images{
+    text-align: center;
+  }
+</style>
+
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <button class="btn btn-lg backbutton" (click)="openLarge(helpquestion)">Add Questions</button>
+  </div>
+</div>
+
+
+<div class="row mb-4">
+  <div class="col-md-12" *ngFor="let faqquestion of faq; let i=index;">
+    <div class="card main-card">
+      <div class="card-header">
+        <div class="actionbutton">
+          <button class="btn-icon btn-icon-only btn btn-outline-danger" title="Delete" (click)="openLarge(helpquestion)"><i class="lnr-trash"></i></button>
+          <span>
+            <button class="btn-icon btn-icon-only btn btn-outline-primary" *ngIf="faqquestion.image_url == null" title="Upload Picture" (click)="openLarge(researcherfaqpicture)"><i class="lnr-picture"></i></button>
+          </span>
+          <span>
+            <button class="btn-icon btn-icon-only btn btn-outline-danger" *ngIf="faqquestion.image_url != null" title="Delete Image" (click)="openLarge(deletefaqpicture)"><i class="lnr-picture"></i></button>
+          </span>
+          <span>
+            <button class="btn-icon btn-icon-only btn btn-outline-primary" title="Edit" (click)="openLarge(helpquestionedit)"><i class="lnr-pencil"></i></button>
+          </span>
+          <span>
+            <button class="btn-icon btn-icon-only btn btn-outline-success" title="Order of FAQ" (click)="openLarge(orderresearcherfaq)"><i class="lnr-layers"></i></button>
+          </span>
+
+        </div>
+      </div>
+      <div class="card-body">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h6 class="text-uppercase">{{faqquestion.faq_help_question.question}}</h6>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p [innerHTML]="faqquestion.faq_help_question.answer"></p>
+            <div class="images" *ngIf="faqquestion.image_url != null">
+              <img src="{{faqquestion.image_url}}" />
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+
+      <!-- delete modal -->
+        <ng-template #helpquestion let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Delete FAQ</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button> 
+          </div>
+            <div class="modal-body"> 
+              <div class="col-md-12 mb-3 form-group">
+                <h4>Sure! You want to delete FAQ?</h4>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+              <button type="submit" class="btn submitbutton" (click)="deleteFAQQuestions(faqquestion.faq_help_question.id);">Yes</button>
+            </div>
+        </ng-template>
+
+
+        <!-- order faq modal -->
+        <ng-template #orderresearcherfaq let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Order of FAQ</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="this.orderfaq" class="needs-validation" novalidate
+                  (validSubmit)="this.orderResearcherFAQ(faqquestion.faq_help_question.id)">
+              <div class="modal-body">
+                  <div class="col-md-12 mb-3 form-group">
+                    <input formControlName="order_number" type="number" class="form-control" id="validationCustom01"
+                    [(ngModel)]="faqquestion.faq_help_question.order_number" required>
+                  </div>
+              </div>
+            <div class="modal-footer">
+              <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+              <button type="submit" class="btn submitbutton">Save changes</button>
+            </div>
+          </form>
+        </ng-template>
+
+
+         <!-- delete modal -->
+         <ng-template #deletefaqpicture let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Delete Image</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button> 
+          </div>
+            <div class="modal-body"> 
+              <div class="col-md-12 mb-3 form-group">
+                <h4>Sure! You want to delete image?</h4>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+              <button type="submit" class="btn submitbutton" (click)="deleteFAQImage(faqquestion.faq_help_question.id);">Yes</button>
+            </div>
+        </ng-template>
+
+        <!-- image upload modal -->
+        <ng-template #researcherfaqpicture let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h5 class="modal-title">Upload Picture</h5>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="this.uploadImage" class="needs-validation" (validSubmit)="this.updateResearcherFaqImage(faqquestion.faq_help_question.id)" novalidate>
+            <div class="modal-body">
+              <div class="col-md-12 mb-3 form-group">
+                <input name="file" type="file" (change)="onFileChange($event)" id="validationCustom01" accept="image/png,image/jpg,image/jpeg"/>
+                <input type="hidden" name="fileHidden" formControlName="file"/> 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+              <button type="submit" class="btn submitbutton">Save</button>
+            </div>
+          </form>
+        </ng-template>
+
+      <!-- help questions edit modal -->
+
+        <ng-template #helpquestionedit let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit FAQ</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="this.edithelpquestion" class="needs-validation" novalidate (validSubmit)="this.editHelpQuestion(faqquestion.faq_help_question.id)">
+            <div class="modal-body"> 
+              <div class="col-md-12 mb-3 form-group">
+                <label for="validationCustom01">Question</label>
+                <input formControlName="question" type="text" [(ngModel)]="faqquestion.faq_help_question.question" class="form-control" id="validationCustom01">
+              </div>
+              <div class="col-md-12 mb-3 form-group">
+                <label for="validationCustom01">Answer</label>
+                <angular-editor formControlName="answer" [(ngModel)]="faqquestion.faq_help_question.answer" [config]="config"></angular-editor>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+              <button type="submit" class="btn submitbutton">Update</button>
+            </div>
+          </form>
+        </ng-template>
+  </div>
+</div>
+    
+
+
+<!-- help questions modal -->
+
+  <ng-template #helpquestion let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Add FAQ</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.addhelpquestion" class="needs-validation" novalidate (validSubmit)="this.addHelpQuestions()">
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <input type="hidden" class="form-control" formControlName="user_type" value="Researcher">
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Question</label>
+          <input formControlName="question" type="text" class="form-control" id="validationCustom01">
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Answer</label>
+          <angular-editor formControlName="answer"  [config]="config"></angular-editor>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn submitbutton">Save</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+

@@ -1,0 +1,190 @@
+<style>
+
+  button{
+    margin-bottom:2%;
+  }
+  
+  .confirm{
+    float:right;
+  }
+  
+</style>
+
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-xs-6">
+    <button class="btn btn-lg bg-white" title="Back" style="margin:auto;float:left;font-size:18px;margin-bottom:1%;" routerLink="/researcheractivestudyDetails/{{study_id}}">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-header">Study Basic Details
+        <div class="btn-actions-pane-right">
+          <div role="group" class="btn-group-sm btn-group">
+        <button class="btn btn-lg" style="background-color: #1f4988;border: #1f4988;color:white;" title="Edit" (click)="openLarge(basic2)">
+          <i class="lnr lnr-pencil"></i>
+        </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="table-responsive">
+            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+              <tr>
+                <th class="text-left">Completion URL</th>
+                <td class="text-right">{{ study?.completionurl }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Completion Code</th>
+                <td class="text-right">{{ study?.completioncode }}</td>
+              </tr> 
+              <tr>
+                <th class="text-left">Study Name</th>
+                <div class="text-right">{{ study?.name }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Study URL</th>
+                <div class="text-right">{{ study?.studyurl }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Estimated Completion Time</th>
+                <div class="text-right">{{ study?.estimatetime }} Minutes</div>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Allowed Time</th>
+                <div class="text-right">{{ study?.allowedtime }} Minutes</div>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Submissions</th>
+                <div class="text-right">{{ study?.submission }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Reward Per Participant</th>
+                <div class="text-right">{{ study?.reward }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum completion date</th>
+                <div class="text-right">{{ study?.max_participation_date | date:'mediumDate' }}</div>
+              </tr>
+            </table>
+          </div>
+        </form>  
+      </div>
+      <div class="d-block text-right card-footer">
+        <!-- <button class="btn btn-success btn-lg" (click)="openLarge(basic)"><i class="lnr lnr-pencil"></i></button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- study published -->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="main-card mb-3 card">
+      <div class="card-header">Study Details</div>
+      <div class="card-body" [innerHTML]="study?.description"></div>
+      <div class="d-block text-right card-footer">
+        <span *ngIf="description_size < 100" style="display:block;color:red; font-size:15px;float:left;">Study Description should be of at least 100 characters...</span>
+
+        <span *ngIf="description_size >= 100" style="display:none;color:red; font-size:15px;float:left;">Study Description should be of at least 100 characters...</span>
+        <span style="float:right;">
+          <button class="btn" style="background-color: #1f4988;border: #1f4988;color:white;" title="Edit" (click)="openLarge(description3)">
+            <i class="lnr lnr-pencil"></i>
+          </button></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- edit description modal -->
+  <ng-template #description3 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Description</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.editstudydescription"  (validSubmit)="this.editStudyDescription(studydescription?.id)" class="needs-validation" novalidate>
+      <div class="modal-body">
+        <angular-editor *ngIf="studydescription || studydescription == null" [(ngModel)]="studydescription.description" formControlName="description" [config]="config"></angular-editor>
+        <div class="divider">{{ studydescription?.description }}</div>
+        <span _ngcontent-c4="" style="display: none;font-size:15px;" id="description" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Study Description should be of at least 100 characters...</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn" style="background-color: #1f4988;border: #1f4988;color:white;" (click)="c('Close click')">Close</button>
+        <button [disabled]="!editstudydescription.valid" style="background-color: #1f4988;border: #1f4988;color:white;" type="submit" class="btn">Submit</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+<!-- edit basic info modal -->
+  <ng-template #basic2 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Basic Info</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.editstudyform"  (validSubmit)="this.editStudy(study.id)" class="needs-validation" novalidate>
+      <div class="modal-body">
+        <div class="form-row">
+            <div class="col-md-6 form-group">
+              <input type="url" *ngIf="study" formControlName="completionurl" class="form-control" id="validationCustomUsername"
+              [(ngModel)]="study.completionurl" aria-describedby="inputGroupPrepend" readonly>
+            </div>
+            <div class="col-md-6 form-group">
+              <input type="text" *ngIf="study" formControlName="completioncode" class="form-control" id="validationCustomUsername"
+              [(ngModel)]="study.completioncode" aria-describedby="inputGroupPrepend" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 form-group">
+            <input type="text" *ngIf="study" formControlName="name" class="form-control" id="validationCustomUsername"
+            [(ngModel)]="study.name" aria-describedby="inputGroupPrepend">
+          </div>
+          <div class="col-md-6 form-group">
+            <input type="url" *ngIf="study"  formControlName="studyurl" class="form-control" id="validationCustomUsername"
+            [(ngModel)]="study.studyurl" aria-describedby="inputGroupPrepend">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 form-group">
+            <input type="number" *ngIf="study"  formControlName="estimatetime" class="form-control" id="validationCustomUsername"
+            [(ngModel)]="study.estimatetime" aria-describedby="inputGroupPrepend">
+          </div>
+          <div class="col-md-6 form-group">
+            <input type="number" *ngIf="study"  class="form-control" formControlName="allowedtime" id="validationCustomUsername"
+            [(ngModel)]="study.allowedtime" (keyup)="greaterTimeFunction()" aria-describedby="inputGroupPrepend">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 form-group">
+            <input type="number" *ngIf="study"  class="form-control" formControlName="submission" id="validationCustomUsername"
+            [(ngModel)]="study.submission" aria-describedby="inputGroupPrepend">
+          </div>
+          <div class="col-md-4 form-group">
+            <input type="text" *ngIf="study"  class="form-control" formControlName="reward" id="validationCustomUsername"
+            [(ngModel)]="study.reward" aria-describedby="inputGroupPrepend">
+          </div>
+          <div class="col-md-4 form-group">
+            <div class="input-group">
+              <input type="date" *ngIf="study" [(ngModel)]="max_participation_date" class="form-control" min="{{min_to_date}}" id="userdate" formControlName="max_participation_date">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" style="background-color: #1f4988;border: #1f4988;color:white;" class="btn" (click)="c('Close click')">Close</button>
+        <button style="background-color: #1f4988;border: #1f4988;color:white;float:right;" type="submit" class="btn">Submit</button>
+        <!-- [disabled]="!editstudyform.valid || greaterTime === false" -->
+      </div>
+    </form>
+  </ng-template>

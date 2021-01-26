@@ -1,0 +1,53 @@
+<style>
+  div.description{
+    overflow: hidden;height:128px;color:#0a2956;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  a,i{
+    color:#0a2956;
+  }
+  .studycard{
+    background-color: #B1B69D;
+  }
+</style>
+
+<div class="row">
+  <div class="col-sm-12 col-xs-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let study of studies; let i=index;">
+    <div class="mb-3 text-white card-border card studycard">
+      <div class="card-header"><i class="header-icon lnr-graduation-hat"></i>
+        <a routerLink="/adminactivestudydetails/{{study.id}}">{{ study.name }}</a>
+      </div>
+      <div class="card-body description" [innerHTML]="study.description"></div>
+      <div class="d-block text-right card-footer">
+        <button class="btn btn-lg submitbutton" (click)="openLarge(content13)">Deactive</button>
+      </div>
+
+      <!-- deactive modal -->
+
+        <ng-template #content13 let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">Deactivate Reason</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form [formGroup]="this.deactivatestudy" class="needs-validation" novalidate
+                (validSubmit)="this.DeactivateStudy(study.id)">
+            <div class="modal-body">
+                <div class="col-md-12 mb-3 form-group">
+                  <input formControlName="deactivate_reason" type="text" class="form-control"
+                      placeholder="Deactivate Reason">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+              <button type="submit" class="btn submitbutton">Save</button>
+            </div>
+          </form>
+        </ng-template>
+    </div>
+  </div>
+</div>
+   

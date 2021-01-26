@@ -1,0 +1,45 @@
+<style>
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .table-responsive{
+    padding:1%;
+  }
+</style>
+
+<button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/adminactivestudydetails/{{study_id}}"><i class="fa fa-arrow-left"></i></button>
+
+<div class="main-card mb-3 card termscondition">
+  <div class="card-header">Study Payment List
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-bordered table-striped table-hover activestudy">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Country of Residency</th>
+        <th class="text-center">Payment</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let paymentdetail of paymentdetails; let i=index;">
+        <td>
+          <div class="widget-content p-0">
+            <div class="widget-content-wrapper">
+              <div class="widget-content-left flex2">
+                <div class="widget-heading">{{ paymentdetails?.user.id }}</div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="text-center">{{ paymentdetails?.user.first_name }} {{ paymentdetails?.user.last_name }}</td>
+        <td class="text-center">{{ paymentdetails?.user.email }}</td>
+        <td class="text-center">{{ paymentdetails?.user.country }}</td>
+        <td class="text-center">{{ paymentdetails?.user.study_wallet }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

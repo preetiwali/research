@@ -1,0 +1,74 @@
+<style>
+  .study{
+    display: block; height: 720px;overflow-y: scroll;padding:1%;
+  }
+  .dropdown-item:hover{
+    background-color:#0a2956 ;color:white;
+  }
+  a:hover{
+    color:white;text-decoration: none;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .faicons{
+    font-size:15px;
+  }
+  .d-inline-block{
+    float: right;
+  }
+  .studylist{
+    margin-bottom:7%;background-color:#0a2956;color:white;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-xs-6">
+      <button class="btn btn-md bg-white backbutton" title="Back" routerLink="/participantratinglist/{{study_id}}"><i class="fa fa-arrow-left"></i></button>
+    </div>
+  
+    <div class="col-lg-6 col-md-6 col-xs-6">
+      <div class="d-inline-block" ngbDropdown placement="bottom">
+        <button type="button" ngbDropdownToggle class="ml-2 btn btn-lg studylist">Partiicpant Study Exprience</button>
+        <div ngbDropdownMenu>
+          <button class="dropdown-item"><a routerLink="/studylessthantwofilter/{{study_id}}">List of Two studies or less</a></button>
+          <button class="dropdown-item"><a routerLink="/studylessthanfourfilter/{{study_id}}">List of Four studies or less</a></button>
+          <button class="dropdown-item"><a routerLink="/studymorethanfourfilter/{{study_id}}">List of More than four studies</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="main-card mb-3 card termscondition">
+    <div class="card-header col-md-12 col-lg-12 col-xl-12">List of More than four studies
+      <div class="btn-actions-pane-right">
+      </div>
+    </div>
+    <div class="table-responsive study">
+      <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">Research Worker Id</th>
+            <th class="text-center">Participated Study List</th>
+            <th class="text-center">Completed Study</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let participant of participantfilterlist; let i=index;">
+            <td class="text-center">{{ participant.user.research_worker_id }}</td>
+            <td class="text-center">{{ participant.participated_studies }}</td>
+            <td class="text-center">{{ participant.completed_studies }}</td>
+            <td class="text-center">
+              <button class="border-0 btn-transition btn btn-outline-success" title="Whitelist user" (click)="whiteListNewUser(participant.user.id);">
+                <fa name="check" class="faicons"></fa>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

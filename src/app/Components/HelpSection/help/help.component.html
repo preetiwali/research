@@ -1,0 +1,71 @@
+
+<style>
+  .lefticon{
+    padding:14%;
+  }
+  .icon-wrapper-bg{
+    background-color: white;
+  }
+  i{
+    color: white;font-weight:bold;margin:26%;
+  }
+  .menu-header-title{
+    color:white;
+  }
+  .dropdown-menu-header-inner{
+    background-color: black;
+  }
+  h5{
+    margin-top:4%;color:black;
+  }
+  h6{
+    color:white;margin-top: 3%;
+  }
+  a{
+    text-decoration: none;
+  } 
+  .helpbutton{
+    color:white;background-color: black;
+  }
+  .dropdown-menu-xl{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: translate(-190px, 46px);
+  }
+</style>
+
+<div class="header-dots" *ngIf="user_type == 'Participant'">
+  <div class="btn-group" ngbDropdown autoClose="outside" placement="bottom">
+    <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle>
+      <span>
+        <div class="icon-wrapper icon-wrapper-alt rounded-circle" title="Help Section">
+          <div class="icon-wrapper-bg"></div>
+          <i class="pe-7s-help1"></i>
+        </div>
+      </span>
+    </button>
+    <div class="dropdown-menu-xl" ngbDropdownMenu>
+      <div class="dropdown-menu-header mb-0">
+        <div class="dropdown-menu-header-inner">
+          <div class="menu-header-image opacity-1 dd-header-bg-2"></div>
+          <div class="menu-header-content text-dark">
+            <h4 class="menu-header-title">Research Square Help Center</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card-tabbed-header">
+        <div class="scroll-gradient">
+          <div class="scroll-area-sm">
+            <h5 class="text-center">How can we help you?</h5>
+            <h6 class="text-center text-info">
+              <a routerLink="/helpcontent" target="_blank">
+                <button class="btn helpbutton">Click here for help</button>
+              </a>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

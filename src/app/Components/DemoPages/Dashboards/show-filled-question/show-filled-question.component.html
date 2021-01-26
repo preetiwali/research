@@ -1,0 +1,48 @@
+
+<ngb-tabset class="tabs-animated tabs-animated-shadow">
+  <ngb-tab>
+    <ng-template ngbTabTitle><span>Category</span></ng-template>
+    <ng-template ngbTabContent>
+      <div class="row">
+        <div class="col-md-8" *ngFor="let question of questionList; let i=index;">
+          <div>
+         
+            <div class="main-card mb-3 card">
+              <div class="card-header">
+                <i class="header-icon lnr-question-circle icon-gradient bg-love-kiss"> </i>
+               {{ question.question['title'] }}
+              </div>
+              <form [formGroup]="saveanswer" (ngSubmit)="saveAnswer(question.question['id'])" class="needs-validation addmodal" novalidate>
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="position-relative form-group">
+                      <h5>
+                      {{ question.question['description'] }}
+                      </h5>
+                      <select type="select" id="exampleCustomSelect" *ngIf="question.question['question_type_id'] == 1 " formControlName="answer_id" class="custom-select" >
+                        <option value="">Select</option>
+                        <option *ngFor="let answer of question.answer; let i=index;" value="{{answer['id']}}" >
+                          {{answer['description']}}
+                        </option>
+                      </select>
+
+                      <div class="position-relative form-group" *ngIf="question.question['question_type_id'] == 2 ">
+                        <select multiple="multiple" type="select" id="exampleCustomMutlipleSelect"
+                                formControlName="answer_id" class="custom-select">
+                          <option  *ngFor="let answer of question.answer; let i=index;" value="{{answer['id']}}">{{ answer['description'] }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block text-right card-footer">
+                  <button type="submit" class="btn-wide btn btn-success">Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

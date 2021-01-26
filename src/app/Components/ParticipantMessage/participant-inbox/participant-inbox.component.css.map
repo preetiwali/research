@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "participant-inbox.component.sass"
+    ],
+    "names": [],
+    "file": "participant-inbox.component.css"
+}

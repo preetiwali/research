@@ -1,0 +1,69 @@
+<style>
+  .card {
+    margin: 0 auto;width: 530px;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  .leftbutton{
+    float:right;
+  }
+</style>
+
+<div class="h-150 bg-plum-plate">
+    <div class="d-flex h-100 justify-content-center align-items-center">
+      <div class="mx-auto app-login-box col-md-8 login_page_container">
+          <div class="card main-card mb-3 row bg-white">
+            <div class="card-body col-md-12 bg-muted">
+              <span class="leftbutton"><button class="btn btn-lg btn-primary" routerLink="/">Back</button></span>
+              <h2 class="text-center">Edit Profile</h2>
+              <form [formGroup]="this.editprofile" class="needs-validation" novalidate
+                    (validSubmit)="this.editProfile(userInfo.id)">
+                    <div class="form-row">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input formControlName="first_name" type="text" class="form-control" id="validationCustom01"
+                                placeholder="First name" [(ngModel)]="userInfo.first_name" *ngIf="userInfo?.first_name"
+                                required>
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="col-md-12 mb-3 form-group">
+                        <input formControlName="last_name" type="text" class="form-control" id="validationCustom02"
+                                placeholder="Last name" [(ngModel)]="userInfo.last_name" *ngIf="userInfo?.last_name"
+                                required>
+                    </div>
+                    </div>
+                  <div class="form-row">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input formControlName="email" type="email" class="form-control" id="validationCustomUsername"
+                              placeholder="Email" aria-describedby="inputGroupPrepend" [(ngModel)]="userInfo.email" 
+                              *ngIf="userInfo?.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" readonly>
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3 form-group">
+                      <input formControlName="contactnumber" type="number" class="form-control" id="validationCustom01"
+                              placeholder="Contact Number" [(ngModel)]="userInfo.contactnumber"  *ngIf="userInfo?.contactnumber"
+                              pattern="[1-9]{1}[0-9]{9}"
+                              required>
+                    </div>
+                </div>
+                  <div class="form-row">
+                    <div class="col-md-12 mb-3 form-group">
+                      <input formControlName="address" type="text" class="form-control" id="validationCustom01"
+                              placeholder="Address" [(ngModel)]="userInfo.address"  *ngIf="userInfo?.address"
+                              required>
+                    </div>
+                </div>
+                <button class="btn btn-success ml-2" type="submit">Update</button>
+              </form>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+        
+        

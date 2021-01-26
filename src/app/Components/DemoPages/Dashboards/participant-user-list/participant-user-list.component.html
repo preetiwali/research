@@ -1,0 +1,48 @@
+
+<style>
+  .participantuserlist{
+    display: block;overflow-y:scroll;height:755px;padding:1%;
+  }
+  a{
+    text-decoration: none;
+  }
+  .pagination{
+    margin-top: 1.5%;
+  }
+</style>
+
+  <div class="main-card mb-3 card termscondition">
+    <div class="card-header">Participant User List
+      <div class="btn-actions-pane-right">
+        <div role="group" class="btn-group-sm btn-group">
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive participantuserlist">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+      </div>
+      <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+        <thead>
+        <tr>
+          <th class="text-center">Research Work id</th>
+          <th class="text-center">Name</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Country</th>
+        </tr>
+        </thead>
+        <tbody>
+          <!-- | paginate: config -->
+        <tr *ngFor="let user of participantusers | filter:term; let i=index;">
+          <td class="text-center">{{ user?.research_worker_id }}</td>
+          <td class="text-center"><a routerLink="/overviewuser/{{ user?.id }}">{{ user?.first_name }} {{ user?.last_name }}</a></td>
+          <td class="text-center">{{ user?.email }}</td>
+          <td class="text-center text-black">{{ user?.country }}</td>
+        </tr>
+        </tbody>
+      </table>
+      <!-- <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6 col-xl-6 pagination">
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+      </div> -->
+    </div>
+  </div>

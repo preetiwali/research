@@ -1,0 +1,221 @@
+<style>
+  .participant-notification{
+    text-transform: none; font-weight: none;color:black;
+  }
+  .icon-wrapper-bg{
+    background-color:white;
+  }
+  .icon-wrapper{
+    padding:-8%;
+  }
+  .participantmail{
+    margin-left: -8%;
+  }
+  .lnr-alarm{
+    color: white;
+  }
+  .participantheader{
+    background-color: black;
+  }
+  .headertitle{
+    color:white;
+  }
+  a{
+    text-decoration: none;
+  }
+  .lnr-envelope{
+    margin:18%;color:white;
+  }
+  .commonheading{
+    background-color: #B1B69D;
+  }
+  .menutitle{
+    color:#0a2956;
+  }
+  .timetitle{
+    text-transform: none; font-weight: none;
+  }
+  .homepage{
+    color:white;
+  }
+  .dropdown-menu-xl{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: translate(-185px, 46px);
+  }
+  .dropdown:hover .dropdown-menu-xl{
+    display: block;
+  }
+  .shadow-overflow{
+    margin:10px;
+  }
+</style>
+
+<div class="header-dots" *ngIf="user_type == 'Participant'">
+  <div class="btn-group show dropdown" ngbDropdown autoClose="outside" placement="bottom">
+    <button type="button" title="Notification" class="btn btn-link p-0 mr-2" ngbDropdownToggle>
+      <span>
+        <div class="icon-wrapper icon-wrapper-alt rounded-circle" (click)="readnotification();">
+          <div class="icon-wrapper-bg"></div>
+          <i class="lnr-alarm"></i>
+          <div class="badge badge-dot badge-dot-sm badge-danger" *ngIf="unread_notification == 'yes'">Notifications</div>
+        </div>
+      </span>
+    </button>
+    <div class="dropdown-menu-xl dropdown-menu" ngbDropdownMenu>
+      <div class="dropdown-menu-header mb-0">
+        <div class="dropdown-menu-header-inner participantheader">
+          <div class="menu-header-image opacity-1 dd-header-bg-2"></div>
+          <div class="menu-header-content text-dark">
+            <h5 class="menu-header-title headertitle">Notifications</h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-tabbed-header">
+        <div class="scroll-gradient">
+          <div class="scroll-area-sm shadow-overflow">
+            <perfect-scrollbar [autoPropagation]="true">
+              <div *ngIf="notifications" class="vertical-without-time vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+                <div class="vertical-timeline-item vertical-timeline-element" *ngFor="let notification of notifications; let i=index;">
+
+                    <div *ngIf="notifications"><span class="vertical-timeline-element-icon bounce-in"><i
+                      class="badge badge-dot badge-dot-xl badge-danger"></i></span>
+
+                      <span class="vertical-timeline-element-icon bounce-in"  *ngIf="notification.seen_status == 1" ><i
+                        class="badge badge-dot badge-dot-xl badge-success"></i></span>
+
+                    <div class="vertical-timeline-element-content bounce-in">
+                      <a routerLink="/{{notification.redirect_url}}"> </a>
+                      <a (click)="seenNotification(notification.id);" routerLink="{{notification.redirect_url}}"><h4 class="participant-notification timeline-title">{{notification.message}}</h4></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+  
+  <div class="icon-wrapper icon-wrapper-alt rounded-circle " routerLink="/participantinbox">
+    <div class="icon-wrapper-bg participantmail"></div>
+    <i class="lnr-envelope"></i>
+  </div>
+</div>
+
+
+
+<div class="header-dots" *ngIf="user_type == 'Researcher'">
+  <div class="btn-group show dropdown" ngbDropdown autoClose="outside" placement="bottom">
+    <button type="button" title="Notification" class="btn btn-link p-0 mr-2" ngbDropdownToggle>
+      <span>
+        <div class="icon-wrapper icon-wrapper-alt rounded-circle" (click)="readnotification();">
+          <div class="icon-wrapper-bg"></div>
+          <i class="lnr-alarm"></i>
+          <div class="badge badge-dot badge-dot-sm badge-danger" *ngIf="unread_notification == 'yes'">Notifications</div>
+        </div>
+      </span>
+    </button>
+    <div class="dropdown-menu-xl dropdown-menu">
+      <div class="dropdown-menu-header mb-0">
+        <div class="dropdown-menu-header-inner commonheading">
+          <div class="menu-header-image opacity-1 dd-header-bg-2"></div>
+          <div class="menu-header-content text-dark">
+            <h5 class="menu-header-title menutitle">Notifications</h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-tabbed-header">
+        <div class="scroll-gradient">
+          <div class="scroll-area-sm shadow-overflow">
+            <perfect-scrollbar [autoPropagation]="true">
+              <div *ngIf="notifications" class="vertical-without-time vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+                <div class="vertical-timeline-item vertical-timeline-element" *ngFor="let notification of notifications; let i=index;">
+
+                  <div *ngIf="notifications"><span class="vertical-timeline-element-icon bounce-in"><i
+                    class="badge badge-dot badge-dot-xl badge-danger"></i></span>
+
+                    <span class="vertical-timeline-element-icon bounce-in"  *ngIf="notification.seen_status == 1" ><i
+                      class="badge badge-dot badge-dot-xl badge-success"></i></span>
+
+                    <div class="vertical-timeline-element-content bounce-in">
+                      <a routerLink="/{{notification.redirect_url}}"> </a>
+                      <a (click)="seenNotification(notification.id);" routerLink="{{notification.redirect_url}}">
+                        <h4 class="timeline-title timetitle">{{notification.message}}</h4></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+<div class="header-dots" *ngIf="user_type == 'Admin'">
+  <div class="btn-group show dropdown" ngbDropdown autoClose="outside" placement="bottom">
+    <button type="button" title="Notification" class="btn btn-link p-0 mr-2" ngbDropdownToggle>
+      <span>
+        <div class="icon-wrapper icon-wrapper-alt rounded-circle" (click)="readnotification();">
+          <div class="icon-wrapper-bg"></div>
+          <i class="lnr-alarm"></i>
+          <div class="badge badge-dot badge-dot-sm badge-danger" *ngIf="unread_notification == 'yes'">Notifications</div>
+        </div>
+      </span>
+    </button>
+    <div class="dropdown-menu-xl dropdown-menu" ngbDropdownMenu>
+      <div class="dropdown-menu-header mb-0">
+        <div class="dropdown-menu-header-inner commonheading">
+          <div class="menu-header-image opacity-1 dd-header-bg-2"></div>
+          <div class="menu-header-content text-dark">
+            <h5 class="menu-header-title menutitle">Notifications</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-tabbed-header">
+        <div class="scroll-gradient">
+          <div class="scroll-area-sm shadow-overflow">
+            <perfect-scrollbar [autoPropagation]="true">
+              <div *ngIf="notifications" class="vertical-without-time vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+                <div class="vertical-timeline-item vertical-timeline-element" *ngFor="let notification of notifications; let i=index;">
+                  <div *ngIf="notifications"><span class="vertical-timeline-element-icon bounce-in"><i
+                    class="badge badge-dot badge-dot-xl badge-danger"></i></span>
+
+                    <span class="vertical-timeline-element-icon bounce-in"  *ngIf="notification.seen_status == 1" ><i
+                      class="badge badge-dot badge-dot-xl badge-success"></i></span>
+
+                    <div class="vertical-timeline-element-content bounce-in">
+                      <a routerLink="/{{notification.redirect_url}}"> </a>
+                        <a routerLink="{{notification.redirect_url}}" (click)="seenNotification(notification.id);" >
+                          <h4 class="timeline-title timetitle">{{notification.message}}</h4>
+                        </a>   
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </perfect-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+
+<div class="header-dots" *ngIf="user_type != 'Participant' && user_type != 'Researcher' && user_type != 'Admin'">
+  <div class="d-flex">
+    <div class="header-btn-lg">
+      <a routerLinkActive="active-item" routerLink="/pages/login-boxed" class="homepage">
+          Login
+      </a>
+    </div>
+  </div>
+</div>
+      

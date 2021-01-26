@@ -1,0 +1,65 @@
+<style>
+  .slider{
+    height:650px;background-color: #2D383C;
+  }
+  img{
+    width:450px;
+  }
+  .images{
+    text-align: center;
+  }
+  h3{
+    color:#0a2956;
+  }
+  .faq{
+    margin-left: 20px;
+  }
+</style>
+
+<div class="container">
+  <!-- <div class="d-none d-lg-block colsm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="slider-light">
+      <ngx-slick-carousel class="slick-slider slick-dotted" #slickModal="slick-carousel"
+                          [config]="slideConfig2">
+        <div ngxSlickItem *ngFor="let content of contentList; let i=index;">
+          <div class="position-relative d-flex justify-content-center align-items-center slider">
+            <div class="slide-img-bg"></div>
+            <div class="slider-content text-light">
+              <h3>{{content.page_content.title}}</h3>
+              <p [innerHTML]="content.page_content.content">
+              </p>
+            </div>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+  </div> -->
+
+
+  <div class="mt-5 mb-5">
+    <div class="col-md-12">
+      <h3 class="faq">FAQ – Frequently Asked Questions</h3>
+    </div>
+    <div class="col-md-12" *ngFor="let faqquestion of faq; let i=index;">
+      <div class="main-card">
+        <div class="card-body">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <h6 class="text-uppercase">{{faqquestion.faq_help_question.question}}</h6>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p [innerHTML]="faqquestion.faq_help_question.answer"></p>
+              <div class="images" *ngIf="faqquestion.image_url != null">
+                <img src="{{faqquestion.image_url}}" />
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

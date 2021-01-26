@@ -1,0 +1,241 @@
+<style>
+  .accept{
+    display: block;overflow-y:scroll;height:420px;padding:1%;
+  }
+  .responsive-center{
+    height:122px;
+  }
+  .transaction{
+    background-color: #B1B69D;
+  }
+  .widget-numbers{
+    font-size: 15px;
+  }
+  .transactiondetails{
+    height: 89%;
+  }
+
+  @media screen and (max-width: 400px) {
+  
+    .total{
+      height:500px;
+    }
+  }
+</style>
+     
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12  col-sm-12 col-xm-12">
+      <div class="main-card mb-3 card termscondition">
+        <div class="card-header">Transaction Details</div>
+        <div class="table-responsive accept">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover activestudy">
+            <thead>
+              <tr>
+                <th class="text-center">User Name</th>
+                <th class="text-center">Study Name</th>
+                <th class="text-center">Order Id</th>
+                <th class="text-center">Transaction Id</th>
+                <th class="text-center">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transactions of transaction; let i=index;">
+                <td class="text-center">{{ transactions?.user.first_name }} {{ transactions?.user.last_name }}</td>
+                <td class="text-center">{{ transactions?.study.name }}</td>
+                <td class="text-center">{{ transactions?.transaction.order_id }}</td>
+                <td class="text-center">{{ transactions?.transaction.transaction_id }}</td>
+                <td class="text-center">{{ transactions?.transaction.amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+    <div class="mb-3 card">
+      <div class="rm-border pb-0 responsive-center card-header">
+        <div><h5 class="menu-header-title text-capitalize">Total Transaction</h5></div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="no-shadow rm-border bg-transparent widget-chart text-left card">
+            <div class="progress-circle-wrapper">
+              <div class="round-progress-text">
+                <span>{{indian_transactions}}</span>
+                <round-progress
+                  [current]="100"
+                  [max]="100"
+                  [color]="'orange'"
+                  [background]="'#e3e3e3'"
+                  [radius]="88"
+                  [stroke]="11"
+                  [semicircle]="false"
+                  [rounded]="true"
+                  [clockwise]="false"
+                  [responsive]="true"
+                  [duration]="1400"
+                  [animation]="'easeInOutQuart'"
+                  [animationDelay]="0"></round-progress>
+              </div>
+            </div>
+            <div class="widget-chart-content">
+              <div class="widget-subheading">Total Transaction of India </div>
+              <div class="widget-numbers text-success"><span>{{total_indian_payment}}</span></div>
+              <div class="widget-description text-focus">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card no-shadow rm-border bg-transparent widget-chart text-left mt-2">
+            <div class="progress-circle-wrapper">
+              <div class="round-progress-text">
+                <span>{{uae_transactions}}</span>
+                <round-progress
+                  [current]="100"
+                  [max]="100"
+                  [color]="'#4143c4'"
+                  [background]="'#e3e3e3'"
+                  [radius]="88"
+                  [stroke]="11"
+                  [semicircle]="false"
+                  [rounded]="true"
+                  [clockwise]="false"
+                  [responsive]="true"
+                  [duration]="1400"
+                  [animation]="'easeInOutQuart'"
+                  [animationDelay]="0"></round-progress>
+              </div>
+            </div>
+            <div class="widget-chart-content">
+              <div class="widget-subheading">Total Transaction of UAE </div>
+              <div class="widget-numbers text-danger"><span>{{total_uae_payment}}</span></div>
+              <div class="widget-description opacity-8 text-focus">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="no-shadow rm-border bg-transparent widget-chart text-left card">
+            <div class="progress-circle-wrapper">
+              <div class="round-progress-text">
+                <span>{{other_country_transactions}}</span>
+                <round-progress
+                  [current]="100"
+                  [max]="100"
+                  [color]="'red'"
+                  [background]="'#e3e3e3'"
+                  [radius]="88"
+                  [stroke]="11"
+                  [semicircle]="false"
+                  [rounded]="true"
+                  [clockwise]="false"
+                  [responsive]="true"
+                  [duration]="1400"
+                  [animation]="'easeInOutQuart'"
+                  [animationDelay]="0"></round-progress>
+              </div>
+            </div>
+            <div class="widget-chart-content">
+              <div class="widget-subheading">Total Transaction of Other Country </div>
+              <div class="widget-numbers text-success"><span>{{total_other_country_payment}}</span></div>
+              <div class="widget-description text-focus">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card no-shadow rm-border bg-transparent widget-chart text-left mt-2">
+            <div class="progress-circle-wrapper">
+              <div class="round-progress-text">
+                <span>{{total_transaction}}</span>
+                <round-progress
+                  [current]="100"
+                  [max]="100"
+                  [color]="'green'"
+                  [background]="'#e3e3e3'"
+                  [radius]="88"
+                  [stroke]="11"
+                  [semicircle]="false"
+                  [rounded]="true"
+                  [clockwise]="false"
+                  [responsive]="true"
+                  [duration]="1400"
+                  [animation]="'easeInOutQuart'"
+                  [animationDelay]="0"></round-progress>
+              </div>
+            </div>
+            <div class="widget-chart-content">
+              <div class="widget-subheading">Total Transaction Amount</div>
+              <div class="widget-numbers text-danger"><span>{{total_payment}}</span></div>
+              <div class="widget-description opacity-8 text-focus">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+    <div class="card main-card mb-3 transactiondetails">
+      <div class="card-header text-white transaction">
+        Monthly Transaction
+      </div>
+      <div class="card-body">
+        <apx-chart
+          [series]="[
+            {
+              name: 'Monthly Number of Transaction',
+              data: monthly_transaction
+            }, {
+              name: 'Monthly Amount',
+              data: monthly_payment
+            }
+          ]"
+          [chart]="{
+            height: '240',
+            type: 'bar'
+          }"
+          [stroke]="{
+            show: true,
+            width: 2,
+            colors: ['transparent']
+          }"
+          [plotOptions]="{
+            bar: {
+              horizontal: false,
+              endingShape: 'rounded',
+              columnWidth: '35%'
+            }
+          }"
+
+          [dataLabels]="{
+            enabled: false
+          }"
+
+          [labels]="['01/01/2003', '02/01/2003', '03/01/2003', '04/01/2003', '05/01/2003', '06/01/2003', '07/01/2003', '08/01/2003', '09/01/2003', '10/01/2003', '11/01/2003']"
+
+          [xaxis]="{
+            categories: months
+          }"
+          [yaxis]="{
+            title: {
+              text: '&#1583;.&#1573; (dirham)'
+            }
+          }"
+
+          [fill]="{
+            opacity: 1
+          }"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>
+</div>
+  

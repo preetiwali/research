@@ -1,0 +1,89 @@
+
+<style>
+  .card-header{
+    background-color: white;
+    }
+  .card-body{
+    background-color: white;
+  }
+  .tab-message{
+    background-color: white;color: black;margin:auto;font-size:14px;border-right:1px solid gray;
+  }
+  .inboxdetails{
+    width:65%;
+  }
+  .tab{
+    color: black;background-color: white;margin:auto;font-size:14px;
+  }
+  .submitbutton{
+    background-color: black;border: black;color:white;
+  }
+  .detailsinbox{
+    margin:auto;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-lg-3 col-xl-2 col-sm-12 col-xs-12">
+      <div class="card main-card inboxdetails">
+        <div class="detailsinbox">
+          <button class="btn btn-lg tab-message" title="Back" routerLink="/participantinbox"><i class="fa fa-arrow-left"></i></button>
+          <span><button class="btn btn-lg tab" title="Reply" (click)="openLarge(name)"><i class="fa fa-reply"></i></button></span>
+        </div>
+      </div>
+      <br>
+    </div>
+  
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card card">
+        <div class="card-header">
+          <div class="col-md-6">{{ message?.subject }}</div>
+        </div>
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane active show" id="tab-eg3-0" role="tabpanel">
+              <p>From <span class="text-primary">{{message?.sender_id }}</span></p>
+            </div>
+            <div class="tab-pane active show" id="tab-eg3-0" role="tabpanel">
+              <p>{{ message?.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- reply modal -->
+  <ng-template #name let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Reply</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.replymessage" class="needs-validation" novalidate (validSubmit)="this.replyMessage()">
+      <div class="modal-body"> 
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Recipant Id</label>
+          <input formControlName="reciever_id" type="text" class="form-control" id="validationCustom01"
+                *ngIf="message" [(ngModel)]="message.sender_id" readonly>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Subject</label>
+          <input formControlName="subject" type="text" class="form-control" id="validationCustom01"
+              *ngIf="message" [(ngModel)]="message.subject" required>
+        </div>
+        <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Message</label>
+          <angular-editor formControlName="description" [config]="config"></angular-editor>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn submitbutton"  (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn submitbutton">Reply</button>
+      </div>
+    </form>
+  </ng-template>

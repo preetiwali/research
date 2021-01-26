@@ -1,0 +1,6 @@
+{
+    "/api*": {
+      "target": "https://testsecureacceptance.cybersource.com/",
+      "secure": false
+    }
+  }

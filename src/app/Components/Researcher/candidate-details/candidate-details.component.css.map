@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "candidate-details.component.sass"
+    ],
+    "names": [],
+    "file": "candidate-details.component.css"
+}

@@ -1,0 +1,35 @@
+
+<style>
+  .study{
+    display: block;height: 720px;overflow-y: scroll; padding:1%;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card mb-3 card termscondition">
+        <div class="card-header">List of Two studies or less
+          <div class="btn-actions-pane-right">
+          </div>
+        </div>
+        <div class="table-responsive study">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">Participated Study List</th>
+                <th class="text-center">Completed Study</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let participant of participantfilterlist; let i=index;">
+                <td class="text-center">{{ participant.participated_studies }}</td>
+                <td class="text-center">{{ participant.completed_studies }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

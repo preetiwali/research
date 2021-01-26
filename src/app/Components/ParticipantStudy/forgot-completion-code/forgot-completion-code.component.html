@@ -1,0 +1,43 @@
+<style>
+  .card {
+    margin: 0 auto;
+  }
+  .verify{
+    margin: auto;
+  }
+  button{
+    background-color:black;color:white;float:right;
+  }
+  button:hover{
+    color: white;
+  }
+</style>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 col-md-12 col-xl-6 col-lg-8 verify">
+        <div class="card main-card">
+          <div class="card-body">
+            <h3 class="text-center">Forgot your completion code</h3>
+            <form [formGroup]="this.formGroup" (validSubmit)="this.forgotCompletionCode()" class="needs-validation" novalidate>
+              <!-- <div class="form-row">
+                <div class="col-md-12 mb-3 form-group">
+                  <input type="hidden" class="form-control" id="validationCustom01" formControlName="completionurl"
+                      [(ngModel)]="url">
+                </div>
+              </div> -->
+              <div class="form-row">
+                <div class="col-xs-12 xol-sm-12 col-md-12 col-lg-12 col-xl-12 mb-12 form-group">
+                  <label for="validationCustomUsername">Email</label>
+                  <input type="email" formControlName="email" class="form-control" id="validationCustomemail"
+                    aria-describedby="inputGroupPrepend" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                </div>
+              </div>
+              <button class="btn ml-2" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+          

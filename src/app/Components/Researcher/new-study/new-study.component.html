@@ -1,0 +1,165 @@
+<style>
+  .card {
+    margin: 0 auto;width: 65%;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  .height{
+      height:100%;
+  }
+  .study{
+    margin-top:5%;
+  }
+  .container{
+    width:100%;
+  }
+  .progressbar{
+    counter-reset: step;
+  }
+  .progressbar li{
+    list-style-type: none;float: left;width:18%;position: relative;text-align: center;
+  }
+  .progressbar li:before{
+    content: counter(step);counter-increment:step;width:30px;height:30px;
+    line-height: 31px;display: block;text-align: center;margin:0 auto 10px auto;border-radius: 50%;
+    background-color: green;
+  }
+  .progressbar li:after{
+    content: '';position: absolute;width:85%;height:1px;background-color: #ddd;top:15px;left:-42%;z-index: 1;
+  }
+  .progressbar li:first-child:after{
+    content: none;
+  }
+  .progressbar li.active{
+    color:white;
+  }
+  .progressbar li.active:before{
+    border-color: green;
+  }
+  h2{
+    padding: 1%;
+  }
+  .progressbar li.active + li:after{
+    background-color: #ddd;
+  }
+  .progressbar li.white:before{
+    background-color: white;
+  }
+  .progressbar li.blue:before{
+    background-color: blue;
+  }
+  .container{
+    margin-top: 2%;
+  }
+  .submitbutton{
+    background-color: #0a2956;border: #0a2956;color:white;float:right;
+  }
+  h6{
+    color: black;
+  }
+  .main-card{
+    box-shadow: none;border:1px solid black;padding:1%;
+  }
+  @media screen and (max-width: 600px) {
+  .study {
+    margin-top:1%;width: 100%;height:190vh !important;
+  }
+}  
+</style>
+
+
+<div class="container card newcontainer">
+<div class="row">
+  <div class="container">
+    <ul class="progressbar">
+      <li class="active text-white"><h6>Basic Details</h6></li>
+      <li class="white"><h6>Study Description</h6></li>
+      <li class="white"><h6>Audience</h6></li>
+      <li class="white"><h6>Review Study</h6></li>
+      <li class="white"><h6>Confirm & Publish</h6></li>
+    </ul>
+  </div>
+</div> 
+
+  <div class="height">
+    <div class="d-flex justify-content-center align-items-center study">
+      <div class="mx-auto app-login-box col-md-12 login_page_container">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card main-card mb-3 row">
+            <div class="card-body col-md-12">
+              <h2 class="text-center">Basic Details</h2>
+              <form [formGroup]="this.newstudyform" (validSubmit)="newStudy()" class="needs-validation" novalidate>
+                
+                <div class="form-row">
+                  <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUsername">Completion URL</label>
+                    <input type="url" formControlName="completionurl" class="form-control" id="validationCustomUsername"
+                        placeholder="Completion URL" *ngIf="completion_url" [(ngModel)]="completion_url" readonly pattern="https?://.+" title="Include http://" aria-describedby="inputGroupPrepend">
+                  </div>
+                </div> 
+                <div class="form-row">
+                  <div class="col-md-12 col-lg-12 col-xl-6 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUsername">Completion Code</label>
+                    <input type="text" formControlName="completioncode" class="form-control" id="validationCustomUsername"
+                        placeholder="Completion Code" aria-describedby="inputGroupPrepend" *ngIf="completion_code" [(ngModel)]="completion_code" readonly>
+                  </div>
+                  <div class="col-md-12 col-lg-12 col-xl-6 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUsername">Study URL</label>
+                    <input type="url" formControlName="studyurl" class="form-control" id="validationCustomUsername"
+                        placeholder="Study URL" pattern="https?://.+" title="Include http://" aria-describedby="inputGroupPrepend">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12 col-lg-12 col-xl-6 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUsername">Study Name</label>
+                    <input type="text" formControlName="name" class="form-control" id="validationCustomUsername"
+                        placeholder="Study Name" aria-describedby="inputGroupPrepend">
+                  </div>
+                  <div class="col-md-12 col-lg-12 col-xl-6 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUsername">Number of Participants</label>
+                    <input type="number" class="form-control" formControlName="submission" min="0" id="submission"
+                            (keyup)="validateParticipants()" placeholder="Number of Participants" aria-describedby="inputGroupPrepend">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12 col-lg-12 col-xl-6 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUsername">Estimated Completion Time</label>
+                    <input type="number" formControlName="estimatetime" class="form-control" id="estimatetime"
+                            min="0" (keyup)="validateEstimateTime()" placeholder="Time In Minutes" aria-describedby="inputGroupPrepend">
+                  </div>
+                  <div class="col-md-12 col-lg-12 col-xl-6 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUsername">Maximum Allowed Time</label>
+                    <input type="number" class="form-control" formControlName="allowedtime" id="maximumtime"
+                        placeholder="Time In Minutes" (keyup)="greaterTimeFunction()" aria-describedby="inputGroupPrepend">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12 col-lg-12 col-xl-6 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUsername">Reward Per Participant</label>
+                    <input type="number" class="form-control" formControlName="reward" min="0" id="reward"
+                       (keyup)="validateMinusValue()" placeholder="Reward Per Participant(&#1583;.&#1573;)" aria-describedby="inputGroupPrepend">
+                  </div>
+                  <div class="col-md-12 col-lg-12 col-xl-6 col-sm-12 col-xs-12 mb-3 form-group">
+                    <label for="validationCustomUser">Maximum completion date</label>
+                    <div class="input-group">
+                      <input [matDatepicker]="picker" (click)="picker.open()" class="form-control" min="{{min_to_date}}" id="userdate" formControlName="max_participation_date" placeholder="yyyy-mm-dd">
+                      <mat-datepicker #picker></mat-datepicker>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn ml-2 submitbutton" type="submit" [disabled]="greaterTime === false">Next  <i class="lnr-arrow-right-circle"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        
+        

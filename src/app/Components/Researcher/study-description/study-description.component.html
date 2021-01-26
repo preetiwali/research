@@ -1,0 +1,83 @@
+<style>
+  button{
+    float:right;margin-bottom:1%;margin-right:1%;
+  }
+  .previous{
+    float:left;
+  }
+  i{
+    font-weight: bold;
+  }
+  .card{
+    margin-top:3%;
+  }
+  p{
+    width:100%; margin-top:3%;
+  }
+  .container{
+    width:100%;
+  }
+  .progressbar{
+    counter-reset: step;
+  }
+  .progressbar li{
+    list-style-type: none;float: left;width:18%;position: relative;text-align: center;
+  }
+  .progressbar li:before{
+    content: counter(step);counter-increment:step;width:30px;height:30px;line-height: 31px;
+    display: block;text-align: center;margin:0 auto 10px auto;border-radius: 50%;background-color: green;
+  }
+  .progressbar li:after{
+    content: '';position: absolute;width:100%;height:1px;background-color: green;top:15px;left:-50%;z-index: -1;
+  }
+  .progressbar li:first-child:after{
+    content: none;
+  }
+  .progressbar li.active{
+    color:black;
+  }
+  .progressbar li.active:before{
+    border-color: green;
+  }
+  .progressbar li.active + li:after{
+    background-color: #ddd;
+  }
+  .progressbar li.white:before{
+    background-color: white;
+  }
+  .progressbar li.green:before{
+    background-color: green;color:white;
+  }
+  h6{
+    color: black;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <ul class="progressbar">
+        <li class="green" routerLink="/newstudy"><h6>Basic Details</h6></li>
+        <li class="active text-white" routerLink="/studydescription/{{id}}"><h6>Study Description</h6></li>
+        <li class="white" routerLink="/studyaudience/{{id}}"><h6>Audience</h6></li>
+        <li class="white" routerLink="/studypublished/{{id}}"><h6>Review Study</h6></li>
+        <li class="white"><h6>Confirm & Publish</h6></li>
+      </ul>
+    </div>
+  </div>
+    
+  <div class="card main-card mb-3">
+    <form [formGroup]="this.studydescriptionform" (validSubmit)="studyDescription()" class="needs-validation" novalidate>
+      <div class="card-body">
+        <angular-editor [(ngModel)]="htmlContent" id="inputString" formControlName="description" [config]="config"></angular-editor>
+      </div>
+      <button class="btn ml-2 previous submitbutton" routerLink="/participanteditnewstudy/{{ id }}"><i class="lnr-arrow-left-circle"></i>  Previous</button>
+      <button class="btn ml-2 submitbutton" [disabled]="!studydescriptionform.valid" type="submit">Next  <i class="lnr-arrow-right-circle"></i></button>
+    </form>
+  </div>
+</div>
+
+    

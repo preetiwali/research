@@ -1,0 +1,66 @@
+<style>
+  .example-card{
+    margin-top: 24%;
+  }
+  button{
+    margin-left: 20%;
+  }
+  label{
+    font-weight: bold;
+  }
+  .payment{
+    margin: auto;
+  }
+  .order-place{
+    margin:auto;
+    width:30%;
+  }
+  .proceedbutton{
+    background-color: #0a2956;border: #0a2956;color:white;
+  }
+  .cashout{
+    margin:auto;
+  }
+  h6 span{
+    float:right;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 col-md-12 col-lg-8 col-xl-8 payment">
+      <div class="card main-card mb-3">
+        <div class="card-body">
+          <div class="row"> 
+            <div class="col-md-12 cashout">
+              <div class="p-3">
+                <h6 class="text-black text-left text-uppercase font-size-md font-weight-bold">Total Amount :&nbsp;&nbsp;&nbsp;&nbsp;{{wallet}}<span></span></h6><br>
+                <form [formGroup]="this.paymentprocess" class="needs-validation" novalidate>
+                  <div class="form-row">
+                    <div class="col-xs-12 xol-sm-12 col-md-12 col-lg-12 col-xl-12 mb-12 form-group">
+                      <label for="validationCustomUsername">Enter Amount You Want To Withdraw</label>
+                      <input type="number" formControlName="amount" class="form-control" id="amount" min="1" (keyup)="validAmount()">
+                    </div>
+                  </div>
+                </form>  
+              </div>
+                <div class="order-place">
+                  <button class="btn btn-sm proceedbutton"  [disabled]="validpayment === false" (click)="proceedToPay($event)">
+                    <a class="btn btn-order">
+                      <ng-container *ngIf="processingPayment">
+                          <i class="fa fa-circle-o-notch fa-spin"></i> Processing
+                      </ng-container>
+                      <ng-container *ngIf="!processingPayment"> 
+                        Cash Out
+                      </ng-container>
+                    </a>
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

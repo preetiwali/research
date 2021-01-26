@@ -1,0 +1,437 @@
+<style>
+  .confirm{
+    float:right;
+  }
+  .pointer_event_none{
+    pointer-events: none !important;
+  }
+  .dropdown-item:hover{
+    background-color: #1f4988;color:white;
+  }
+  p{
+    width:100%;margin-top:3%;
+  }
+  .container{
+    width:100%; margin-bottom: 3%;
+  }
+  .progressbar{
+    counter-reset: step;
+  }
+  .progressbar li{
+    list-style-type: none;float: left;width:18%;position: relative;text-align: center;
+  }
+  .progressbar li:before{
+    content: counter(step);counter-increment:step;width:30px;height:30px;line-height: 31px;display: block;text-align: center;
+    margin:0 auto 10px auto;border-radius: 50%;background-color: #ddd;
+  }
+  .progressbar li:after{
+    content: '';position: absolute;width:100%;height:1px;background-color: green;top:15px;left:-50%;z-index: -1;
+  }
+  .progressbar li:first-child:after{
+    content: none;
+  }
+  .progressbar li.active{
+    color:black;
+  }
+  .progressbar li.active:before{
+    border-color: green;background-color: green;
+  }
+  .progressbar li.active + li:after{
+    background-color: #ddd;
+  }
+  .progressbar li.white:before{
+    background-color: green;
+  }
+  h6{
+    color: black;
+  }
+  .confirmbutton{
+    margin-left:-1.5%;background-color: #1f4988;border: #1f4988;color:white;float:right;
+  }
+  .backbutton{
+    font-size: 14px;margin-bottom:1%;float: left;
+  }
+  .actionbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .closebutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .paymentbutton{
+    float: right;
+  }
+  .countbar{
+    font-size: 25px;
+  }
+  .showerrormessage{
+    display:block;color:red; font-size:15px;float:left;
+  }
+  .hideerrormessage{
+    display:none;color:red; font-size:15px;float:left;
+  }
+  .actionbutton{
+    float:right;
+  }
+  .cardpayment{
+    height:92%;
+  }
+  .listshowbutton{
+    background-color: #1f4988;border: #1f4988;color:white;margin-left:0.5%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;float:right;
+  }
+  .hidemessage{
+    display: none;font-size:15px;
+  }
+@media screen and (max-width: 400px) {
+  .list{
+    margin-left:8%;
+  }
+  .proceed_btn{
+    width:100%;
+  }
+  .confirm{
+    margin:1%;
+  }
+}
+
+wm-paypal { width: 220px; }
+.paypal-button {
+  display: none;
+} 
+
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/unpublishedstudy"><i class="fa fa-arrow-left"></i></button>
+      <!-- <button class="btn btn-lg list closebutton" routerLink="/studyaudience/{{ study?.id }}">Audience</button> -->
+      <!-- <button class="btn btn-lg list listshowbutton" title="Survey experience of the participants" routerLink="/participantratinglist/{{study?.id}}">Participant Experience List</button> -->
+      <button class="btn btn-md confirm confirmbutton mb-3" *ngIf="is_paid == 1 && study.is_published == null" routerLink="/confirmpublish/{{ study?.id }}">Confirm Publish</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container">
+      <ul class="progressbar">
+        <li class="white text-white" routerLink="/editstudy/{{study_id}}"><h6>Basic Details</h6></li>
+        <li class="white text-white" routerLink="/researcherstudyDescription/{{study_id}}"><h6>Study Description</h6></li>
+        <li class="white text-white" routerLink="/studyaudience/{{study_id}}"><h6>Audience</h6></li>
+        <li class="active text-white" routerLink="/studypublished/{{study_id}}"><h6>Review Study</h6></li>
+        <li class="green"><h6>Confirm & Publish</h6></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- <div class="icon-wrapper icon-wrapper-alt rounded-circle" title="Wallet">
+    <div class="icon-wrapper-bg"></div>
+      <p>&#1583;.&#1573;{{study_wallet}}</p>
+  </div> -->
+
+  <!-- <div class="row justify-content-end">
+    <button style="margin-bottom: 8px; margin-right: 20px;" class="btn btn-outline-primary btn-lg confirm confirmbutton" *ngIf="is_paid == 0" method="post" (click)="CybersourcePay()">Proceed to pay</button>
+  </div> -->
+
+  <div class="row justify-content-end">
+    <form #form  action='https://testsecureacceptance.cybersource.com/pay' method='POST'>
+    
+      <input type="hidden" id="access_key" name="access_key" value="{{access_key}}">
+      <input type="hidden" id="profile_id" name="profile_id" value="{{profile_id}}">
+      <input type="hidden" id="bill_to_forename" name="bill_to_forename" value="{{bill_to_forename}}" >
+      <input type="hidden" id="bill_to_surname" name="bill_to_surname" value="{{bill_to_surname}}">
+      <input type="hidden" id="bill_to_company_name" name="bill_to_company_name" value="{{bill_to_company_name}}">
+      <input type="hidden" id="bill_to_address_line1" name="bill_to_address_line1" value="{{bill_to_address_line1}}">
+      <input type="hidden" id="bill_to_address_city" name="bill_to_address_city" value="{{bill_to_address_city}}"> 
+      <input type="hidden" id="bill_to_phone" name="bill_to_phone" value="{{bill_to_phone}}">  
+      <input type="hidden" id="bill_to_email" name="bill_to_email" value="{{bill_to_email}}">
+      <input type="hidden" id="locale" name="locale" value="{{locale}}">
+      <input type="hidden" id="amount" name="amount" value="{{amount}}">
+      <input type="hidden" id="transaction_type" name="transaction_type" value="{{transaction_type}}">
+      <input type="hidden" id="transaction_uuid" name="transaction_uuid" value="{{transaction_uuid}}">
+      <input type="hidden" id="signature" name="signature" value="{{signature}}">
+      <input type="hidden" id="currency" name="currency" value="{{currency}}">
+      <input type="hidden" id="signed_date_time" name="signed_date_time" value="{{signed_date_time}}">
+      <input type="hidden" id="reference_number" name="reference_number" value="{{reference_number}}">
+      <input type="hidden" id="signed_field_names" name="signed_field_names" value="{{signed_field_names}}">
+      <input type="hidden" id="unsigned_field_names" name="unsigned_field_names" value="{{unsigned_field_names}}">
+        
+    </form> 
+    <button type="submit" style="margin-bottom: 8px; margin-right: 20px;" class="btn btn-outline-primary btn-lg confirm confirmbutton" *ngIf="is_paid == 0 && all_params == 1" method="post" (click)="form.submit()">Proceed to pay</button>
+  </div>
+
+  <div class="row justify-content-end">
+    <img src="assets/images/cybersource-logo.jpg" alt="" style="height: 27px; width: 115px; margin-right: 20px; margin-bottom: 8px;" *ngIf="is_paid == 0">
+  </div>
+  
+  <!-- <div class="row"> -->
+      
+    <!-- razorpay -->
+    <!-- <div class="col-md-12 col-lg-12 col-xl-12 col-xs-12 col-sm-12 paymentbutton">
+      <div class="order-place" *ngIf="description_size >= 100">
+        <button class="btn btn-sm confirm proceed_btn closebutton" *ngIf="is_paid == null" (click)="proceedToPay($event)">
+          <a class="btn btn-order">
+            <ng-container *ngIf="processingPayment">
+                <i class="fa fa-circle-o-notch fa-spin"></i> Processing
+            </ng-container>
+            <ng-container *ngIf="!processingPayment"> 
+              Proceed to Pay
+            </ng-container>
+          </a>
+        </button>
+      </div> 
+    </div> -->
+
+    <!-- paypal -->
+
+    <!-- <div class="col-md-12 col-lg-12 col-xl-12 col-xs-12 col-sm-12 paymentbutton">
+      <div class="order-place" *ngIf="description_size >= 100">
+        <div class="confirm proceed_btn" *ngIf="is_paid == null">
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+      </div> 
+    </div>
+  </div> -->
+
+  
+  
+  <!-- <div class="row">
+
+    <div class="col-md-12 col-lg-12 col-xl-12 col-xs-12 col-sm-12 paymentbutton">
+      <div class="order-place" *ngIf="description_size >= 100">
+        <div class="confirm proceed_btn" *ngIf="is_paid == null">
+          <li class="active text-white" routerLink="/payment/{{study_id}}"><h6>Pay</h6></li> -->
+          <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
+        <!-- </div>
+      </div> 
+    </div>
+  </div> -->
+
+  <div class="row">
+    <!-- count show of filtered candidate -->
+    <div class="col-lg-4">
+      <div class="card main-card mb-3">
+        <div class="card-body text-center text-warning countbar">
+          <mwl-gauge
+            class="two"
+            [max]="100"
+            [dialStartAngle]="180"
+            [dialEndAngle]="0"
+            [value]="filteredCandidateCount"
+            [animated]="true"
+            [animationDuration]="2">
+          </mwl-gauge>
+          Eligible Candidate Count
+        </div>
+      </div>
+    </div>
+      
+    <div class="col-lg-8">
+      <div class="main-card mb-3 card cardpayment">
+        <div class="card-body">
+          <h5 class="card-title">Payment</h5>
+          <div class="table-responsive">
+            <table class="mb-0 table table-bordered">
+              <tbody>
+              <tr>
+                <th scope="row"><b>Number of Participants</b></th>
+                <td>{{ study?.submission }}</td>
+              </tr>
+              <tr>
+                <th scope="row"><b>Reward per Participant</b></th>
+                <td>{{ study?.reward }}</td>
+              </tr>
+              <tr>
+                <th scope="row"><b>Amount</b></th>
+                <td>{{ study?.reward * study?.submission }}</td>
+              </tr>
+              <tr>
+                <th scope="row"><b>Taxes & Commissions</b></th>
+                <td>{{ study?.reward * study?.submission * 0.30 | number: '.2' }}</td>
+              </tr>
+              <tr>
+                <th scope="row"><b>Total Amount</b></th>
+                <td>{{ study?.reward * study?.submission * 1.30 | number: '.2' }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Study Basic Details
+          <div class="btn-actions-pane-right">
+            <div role="group" class="btn-group-sm btn-group">
+              <button class="btn btn-lg actionbutton" title="Edit" (click)="openLarge(basic)"><i class="lnr lnr-pencil"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="table-responsive">
+              <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                <tr>
+                  <th class="text-left">Completion URL</th>
+                  <td class="text-right">{{ study?.completionurl }}</td>
+                </tr>
+                <tr>
+                  <th class="text-left">Completion Code</th>
+                  <td class="text-right">{{ study?.completioncode }}</td>
+                </tr> 
+                <tr>
+                  <th class="text-left">Study Name</th>
+                  <div class="text-right">{{ study?.name }}</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Study URL</th>
+                  <div class="text-right">{{ study?.studyurl }}</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Estimated Completion Time</th>
+                  <div class="text-right">{{ study?.estimatetime }} Minutes</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Maximum Allowed Time</th>
+                  <div class="text-right">{{ study?.allowedtime }} Minutes</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Maximum Submissions</th>
+                  <div class="text-right">{{ study?.submission }}</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Reward Per Participant</th>
+                  <div class="text-right">{{ study?.reward }}</div>
+                </tr>
+                <tr>
+                  <th class="text-left">Maximum completion date</th>
+                  <div class="text-right">{{ study?.max_participation_date | date:'mediumDate' }}</div>
+                </tr>
+              </table>
+            </div>
+          </form>  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- study published -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Study Details</div>
+        <div class="card-body" [innerHTML]="study?.description"></div>
+        <div class="d-block text-right card-footer">
+          <span class="showerrormessage" *ngIf="description_size < 100" >Study Description should be of at least 100 characters...</span>
+          <span class="hideerrormessage" *ngIf="description_size >= 100" >Study Description should be of at least 100 characters...</span>
+          <span class="actionbutton">
+            <button class="btn closebutton" title="Edit" (click)="openLarge(description)">
+              <i class="lnr lnr-pencil"></i>
+            </button></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- edit description modal -->
+  <ng-template #description let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Description</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.editstudydescription"  (validSubmit)="this.editStudyDescription(studydescription?.id)" class="needs-validation" novalidate>
+      <div class="modal-body">
+        <angular-editor *ngIf="studydescription || studydescription == null" [(ngModel)]="studydescription.description" formControlName="description" [config]="config"></angular-editor>
+        <div class="divider">{{ studydescription?.description }}</div>
+        <span _ngcontent-c4="" id="description" class="invalid-feedback ng-star-inserted hidemessage" ng-reflect-ng-class="invalid-feedback">Study Description should be of at least 100 characters...</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn closebutton" (click)="c('Close click')">Close</button>
+        <button [disabled]="!editstudydescription.valid" type="submit" class="btn closebutton">Submit</button>
+      </div>
+    </form>
+  </ng-template>
+
+
+<!-- edit basic info modal -->
+  <ng-template #basic let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Edit Basic Info</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="this.editstudyform"  (validSubmit)="this.editStudy(study.id)" class="needs-validation" novalidate>
+      <div class="modal-body">
+        <div class="form-row">
+            <div class="col-md-6 form-group">
+              <label for="validationCustomUsername">Completion URL</label>
+              <input type="url" *ngIf="study" formControlName="completionurl" class="form-control" id="validationCustomUsername"
+              [(ngModel)]="study.completionurl" aria-describedby="inputGroupPrepend" readonly>
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="validationCustomUsername">Completion Code</label>
+              <input type="text" *ngIf="study" formControlName="completioncode" class="form-control" id="validationCustomUsername"
+              [(ngModel)]="study.completioncode" aria-describedby="inputGroupPrepend" readonly>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 form-group">
+            <label for="validationCustomUsername">Study Name</label>
+            <input type="text" *ngIf="study" formControlName="name" class="form-control" id="validationCustomUsername"
+            [(ngModel)]="study.name" aria-describedby="inputGroupPrepend">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="validationCustomUsername">Study URL</label>
+            <input type="url" *ngIf="study"  formControlName="studyurl" class="form-control" id="validationCustomUsername"
+            [(ngModel)]="study.studyurl" aria-describedby="inputGroupPrepend">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6 form-group">
+            <label for="validationCustomUsername">Estimated Completion Time</label>
+            <input type="number" *ngIf="study"  formControlName="estimatetime" class="form-control" id="estimatetime"
+            [(ngModel)]="study.estimatetime" min="1" (keyup)="validateEstimateTime()"  aria-describedby="inputGroupPrepend">
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="validationCustomUsername">Maximum Allowed Time</label>
+            <input type="number" *ngIf="study"  class="form-control" formControlName="allowedtime" id="maximumtime"
+            [(ngModel)]="study.allowedtime" (keyup)="greaterTimeFunction()" aria-describedby="inputGroupPrepend">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 form-group">
+            <label for="validationCustomUsername">Number of Participants</label>
+            <input type="number" *ngIf="study"  class="form-control" formControlName="submission" id="validationCustomUsername"
+            [(ngModel)]="study.submission" aria-describedby="inputGroupPrepend">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="validationCustomUsername">Reward Per Participant</label>
+            <input type="text" *ngIf="study"  class="form-control" formControlName="reward" id="validationCustomUsername"
+            [(ngModel)]="study.reward" aria-describedby="inputGroupPrepend">
+          </div>
+          <div class="col-md-4 form-group">
+            <label for="validationCustomUsername">Maximum completion date</label>
+            <input type="date" *ngIf="study" [(ngModel)]="max_participation_date" class="form-control"
+              min="{{min_to_date}}" id="userdate" formControlName="max_participation_date">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn closebutton" (click)="c('Close click')">Close</button>
+        <button type="submit" class="btn submitbutton">Submit</button>
+      </div>
+    </form>
+  </ng-template>

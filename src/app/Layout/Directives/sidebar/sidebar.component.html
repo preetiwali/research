@@ -1,0 +1,706 @@
+<style>
+  .logo{
+    font-size: 20px;font-weight: bold;
+  }
+  a{
+    padding-top: 10px;padding-bottom: 10px;padding-right: 90px;text-decoration: none;
+  }
+  a:hover {
+    color:white;font-family: sharp sans,Arial,sans-serif;
+  }
+  .images{
+    width: 80%;
+  }
+  .scrollsidebar{
+    background-color:#d7d9c6;
+  }
+  .vsm-link:hover{
+    background-color: #0a2956;color:white;
+  }
+  .sidecontent{
+    background-color:#d7d9c6;
+  }
+  .vsm-link-participant:hover{
+    background-color: black;color:white;
+  }
+  .vsm-title:hover{
+    color:white;font-family: sharp sans,Arial,sans-serif;
+  }
+  .participant-sidebar{
+    color:black;font-weight: bold;
+  }
+  a{
+    text-decoration: none;color:#0a2956;
+  }
+  .vsm-title{
+    font-size: 15px;font-family: sharp sans,Arial,sans-serif;
+  }
+
+ .vsm-link{
+  color:#0a2956;
+ }
+  .icon{
+    color:black;
+  }
+  .icon:hover{
+    color:white;
+  }
+  .vsm-icon:hover{
+    color:white;
+  }
+  .vsm-arrow:hover{
+    color:white;
+  }
+  .headerlogo{
+    background-color:#0a2956!important;
+  }
+  .vsm-header{
+    color:#0a2956;
+  }
+  .app-sidebar-participant{
+    z-index: 0;
+    background-color: white;
+  }
+  .app-sidebar-researcher{
+    z-index: 0;
+  }
+  .app-header__logo_first{
+    z-index: 0;
+    background-color:#0a2956;
+  }
+  .app-header__logo{
+    z-index: 20 !important;
+  }
+  .logo{
+    z-index: 20 !important;
+  }
+  .participant-links{
+    color:black;
+  }
+  .participant-header{
+    color:black;
+  }
+  .sidebar-researcher{
+    display: none;
+  }
+  .participantlogo{
+    background-color:#c8de72;margin-top: 7%;
+  }
+  @media screen and (min-width: 990px) {
+    .sidebar-participant{
+      display: none;
+    }
+  }
+  @media screen and (min-width: 390px) and (max-width: 991px) {
+    .app-sidebar-participant{
+      z-index: 20 !important;
+    }
+  }
+
+</style>
+
+<div [class]="'app-sidebar sidebar-shadow app-sidebar-participant' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
+     (mouseout)="sidebarHover()" *ngIf="user_type == 'Participant' && login_count == 1">
+  <div class="app-header__logo participantlogo" *ngIf="user_type == 'Participant' && login_count == 1">
+
+    <div class="header__pane ml-auto">
+    </div>
+  </div>
+
+    <!-- participant -->
+  <div class="app-sidebar-content sidebar-participant">
+    <div class="app-sidebar-scroll" *ngIf="user_type == 'Participant'">
+      <perfect-scrollbar>
+        <div class="v-sidebar-menu vsm-default">
+          <div class="vsm-list">
+
+            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+              <ngb-panel>
+                <ng-template ngbPanelHeader>
+                  <div class="vsm-header participant-header">Main Navigation</div>
+                </ng-template>
+              </ngb-panel>
+              
+              <ngb-panel id="dashboardsMenu5">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link vsm-link-participant">
+                    <i class="vsm-icon lnr-graduation-hat icon"></i>
+                    <span class="vsm-title participant-sidebar">
+                      <a class="participant-links"routerLink="/participantstudy">Studies</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardsMenu6">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link vsm-link-participant">
+                    <i class="vsm-icon lnr-file-empty icon"></i>
+                    <span class="vsm-title participant-sidebar">
+                      <a class="participant-links"routerLink="/participantstudysubmission/{{user_id}}">Submissions</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+    
+              <ngb-panel id="dashboardsMenu7">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link vsm-link-participant">
+                    <i class="vsm-icon lnr-users icon"></i>
+                    <span class="vsm-title participant-sidebar">
+                      <a class="participant-links" routerLink="/aboutyou">About You</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardsMenu3">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link vsm-link-participant">
+                    <i class="vsm-icon lnr lnr-list icon"></i>
+                    <span class="vsm-title participant-sidebar">
+                      <a class="participant-links" routerLink="/participanttransactions">Transaction Details</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+
+
+<div [class]="'app-sidebar sidebar-shadow app-sidebar-participant' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
+     (mouseout)="sidebarHover()" *ngIf="user_type == 'Participant' && login_count != 1">
+  <div class="app-header__logo participantlogo" *ngIf="user_type == 'Participant' && login_count != 1">
+
+    <div class="header__pane ml-auto">
+    </div>
+  </div>
+
+    <!-- participant -->
+  <div class="app-sidebar-content sidebar-participant">
+    <div class="app-sidebar-scroll" *ngIf="user_type == 'Participant'">
+      <perfect-scrollbar>
+        <div class="v-sidebar-menu vsm-default">
+          <div class="vsm-list">
+
+            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+              <ngb-panel>
+                <ng-template ngbPanelHeader>
+                  <div class="vsm-header participant-header">Main Navigation</div>
+                </ng-template>
+              </ngb-panel>
+              
+              <ngb-panel id="dashboardsMenu5">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link vsm-link-participant">
+                    <i class="vsm-icon lnr-graduation-hat icon"></i>
+                    <span class="vsm-title participant-sidebar">
+                      <a class="participant-links"routerLink="/participantstudy">Studies</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardsMenu6">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link vsm-link-participant">
+                    <i class="vsm-icon lnr-file-empty icon"></i>
+                    <span class="vsm-title participant-sidebar">
+                      <a class="participant-links"routerLink="/participantstudysubmission/{{user_id}}">Submissions</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+    
+              <ngb-panel id="dashboardsMenu7">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link vsm-link-participant">
+                    <i class="vsm-icon lnr-users icon"></i>
+                    <span class="vsm-title participant-sidebar">
+                      <a class="participant-links" routerLink="/aboutyou">About You</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardsMenu3">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link vsm-link-participant">
+                    <i class="vsm-icon lnr lnr-list icon"></i>
+                    <span class="vsm-title participant-sidebar">
+                      <a class="participant-links" routerLink="/participanttransactions">Transaction Details</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+
+    
+<div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
+(mouseout)="sidebarHover()" *ngIf="user_type == 'Researcher' && login_count != 1">
+    <div class="app-header__logo headerlogo" *ngIf="user_type == 'Researcher' && login_count != 1 ">
+      <div class="logo text-white">
+        <a class="text-white" routerLink="/">
+          <img src="assets/images/ResearchSquareLogo.png" class="images">
+        </a>
+      </div>
+      <div class="header__pane ml-auto">
+      </div>
+    </div>
+
+    <!-- researcher  -->
+    <div class="app-sidebar-content sidecontent" *ngIf="user_type == 'Researcher'">
+      <div class="app-sidebar-scroll scrollsidebar" *ngIf="user_type == 'Researcher'">
+        <perfect-scrollbar>
+          <div class="v-sidebar-menu vsm-default">
+            <div class="vsm-list">
+              <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+                <ngb-panel>
+                  <ng-template ngbPanelHeader>
+                    <div class="vsm-header">Main Navigation</div>
+                  </ng-template>
+                </ngb-panel>
+
+                <ngb-panel id="dashboard">
+                  <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="vsm-link">
+                      <i class="vsm-icon lnr-layers"></i>
+                      <span class="vsm-title">Studies</span>
+                      <i class="vsm-arrow"></i>
+                    </button>
+                  </ng-template>
+                  <ng-template ngbPanelContent> 
+                    <div class="vsm-dropdown">
+                      <div class="vsm-list">
+                        <div class="vsm-item">
+                          <a routerLink="/newstudy" class="vsm-link"><span
+                            class="vsm-title">New Study</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/unpublishedstudy" class="vsm-link"><span
+                            class="vsm-title">Unpublished Study</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/studyactive" class="vsm-link"><span
+                            class="vsm-title" >Active Study</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/studycomplete" class="vsm-link"><span
+                            class="vsm-title">Completed Study</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/researcherrejectedstudy" class="vsm-link"><span
+                            class="vsm-title">Rejected Study</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-panel>
+                
+
+                <ngb-panel id="pagesMenu">
+                  <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="vsm-link">
+                      <i class="vsm-icon lnr-envelope"></i>
+                      <span class="vsm-title">Message</span>
+                      <i class="vsm-arrow"></i>
+                    </button>
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <div class="vsm-dropdown">
+                      <div class="vsm-list">
+                        <div class="vsm-item">
+                          <a routerLink="/newmessage"
+                              class="vsm-link"><span class="vsm-title">New Message</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/inboxmessage" class="vsm-link"><span
+                            class="vsm-title">Inbox</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/archivemessage" class="vsm-link"><span
+                            class="vsm-title">Archive</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/sentmessage" class="vsm-link"><span
+                            class="vsm-title">Sent</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-panel>
+
+                <ngb-panel id="dashboardsMenu3">
+                  <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="vsm-link">
+                      <i class="vsm-icon lnr-file-empty"></i>
+                      <span class="vsm-title">
+                        <a routerLink="/researchertrackactivestudy">Track Study</a></span>
+                    </button>
+                  </ng-template>
+                </ngb-panel>
+
+                <ngb-panel id="dashboardsMenu4">
+                  <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="vsm-link">
+                      <i class="vsm-icon lnr lnr-list"></i>
+                      <span class="vsm-title">
+                        <a routerLink="/transactions">Transaction Details</a></span>
+                    </button>
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+      </div>
+</div>
+
+
+<div [class]="'app-sidebar sidebar-shadow app-sidebar-researcher' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
+(mouseout)="sidebarHover()" *ngIf="user_type == 'Researcher' && login_count == 1">
+    <div class="app-header__logo_first" *ngIf="user_type == 'Researcher' && login_count == 1 ">
+      <div class="header__pane ml-auto">
+      </div>
+    </div>
+
+    <!-- researcher  -->
+    <div class="app-sidebar-content sidecontent sidebar-researcher" *ngIf="user_type == 'Researcher'">
+      <div class="app-sidebar-scroll scrollsidebar" *ngIf="user_type == 'Researcher'">
+        <perfect-scrollbar>
+          <div class="v-sidebar-menu vsm-default">
+            <div class="vsm-list">
+              <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+                <ngb-panel>
+                  <ng-template ngbPanelHeader>
+                    <div class="vsm-header">Main Navigation</div>
+                  </ng-template>
+                </ngb-panel>
+
+                <ngb-panel id="dashboard">
+                  <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="vsm-link">
+                      <i class="vsm-icon lnr-layers"></i>
+                      <span class="vsm-title">Studies</span>
+                      <i class="vsm-arrow"></i>
+                    </button>
+                  </ng-template>
+                  <ng-template ngbPanelContent> 
+                    <div class="vsm-dropdown">
+                      <div class="vsm-list">
+                        <div class="vsm-item">
+                          <a routerLink="/newstudy" class="vsm-link"><span
+                            class="vsm-title">New Study</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/unpublishedstudy" class="vsm-link"><span
+                            class="vsm-title">Unpublished</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/studyactive" class="vsm-link"><span
+                            class="vsm-title" >Active</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/studycomplete" class="vsm-link"><span
+                            class="vsm-title">Completed</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/researcherrejectedstudy" class="vsm-link"><span
+                            class="vsm-title">Rejected Study</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-panel>
+                
+
+                <ngb-panel id="pagesMenu">
+                  <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="vsm-link">
+                      <i class="vsm-icon lnr-envelope"></i>
+                      <span class="vsm-title">Message</span>
+                      <i class="vsm-arrow"></i>
+                    </button>
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <div class="vsm-dropdown">
+                      <div class="vsm-list">
+                        <div class="vsm-item">
+                          <a routerLink="/newmessage"
+                              class="vsm-link"><span class="vsm-title">New Message</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/inboxmessage" class="vsm-link"><span
+                            class="vsm-title">Inbox</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/archivemessage" class="vsm-link"><span
+                            class="vsm-title">Archive</span></a>
+                        </div>
+                        <div class="vsm-item">
+                          <a routerLink="/sentmessage" class="vsm-link"><span
+                            class="vsm-title">Sent</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngb-panel>
+
+                <ngb-panel id="dashboardsMenu3">
+                  <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="vsm-link">
+                      <i class="vsm-icon lnr-file-empty"></i>
+                      <span class="vsm-title">
+                        <a routerLink="/researchertrackactivestudy">Track Study</a></span>
+                    </button>
+                  </ng-template>
+                </ngb-panel>
+
+                <ngb-panel id="dashboardsMenu4">
+                  <ng-template ngbPanelHeader>
+                    <button ngbPanelToggle class="vsm-link">
+                      <i class="vsm-icon lnr lnr-list"></i>
+                      <span class="vsm-title">
+                        <a routerLink="/transactions">Transaction Details</a></span>
+                    </button>
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+      </div>
+</div>
+
+
+<div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
+(mouseout)="sidebarHover()" *ngIf="user_type == 'Admin'">
+    <div class="app-header__logo headerlogo" *ngIf="user_type == 'Admin'">
+      <div class="logo text-white">
+        <a class="text-white" routerLink="/">
+          <img src="assets/images/ResearchSquareLogo.png" class="images">
+        </a>
+      </div>
+      <div class="header__pane ml-auto">
+      </div>
+    </div>
+    <div class="app-sidebar-content sidecontent" *ngIf="user_type == 'Admin'">
+    <div class="app-sidebar-scroll scrollsidebar" *ngIf="user_type == 'Admin'">
+      <perfect-scrollbar>
+        <div class="v-sidebar-menu vsm-default" >
+          <div class="vsm-list">
+            <ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+              <ngb-panel>
+                <ng-template ngbPanelHeader>
+                  <div class="vsm-header">Main Navigation</div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboard1">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon lnr-chart-bars"></i>
+                    <span class="vsm-title">Dashboard</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent> 
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/dashboards/reports" class="vsm-link"><span
+                          class="vsm-title">Reports</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/dashboards/adminfilter" class="vsm-link"><span
+                          class="vsm-title">Advance Filter</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/content" class="vsm-link"><span
+                          class="vsm-title">Add Content</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/activestudyrecord" class="vsm-link"><span
+                          class="vsm-title">Active Study Report</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardsMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon pe-7s-rocket"></i>
+                    <span class="vsm-title">Demographics</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent> 
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/question-categoryadmin" class="vsm-link"><span
+                          class="vsm-title">Question Category</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboard">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon lnr-users"></i>
+                    <span class="vsm-title">Users</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent> 
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/participantuserlist" class="vsm-link"><span
+                          class="vsm-title">Participants</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/researcheruserlist" class="vsm-link"><span
+                          class="vsm-title">Researchers</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon lnr-list"></i>
+                    <span class="vsm-title">CMS</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent> 
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/termsconditions" class="vsm-link"><span
+                          class="vsm-title">Terms & Conditions</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/privacypolicies" class="vsm-link"><span
+                          class="vsm-title">Privacy Policy</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/dashboards/termsofuse" class="vsm-link"><span
+                          class="vsm-title">Terms Of Use</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardMenu3">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon lnr-envelope"></i>
+                    <span class="vsm-title">Message</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent> 
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/adminnewmessage" class="vsm-link"><span
+                          class="vsm-title">New Message</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/admininboxmessage" class="vsm-link"><span
+                          class="vsm-title">Inbox</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/adminsentmessage" class="vsm-link"><span
+                          class="vsm-title">Sent</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardMenu2">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon lnr-graduation-hat"></i>
+                    <span class="vsm-title">Study</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent> 
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/adminnewstudy" class="vsm-link"><span
+                          class="vsm-title">New Study</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/admincompletestudy" class="vsm-link"><span
+                          class="vsm-title">Complete</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/adminactivestudy" class="vsm-link"><span
+                          class="vsm-title">Active</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/admininactivestudylist" class="vsm-link"><span
+                          class="vsm-title">Reject</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardsMenu3">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon lnr lnr-list"></i>
+                    <span class="vsm-title"><a routerLink="/admintransactions">Transaction Details</a></span>
+                  </button>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="dashboardMenu4">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon lnr-question-circle"></i>
+                    <span class="vsm-title" >FAQ</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent> 
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLink="/helpFAQ" class="vsm-link"><span
+                          class="vsm-title">Participant FAQ</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLink="/researcherhelpFAQ" class="vsm-link"><span
+                          class="vsm-title">Researcher FAQ</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>

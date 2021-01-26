@@ -1,0 +1,135 @@
+<style>
+  .widget-chart{
+    background-color: white;
+  }
+  a{
+    font-size:25px;
+    color:black;
+    text-decoration: none;
+  }
+  i{
+    color:black;
+  }
+  .icon-wrapper-bg{
+    background-color: #888585;
+  }
+  h4{
+    color: black;
+    font-weight: bold;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-6 col-xl-6">
+      <a routerLink="/participanttotalstudysubmission/{{user_id}}">
+        <div class="card mb-3 widget-chart">
+          <div class="widget-chart-content">
+            <div class="icon-wrapper rounded">
+              <div class="icon-wrapper-bg"></div>
+              <i class="lnr-graduation-hat"></i></div>
+            <div class="widget-numbers">
+              <span>{{total_submission}}</span>
+            </div>
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-warning font-weight-bold">
+              <h4> Total Submission</h4>
+            </div>
+          </div>
+          <div class="widget-chart-wrapper">
+            <div class="d-block">
+              <canvas baseChart
+                      class="chart"
+                      [datasets]="datasets"
+                      [labels]="labels"
+                      [colors]="lineChartColors"
+                      [options]="options"
+                      [chartType]="'line'">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </a>  
+    </div>
+    <div class="col-md-6 col-md-6 col-xl-6">
+      <a routerLink="/participantstudytotalattempt/{{user_id}}">
+        <div class="card mb-3 widget-chart">
+          <div class="widget-chart-content">
+            <div class="icon-wrapper rounded">
+              <div class="icon-wrapper-bg"></div>
+              <i class="lnr-graduation-hat"></i>
+            </div>
+            <div class="widget-numbers"><span>{{total_attempt}}</span></div>
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-danger font-weight-bold">
+              <h4>Total Attempt</h4>
+            </div>
+          </div>
+          <div class="widget-chart-wrapper">
+            <canvas baseChart
+                    class="chart"
+                    [datasets]="datasets2"
+                    [labels]="labels"
+                    [colors]="lineChartColors"
+                    [options]="options"
+                    [chartType]="'line'">
+            </canvas>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6 col-md-6 col-xl-6">
+      <a routerLink="/participantstudyacceptreject/{{user_id}}">
+        <div class="card mb-3 widget-chart">
+          <div class="widget-chart-content">
+            <div class="icon-wrapper rounded">
+              <div class="icon-wrapper-bg"></div>
+              <i class="lnr-graduation-hat"></i>
+            </div>
+            <div class="widget-numbers"><span>{{accepted_studies}}</span></div>
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-danger font-weight-bold">
+              <h4>Accepted Study</h4>
+            </div>
+          </div>
+          <div class="widget-chart-wrapper">
+            <canvas baseChart
+                    class="chart"
+                    [datasets]="datasets2"
+                    [labels]="labels"
+                    [colors]="lineChartColors"
+                    [options]="options"
+                    [chartType]="'line'">
+            </canvas>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6 col-md-6 col-xl-6">
+      <a routerLink="/participantstudyreject/{{user_id}}">
+        <div class="card mb-3 widget-chart">
+          <div class="widget-chart-content">
+            <div class="icon-wrapper rounded">
+              <div class="icon-wrapper-bg"></div>
+              <i class="lnr-graduation-hat"></i></div>
+            <div class="widget-numbers">
+              <span>{{rejected_studies}}</span>
+            </div>
+            <div class="widget-subheading fsize-1 pt-2 opacity-10 text-warning font-weight-bold">
+              <h4>Rejected Study</h4>
+            </div>
+          </div>
+          <div class="widget-chart-wrapper">
+            <div class="d-block">
+              <canvas baseChart
+                      class="chart"
+                      [datasets]="datasets"
+                      [labels]="labels"
+                      [colors]="lineChartColors"
+                      [options]="options"
+                      [chartType]="'line'">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

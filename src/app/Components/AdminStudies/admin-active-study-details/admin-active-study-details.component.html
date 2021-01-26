@@ -1,0 +1,157 @@
+<style>
+
+  button{
+    margin-bottom:2%;
+  }
+  .confirm{
+    float:right;
+  }
+  i{
+    color: #1f4988;
+  }
+  .lefticon{
+    color: black;
+  }
+  .progress-bar{
+    width: 65%;
+  }
+  .widget-numbers{
+    font-size: 20px;
+  }
+  .widget-subheading{
+    font-size:20px;
+  }
+  .backbutton{
+    margin-bottom: 1%;font-size: 14px;
+  }
+  i{
+    color: black;
+  }
+  .sentemails{
+    background-color: #0a2956;border: #0a2956;color:white;float:right;margin-bottom: 1%;
+  }
+</style>
+
+<button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/adminactivestudy">
+  <i class="fa fa-arrow-left"></i></button>
+<!-- <span><button class="btn sentemails" (click)="sendMailToParticipant(study.id);">Send Email</button></span> -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Basic Details
+          <div class="btn-actions-pane-right">
+            <div role="group" class="btn-group-sm btn-group">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+              <tr>
+                <th class="text-left">Completion URL</th>
+                <td class="text-right">{{ study?.completionurl }}</td>
+              </tr>
+              <tr>
+                <th class="text-left">Completion Code</th>
+                <td class="text-right">{{ study?.completioncode }}</td>
+              </tr> 
+              <tr>
+                <th class="text-left">Study Name</th>
+                <div class="text-right">{{ study?.name }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Study URL</th>
+                <div class="text-right">{{ study?.studyurl }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Estimated Completion Time</th>
+                <div class="text-right">{{ study?.estimatetime }} Minutes</div>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Allowed Time</th>
+                <div class="text-right">{{ study?.allowedtime }} Minutes</div>
+              </tr>
+              <tr>
+                <th class="text-left">Maximum Submissions</th>
+                <div class="text-right">{{ study?.submission }}</div>
+              </tr>
+              <tr>
+                <th class="text-left">Reward Per Participant</th>
+                <div class="text-right">{{ study?.reward }}</div>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- study published -->
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="main-card mb-3 card">
+        <div class="card-header">Study Details</div>
+        <div class="card-body">
+          <form>
+              <p class="mb-0" [innerHTML]="study?.description"></p>
+          </form>  
+        </div>
+      </div>
+    </div>
+  </div>
+        
+  <div class="row mx-auto">
+    <div class="col-lg-4 col-md-4 col-xl-4 col-sm-12 col-xs-12">
+      <div class="card mb-3 widget-chart">
+        <div class="icon-wrapper rounded-circle">
+          <div class="icon-wrapper-bg bg-primary"></div>
+          <i class="lnr-graduation-hat"></i></div>
+        <div class="widget-numbers">{{ submitted_candidate_count }}</div>
+        <div class="widget-subheading text-primary"><a routerLink="/adminsubmitstudylist/{{study?.id}}">Submitted Study Details</a></div>
+        <div class="widget-progress-wrapper">
+          <div class="progress-bar-sm progress-bar-animated-alt progress">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="65" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xl-4 col-sm-12 col-xs-12">
+      <div class="card mb-3 widget-chart">
+        <div class="icon-wrapper rounded-circle">
+          <div class="icon-wrapper-bg bg-primary"></div>
+          <i class="lnr-graduation-hat"></i></div>
+        <div class="widget-numbers">{{ paid_candidate_count }}</div>
+        <div class="widget-subheading text-primary"><a routerLink="/adminstudypaymentlist/{{study?.id}}">Study Payment List</a></div>
+        <div class="widget-progress-wrapper">
+          <div class="progress-bar-sm progress-bar-animated-alt progress">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="65" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xl-4 col-sm-12 col-xs-12">
+      <div class="card mb-3 widget-chart">
+        <div class="icon-wrapper rounded-circle">
+          <div class="icon-wrapper-bg bg-primary"></div>
+          <i class="lnr-graduation-hat"></i></div>
+        <div class="widget-numbers">{{ eligible_candidate_count }}</div>
+        <div class="widget-subheading text-primary">
+          <a routerLink="/eligiblecandidates/{{study?.id}}">Eligible Candidate List</a>
+        </div>
+        <div class="widget-progress-wrapper">
+          <div class="progress-bar-sm progress-bar-animated-alt progress">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="65" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+
+    

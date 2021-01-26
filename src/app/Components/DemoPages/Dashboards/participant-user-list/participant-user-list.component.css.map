@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "participant-user-list.component.sass"
+    ],
+    "names": [],
+    "file": "participant-user-list.component.css"
+}

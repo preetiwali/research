@@ -1,0 +1,98 @@
+<style>
+  .before-time{
+    background-color: #de909f !important;
+  }
+  .after-time{
+    background-color: #e4ce8d !important;
+  }
+  .within-time{
+    background-color: #8fdcb4 !important;
+  }
+  .accept{
+    display: block;overflow-y:scroll;height:670px;padding:1%;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .warningcolor{
+    color:yellow;
+  }
+  .faicons{
+    font-size:15px;
+  }
+  .actionbutton{
+    margin-left: 2%;
+  }
+</style>
+
+
+<div class="container">
+  <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/researcheractivestudyDetails/{{study_id}}"><i class="fa fa-arrow-left"></i></button>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="main-card mb-3 card accept">
+        <div class="card-header">Submitted Study Details</div>
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+              <th class="text-center">RW Id</th>
+              <th class="text-center">Start Time</th>
+              <th class="text-center">Completing Time</th>
+              <th class="text-center">Submission</th> 
+              <th class="text-center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let submitted of submitted_candidate_list; let i=index;" class="{{submitted.submission_status}}">
+              <td class="text-center">{{ submitted?.user.research_worker_id  }}</td>
+              
+              <td class="text-center">{{ submitted?.start_time | date:'dd' }} {{ submitted?.start_time | date:'MMM' }} {{ submitted?.start_time | date:'yyyy' }}, {{ submitted?.start_time | date:'hh:mm' }}</td>
+              <td class="text-center text-danger" *ngIf="submitted.submission_status == 'before-time'">{{ submitted?.completion_time }}</td>
+              <td class="text-center text-success" *ngIf="submitted.submission_status == 'within-time'">{{ submitted?.completion_time }}</td>
+              <td class="text-center warningcolor" *ngIf="submitted.submission_status == 'after-time'">{{ submitted?.completion_time }}</td>
+              
+              <td class="text-center">{{ submitted?.submission }}</td>
+              
+              <td class="text-center">
+                <button class="border-0 btn-transition btn btn-outline-success" *ngIf="submitted.status == null" (click)="acceptSubmittedStudy(submitted.user.id);"><fa name="check" class="faicons"></fa></button>
+                <button class="border-0 btn-transition btn btn-outline-danger actionbutton" *ngIf="submitted.status == null" (click)="openLarge(content12)"><fa name="close" class="faicons"></fa></button>
+                <button class="border-0 btn-transition btn btn-outline-info actionbutton" routerLink="/createnewmessageresearcher/{{study_id}}/{{submitted?.user.research_worker_id}}"><fa name="envelope"></fa></button>
+              </td>
+      
+            <!-- reject submitted study modal -->
+      
+                <ng-template #content12 let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Reject Reason</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="this.rejectsubmitstudy" class="needs-validation" novalidate
+                        (validSubmit)="this.rejectSubmitStudy(submitted.user.id)">
+                    <div class="modal-body">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input formControlName="reject_reason" type="text" class="form-control"
+                               placeholder="Reject Reason">
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+                      <button type="submit" class="btn submitbutton">Save</button>
+                    </div>
+                  </form>
+                </ng-template>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

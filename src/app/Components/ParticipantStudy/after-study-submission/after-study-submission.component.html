@@ -1,0 +1,46 @@
+<style>
+  .card {
+    margin: 0 auto;
+  }
+  .verify{
+    margin: auto;
+  }
+  button{
+    background-color:black;color:white;float:right;
+  }
+  button:hover{
+    color: white;
+  }
+</style>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 col-md-12 col-xl-6 col-lg-8 verify">
+        <div class="card main-card">
+          <div class="card-body">
+            <h3 class="text-center">Study Submission</h3>
+            <form [formGroup]="this.formGroup" (validSubmit)="this.studySubmitted()" class="needs-validation" novalidate>
+              <div class="form-row">
+                <div class="col-xs-12 xol-sm-12 col-md-12 col-lg-12 col-xl-12 mb-12 form-group">
+                  <label for="validationCustomUsername">Email</label>
+                  <input type="email" formControlName="email" class="form-control" id="validationCustomemail"
+                    aria-describedby="inputGroupPrepend" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-xs-12 xol-sm-12 col-md-12 col-lg-12 col-xl-12 mb-12 form-group">
+                  <label for="validationCustomUsername">Completion Code</label>
+                  <input type="text" formControlName="completioncode" class="form-control" id="validationCustomcode"
+                    aria-describedby="inputGroupPrepend" required>
+                </div>
+              </div>
+              <a class="text-primary" routerLink="/forgotcompletioncode/{{token}}" target="_blank">Forgot your completion code?</a>
+              <button class="btn ml-2" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+          
+  <!-- http://localhost:4200/#/studysubmission/7c60e6 -->

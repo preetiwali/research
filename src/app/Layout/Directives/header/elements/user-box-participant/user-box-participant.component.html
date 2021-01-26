@@ -1,0 +1,90 @@
+<style>
+  li a{
+    color:black;text-decoration: none;
+  }
+  p{
+    margin:auto;font-size:12px; color: white;font-weight: bold;
+  }
+  .dropdown-menu-header-inner{
+    background-color: black;
+  }
+  .logoutbutton{
+    background-color: white;border: white; color:black;
+  }
+  .icons{
+    color: white;
+  }
+  .icon-wrapper{
+    width:43px; height:43px; margin-top:16%;margin-left: -12%;
+  }
+  .icon-wrapper-bg{
+    background-color: white;
+  }
+  a{
+    text-decoration: none;
+   }
+</style>
+
+<div class="d-flex">
+  <div class="header-btn-lg pr-0">
+    <div class="widget-content p-0">
+      <div class="widget-content-wrapper">
+        <div class="widget-content-left">
+          <div class="btn-group" ngbDropdown placement="bottom-right">
+            <button type="button" class="btn btn-link p-0 mr-2 icons" ngbDropdownToggle>
+              <span>
+                <div class="icon-wrapper icon-wrapper-alt rounded-circle" *ngIf="image_url == null">
+                  <img width="42" height="42" src="./assets/images/profile.jpg" alt="" class="rounded-circle">
+                </div>
+                <div class="icon-wrapper icon-wrapper-alt rounded-circle" *ngIf="image_url != null">
+                    <img width="42" height="42" class="rounded-circle" src="{{ image_url }}">
+                </div>
+              </span>
+            </button>
+            <div class="dropdown-menu-lg" ngbDropdownMenu>
+              <div class="dropdown-menu-header">
+                <div class="dropdown-menu-header-inner">
+                  <div class="menu-header-image opacity-2 dd-header-bg-6"></div>
+                  <div class="menu-header-content text-left">
+                    <div class="widget-content p-0">
+                      <div class="widget-content-wrapper">
+                        <div class="widget-content-left mr-3 rounded-circle" *ngIf="image_url == null" >
+                          <img width="42" height="42" src="./assets/images/profile.jpg" alt="" class="rounded-circle">
+                        </div>
+                        <div class="widget-content-left mr-3 rounded-circle" *ngIf="image_url != null">
+                          <img width="42" height="42" class="rounded-circle" src="{{ image_url }}">
+                        </div>
+                        <div class="widget-content-right mr-2">
+                          <button class="btn-pill btn-shadow btn-shine btn btn-focus logoutbutton" href="javascript: void(0)" (click)="logout()">Logout</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+              <div class="scroll-area-xs">
+                <perfect-scrollbar [autoPropagation]="true">
+                  <ul class="nav flex-column">
+                    <li class="nav-item"><a routerLink="/accountparticipant" class="nav-link">Account
+                    </a></li>
+                    <li class="nav-item"><a routerLink="/dashboards/userterms" class="nav-link">Terms & Conditions</a></li>
+                    <!-- <li class="nav-item"><a routerLink="/dashboards/usertermsofuse" class="nav-link">Terms of Use</a></li> -->
+                    <li class="nav-item"><a routerLink="/dashboards/userpolicy" class="nav-link">Privacy Policy
+                    </a></li>
+                  </ul>
+                </perfect-scrollbar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a routerLink="/walletparticipant">
+  <div class="icon-wrapper icon-wrapper-alt rounded-circle" title="Wallet">
+    <div class="icon-wrapper-bg"></div>
+      <p>&#1583;.&#1573;{{wallet}}</p>
+  </div>
+  </a>
+</div>
+

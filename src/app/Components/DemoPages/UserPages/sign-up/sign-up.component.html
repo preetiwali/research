@@ -1,0 +1,300 @@
+
+<style>
+  .card {
+    margin: 0 auto;width: 60%;
+  }
+  .forgotpassword{
+    float:right;
+  }
+  .register{
+    float:right;
+  }
+  button{
+    text-align: center;
+  }
+  .form-row{
+    margin-bottom: -1%;
+  }
+  .ngselect{
+    color:gray;font-size: 1rem;line-height: 1.5;
+  }
+  .signup{
+    background-color: #1f4988;
+  }
+  .displaynone{
+    display: none;
+  }
+  /* .invalid-feedback{
+    display: none !important;
+  } */
+
+  .leftbutton{
+    float:right;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  #form_2{
+    display: none;
+  }
+
+  label {
+    color: #d92550;display: block;
+  }
+  input:checked + label{
+    color: #3ac47d;
+  }
+  .checklabel{
+    margin-left: 5px;
+  }
+  .checkinput{
+    margin-top: 4px;
+  }
+  .checkvalidations{
+    margin-left: 3%;
+  }
+  .participantcheckbox{
+    margin-top: -2%;
+  }
+
+  @media screen and (max-width: 600px) {
+
+  .signup {
+    margin-top:6%;
+    width: 100%;
+    height:195vh !important;
+    background-color: #1f4988;
+
+  }
+  .card {
+    margin-top:150%;
+    width: 100%;
+  }
+  .emailmessage{
+    display:none;
+  }
+  .ng-select .ng-clear-wrapper {
+    color: red !important;
+  }
+  }
+
+  @media screen and (min-width: 1200px) and (max-width: 1400px) {
+    .terms{
+      font-size: 12px;
+    }
+  }
+
+
+</style>
+
+<!-- bg-plum-plate  -->
+<div class="h-500 signup">
+  <div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="mx-auto app-login-box col-md-12 col-lg-12 col-xl-8 login_page_container">
+      <div class="card main-card mb-3 row">
+        <div class="card-body col-md-12 col-lg-12">
+          <span class="leftbutton"><button class="btn ml-2 submitbutton" routerLink="http://localhost:3000/">Home</button></span>
+            <h2 class="text-center">Registration</h2>
+              <div class="form-row"  onclick="myfunction();">
+                <div class="col-md-12 mb-3 form-group">
+                  <select class="form-control" id="registerparticipate">
+                    <option value="participant">I want to take part in studies </option>
+                    <option value="research">I want to recruit participants</option>
+                  </select>
+                </div>
+              </div>
+
+        <!-- researcher form -->
+          <div id="form_2">
+            <form [formGroup]="this.formGroup" class="needs-validation" novalidate (validSubmit)="this.handleValidSubmitResearcher()">
+              <div class="form-row">
+                <div class="col-md-12 mb-3 form-group">
+                  <ng-select class="custom ngselect" [items]="specialisationarea" formControlName="specialisation" id="validationspecialisation"
+                              bindLabel="name" (change)="specialisationValidation();" placeholder="Specialisation" [(ngModel)]="selectedSpecialisation" required>
+                  </ng-select>
+                  <span _ngcontent-c4="" id="specialisation" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Please select a specialisation</span>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3 form-group">
+                  <input formControlName="first_name" type="text" class="form-control" id="validationname"
+                          placeholder="First Name" pattern="[A-Za-z]{2,}" required>
+                </div>
+
+                <div class="col-md-6 mb-3 form-group">
+                  <input formControlName="last_name" type="text" class="form-control" id="validationCustom02"
+                        placeholder="Last Name"  pattern="[A-Za-z]{2,}" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3 form-group">
+                  <input formControlName="email" type="text" class="form-control" id="validationCustomUsername"
+                          placeholder="University Email" id="emailvalidparticipant" (change)="emailValidation1();" aria-describedby="inputGroupPrepend" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                  <span _ngcontent-c4="" id="showmessageemail" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Email id already exists</span>
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                  <input formControlName="referral_code" type="text" placeholder="Referral Code" class="form-control">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6 mb-3 form-group">
+                  <input formControlName="university" type="text" class="form-control" id="validationCustomUniversity"
+                          placeholder="Organisation/University"  Departmentaria-describedby="inputGroupPrepend" required>
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+
+                  <ng-select class="custom ngselect" [items]="department" formControlName="department" id="validationDepartment"
+                              bindLabel="name" (change)="validateDepartment();" placeholder="Department" [(ngModel)]="selectedDepartment" required >
+                  </ng-select>
+                  <span _ngcontent-c4="" id="showmessagedepartment" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Please select a department</span>
+
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-6 mb-3 form-group">
+                  <ng-select class="custom ngselect" [items]="city" formControlName="city" id="validationcity"
+                              bindLabel="name" (change)="validateCity();" placeholder="City of Residence" [(ngModel)]="selectedCity" required >
+                  </ng-select>
+                  <span _ngcontent-c4="" id="showmessagecity" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Please select a city of residence</span>
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                  <ng-select class="custom ngselect" [items]="country" formControlName="country" id="validationCountry"
+                              bindLabel="name" (change)="validateCountry();" placeholder="Country of Residency" [(ngModel)]="selectedCountry" required >
+                  </ng-select>
+                  <span _ngcontent-c4="" id="showmessagecountry" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Please select a country of residency</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-6 mb-3 form-group">
+                  <input formControlName="password" type="password" class="form-control password1" id="password1234"
+                         data-toggle="tooltip" data-html="true" title="Password should be atleast 8 character, one uppercase, one lowercase, one special character, one numeric"
+                          placeholder="Password" (keyup)="validatePassword1();" required>
+                          <span _ngcontent-c4="" id="showmessageresearcherpassword" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Confirm Password should have one uppercase, one lowercase, one special character, one numeric</span>
+                </div>
+                <div class="col-md-6 mb-3 form-group">
+                  <input formControlName="confirmpassword" type="password" (keyup)="validateConfirmPassword1();" class="form-control password2"
+                        placeholder="Confirm Password" id="confirmpassword1234" required>
+                    <span _ngcontent-c4="" id="showmessageresearcherconfirmpassword" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Confirm Password should have one uppercase, one lowercase, one special character, one numeric</span>
+                </div>
+              </div>
+
+              <div class="form-group checkvalidations">
+                <div class="row">
+                  <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="terms_accepted" >
+                  <label for="opt-in" class="checklabel terms"> I have read & agree to the <a class="text-primary" target='_blank' routerLink="/pages/termsconditions/Researcher">
+                    Terms & Conditions</a> and the <a target='_blank' class="text-primary" routerLink="/pages/privacypolcies/Researcher">Privacy Policy</a>
+                     documents</label>
+                </div>
+              </div>
+              <button class="btn ml-2 submitbutton" type="submit" [disabled]="passwordmatch === false && !formGroup.valid">Register</button>
+            </form>
+          </div>
+
+
+            <!-- participant  -->
+
+            <div id="form_1">
+              <form [formGroup]="this.formGroupParticipant" class="needs-validation" novalidate (validSubmit)="this.handleValidSubmitParticipant()">
+                <div class="form-row">
+                  <div class="col-md-6 mb-3 form-group">
+                    <ng-select class="custom ngselect" [items]="country" formControlName="country" id="validationCountry1"
+                                bindLabel="name" (change)="validateCountry1();" placeholder="Country of Residency" [(ngModel)]="selectedCountry" required >
+                    </ng-select>
+                    <span _ngcontent-c4="" id="showmessagecountry1" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Please select a country of residency</span>
+                  </div>
+                  <!-- pattern="\b[\w\.-]+@((?!gmail|hotmail).)[\w\.-]+\.\w{2,4}\b"  -->
+                  <div class="col-md-6 mb-3 form-group">
+                    <input formControlName="email" type="text" class="form-control" id="emailvalidresearcher"
+                        placeholder="Email" aria-describedby="inputGroupPrepend" (change)="emailValidation();" required>
+                        <span _ngcontent-c4="" id="showmessageemail1" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Email id already exists</span>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 mb-3 form-group">
+                    <input formControlName="first_name" type="text" placeholder="First Name" class="form-control" id="validationCustom01"
+                            pattern="[A-Za-z]{2,}" required>
+                  </div>
+                  <div class="col-md-6 mb-3 form-group">
+                    <input formControlName="last_name" type="text" placeholder="Last Name" class="form-control" id="validationCustom02"
+                            pattern="[A-Za-z]{2,}" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6 mb-3 form-group">
+                    <ng-select class="custom ngselect" [items]="city" formControlName="city" id="validationcity1"
+                                bindLabel="name" (change)="validateCity1();" placeholder="City of Residence" [(ngModel)]="selectedCity" required >
+                    </ng-select>
+                    <span _ngcontent-c4="" id="showmessagecity1" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Please select a city of residence</span>
+                  </div>
+                  <div class="col-md-6 mb-3 form-group">
+                    <ng-select class="custom ngselect" [items]="heard_from" formControlName="heard_from" id="validationheardfrom"
+                                bindLabel="name" [clearable]="true" (change)="validateHeardFrom();" placeholder="How did you hear about us" [(ngModel)]="selectedheard_from" required>
+                    </ng-select>
+                    <span _ngcontent-c4="" id="heardfrom" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Please select value</span>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6 mb-3 form-group">
+                    <input formControlName="password" type="password" class="form-control password1" id="password123"
+                        data-toggle="tooltip" data-html="true"
+                        title="Password should be atleast 8 character, one uppercase, one lowercase, one special character, one numeric"
+                        placeholder="Password" (keyup)="validatePassword();" required>
+                        <span _ngcontent-c4="" id="showmessagepassword" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Password should have one uppercase, one lowercase, one special character, one numeric</span>
+                  </div>
+                  <div class="col-md-6 mb-3 form-group">
+                    <input formControlName="confirmpassword" type="password" (keyup)="validateConfirmPassword();" class="form-control password2"
+                      placeholder="Confirm Password" id="confirmpassword123" required>
+                      <span _ngcontent-c4="" id="showmessageconfirmpassword" style="display: none;" class="invalid-feedback ng-star-inserted" ng-reflect-ng-class="invalid-feedback">Confirm Password should have one uppercase, one lowercase, one special character, one numeric</span>
+                  </div>
+                </div>
+                <!-- <div class="form-group">
+                  <div class="form-check col-md-12 mb-3 form-group checkvalidation1">
+                    <input formControlName="alert_info" class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label text-black" for="invalidCheck">
+                      I am happy to receive information about relevant offers from WinPower
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-check col-md-12 mb-3 form-group">
+                    <input formControlName="terms" class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label text-black" for="invalidCheck">
+                        I have read & agree to the <a class="text-primary" target='_blank' routerLink="/termsconditionsuser">Terms & Conditions</a> and the <a target='_blank' class="text-primary" routerLink="/privacypoliciesuser">Privacy Policy</a> documents
+                    </label>
+                  </div>
+                </div> -->
+
+                <div class="form-group checkvalidations">
+                  <div class="row">
+                    <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="alert_info">
+                    <label for="opt-in" class="checklabel terms">I am happy to receive information about relevant offers from ResearchSquare</label>
+                  </div>
+                </div>
+
+                <div class="form-group checkvalidations participantcheckbox">
+                  <div class="row">
+                    <input type="checkbox" class="checkinput" name="my-checkbox" id="opt-in" formControlName="terms_accepted">
+                    <label for="opt-in" class="checklabel terms"> I have read & agree to the <a class="text-primary"
+                       target='_blank' routerLink="/pages/termsconditions/Participant">Terms & Conditions</a> and the <a target='_blank' class="text-primary" routerLink="/pages/privacypolcies/Participant">Privacy Policy</a> documents
+                    </label>
+                  </div>
+                </div>
+                <button class="btn ml-2 submitbutton" (click)="hideerror()" type="submit" [disabled]="passwordmatch === false && !formGroupParticipant.valid">Register</button>
+              </form>
+            </div>
+          <a class="text-primary register" routerLink="/pages/login-boxed" >Already have an account?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

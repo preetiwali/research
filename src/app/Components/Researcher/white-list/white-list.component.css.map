@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "white-list.component.sass"
+    ],
+    "names": [],
+    "file": "white-list.component.css"
+}

@@ -1,0 +1,197 @@
+<style>
+  button{
+    margin:1%;float:right;
+  }
+  .action{
+    display: flex;
+  }
+  .table-responsive{
+    padding:1%;
+  }
+  .categorylist{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .image{
+    width: 8%;
+  }
+  .submitbutton{
+    background-color: #0a2956;border: #0a2956;color:white;
+  }
+  .backbutton{
+    font-size: 14px;float: left;margin-left:0%;
+  }
+</style>
+<!-- 
+<div class="row">
+  <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+    <div class="card main-card">
+      <form [formGroup]="this.basicdetails" (validSubmit)="this.addBasicDetails()" class="needs-validation" novalidate>
+        <div class="card-body">
+          <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustomUsername">Title</label>
+            <input formControlName="title" type="text" class="form-control col-md-12 col-lg-12 col-sm-12" id="validationCustom01">
+          </div>
+          <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustomUsername">Content Type</label>
+            <input formControlName="content_type" type="text" class="form-control col-md-12 col-lg-12 col-sm-12" id="validationCustom01">
+          </div>
+          <label for="validationCustomUsername">Content</label>
+          <angular-editor formControlName="content" [config]="config"></angular-editor>
+        </div>
+        <button class="btn ml-2 submitbutton" type="submit">Add</button>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/content">
+      <i class="fa fa-arrow-left"></i></button>
+  </div>
+
+
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="main-card mb-3 card">
+      <div class="card-header">List of Contents
+        <div class="btn-actions-pane-right">
+          <div role="group" class="btn-group-sm btn-group">
+            <button class="btn categorylist" (click)="openLarge(addcontent)">Add New Content</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+            <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">Image</th>
+                  <th class="text-center">Title</th>
+                  <th class="text-center">Content</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let content of contentList; let i=index;">
+                <td class="text-center image" *ngIf="content.image_url == null" >
+                  <img width="45" height="45" src="./assets/images/family.jpg" (click)="openLarge(content31)">
+                </td>
+                <td class="text-center image" *ngIf="content.image_url != null" >
+                  <img width="45" height="45" src="{{ content.image_url }}" (click)="openLarge(content31)">
+                </td>
+                <td class="text-center">{{content.page_content.title}}</td>
+                <td class="text-center" [innerHTML]="content.page_content.content"></td>
+                <td class="text-center action">
+                  <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" title="Delete" (click)="openLarge(researcherfirstpage)"><i
+                    class="pe-7s-trash btn-icon-wrapper"></i></button>
+                  <button class="btn-icon btn-icon-only btn btn-outline-primary" title="Edit" (click)="openLarge(edit)"><i class="lnr-pencil"></i></button>
+                </td>
+
+                <!-- delete modal -->
+                    <ng-template #researcherfirstpage let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Delete First Page Details</h5>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button> 
+                      </div>
+                        <div class="modal-body"> 
+                          <div class="col-md-12 mb-3 form-group">
+                            <h4>Sure! You want to delete first page details?</h4>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                          <button type="submit" class="btn submitbutton" (click)="deleteContent(content.page_content.id);">Yes</button>
+                        </div>
+                    </ng-template>
+                
+              <!-- Edit category -->
+              
+                <ng-template #edit let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Content</h5>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="this.editcontent" class="needs-validation" novalidate
+                          (validSubmit)="this.editContent(content.page_content.id)">
+                    <div class="modal-body">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input *ngIf="content" [(ngModel)]="content.page_content.title" formControlName="title" type="text" class="form-control col-md-12 col-lg-12 col-sm-12" id="validationCustom01">
+                      </div>
+                      <div class="col-md-12 mb-3 form-group">
+                        <angular-editor *ngIf="content" [(ngModel)]="content.page_content.content" formControlName="content" [config]="config"></angular-editor>
+                        <div class="divider" [innerHTML]="content.page_content.content"></div>
+                      </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                      <button type="button" class="btn submitbutton" (click)="c('Close click')">Close</button>
+                      <button type="submit" class="btn submitbutton">Save</button>
+                    </div>
+                  </form>
+                </ng-template>
+
+              <!-- image upload modal -->
+                <ng-template #content31 let-c="close" let-d="dismiss">
+                  <div class="modal-header bg-dark text-warning">
+                    <h5 class="modal-title">Upload Image</h5>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <form [formGroup]="this.uploadImage" class="needs-validation"(validSubmit)="this.updateImage(content.page_content.id)" novalidate>
+                    <div class="modal-body">
+                      <div class="col-md-12 mb-3 form-group">
+                        <input name="file" type="file" (change)="onFileChange($event)" id="validationCustom01" accept="image/png,image/jpg,image/jpeg"/>
+                        <input type="hidden" name="fileHidden" formControlName="image_url"/> 
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn categorylist">Submit</button>
+                    </div>
+                  </form>
+                </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ 
+  <!-- ADD content MODAL -->
+
+    <ng-template #addcontent let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Category</h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="this.basicdetails" (validSubmit)="this.addBasicDetails()" class="needs-validation" novalidate>
+        <div class="card-body">
+          <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustomUsername">Title</label>
+            <input formControlName="title" type="text" class="form-control" id="validationCustom01">
+          </div>
+          <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustomUsername">Content Type</label>
+            <input formControlName="content_type" type="text" class="form-control" id="validationCustom01">
+          </div>
+          <div class="col-md-12 mb-3 form-group">
+            <label for="validationCustomUsername">Content</label>
+            <angular-editor formControlName="content" [config]="config"></angular-editor>
+          </div>
+        </div>
+        <button class="btn ml-2 submitbutton" type="submit">Add</button>
+      </form>
+    </ng-template>
+  
+  
+  

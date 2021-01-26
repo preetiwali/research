@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "verify-email.component.sass"
+    ],
+    "names": [],
+    "file": "verify-email.component.css"
+}

@@ -1,0 +1,561 @@
+<style>
+  .accept{
+    display: block;height: 757px;overflow-y: scroll;overflow-x: scroll;padding:1%;
+  }
+  button{
+    margin:2px;
+  }
+  a{
+    text-decoration: none;
+  }
+  .widget-subheading{
+    color: black;font-weight: bold;cursor: pointer;
+  }
+  .backbutton{
+    margin:auto;font-size: 14px;margin-bottom:1%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .studyparticipated{
+    color: black;
+  }
+  .studyparticipated{
+    color: black;
+  }
+  .ratinglist{
+    margin-bottom: 2%;
+  }
+  .filter{
+    font-size: 17px;
+    font-weight: bold;
+  }
+  .bar{
+    margin: auto;
+  }
+  .widget-content-wrapper{
+    margin: auto;
+  }
+  .text{
+    margin-top: -12%;
+  }
+  .widget-numbers{
+    font-size: 35px;
+  }
+  .form-check-label{
+    font-size: 18px;
+  }
+  .form-check-input {
+    position: relative;
+    margin:0px;
+  }
+  .listuser{
+    float: right;
+    margin-bottom: 10px;
+  }
+</style>
+
+
+<div class="container">
+  <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/studyaudience/{{study_id}}">
+    <i class="fa fa-arrow-left"></i>
+  </button>
+
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" (click)="showacceptance();">
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card" style="background-color: #16aaff;color:white" *ngIf="acceptancelistshow == true">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Survey experience of the participants">
+            <h6>Participant Quality</h6>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card" *ngIf="acceptancelistshow == false">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Survey experience of the participants">
+            <h6>Participant Quality</h6>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" (click)="showEprerience();">
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card" *ngIf="experiencelistshow == true" style="background-color: #16aaff;color:white">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Survey experience of the participants">
+            <h6>Participation Experience</h6>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card"  *ngIf="experiencelistshow == false">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Survey experience of the participants">
+            <h6>Participation Experience</h6>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" (click)="showWhitelist();">
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card" *ngIf="listwhite == true" style="background-color: #16aaff;color:white">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="White list">
+            <h6>White List</h6>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card" *ngIf="listwhite == false">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="White list">
+            <h6>White List</h6>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" (click)="showBlacklist();">
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card" *ngIf="listblack == true" style="background-color: #16aaff;color:white">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Black list">
+            <h6>Black List</h6>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card" *ngIf="listblack == false">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Black list">
+            <h6>Black List</h6>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 bar" *ngIf="acceptancelistshow">
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Survey experience of the participants">
+            <div class="d-inline-block" ngbDropdown placement="bottom">
+              <button type="button" class="ml-2 btn btn-lg text-black filter">You can choose participants based on rate of acceptance of their submissions</button>
+              <form [formGroup]="this.participantSubmission" class="needs-validation" novalidate>
+                <fieldset class="position-relative form-group">
+                  <div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="rating_selection" value="above_90_percent" [checked]="rating_selection == 'above_90_percent'">
+                      90% and above submissions accepted
+                    </label>
+                  </div>
+                  <div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="rating_selection" value="above_75_percent" [checked]="rating_selection == 'above_75_percent'">
+                      75% and above submissions accepted
+                    </label>
+                  </div><div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="rating_selection" value="above_60_percent" [checked]="rating_selection == 'above_60_percent'">
+                      60% and above submissions accepted
+                    </label>
+                  </div><div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="rating_selection" value="above_50_percent" [checked]="rating_selection == 'above_50_percent'">
+                      50% and above submissions accepted
+                    </label>
+                  </div>
+                  <div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="rating_selection" value="below_50_percent" [checked]="rating_selection == 'below_50_percent'">
+                      50% and below submissions accepted
+                    </label>
+                  </div>
+                </fieldset>
+                <button class="mr-2 btn-icon btn-icon-only btn btn-outline-success listuser" (click)=saveParticipantrating();>Save</button>
+                <span><button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger listuser" (click)=deleteRatinglist();>Cancel</button></span>
+              </form>
+            </div>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 bar" *ngIf="experiencelistshow">
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Acceptance rate of the participant">
+            <div class="d-inline-block" ngbDropdown placement="bottom">
+              <button type="button" class="ml-2 btn btn-lg text-black filter">You can choose participants based on their experience with studies on Research Square</button>
+              <form [formGroup]="this.participantExprience" class="needs-validation" novalidate>
+                <fieldset class="position-relative form-group">
+                  <div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="participation_selection" value="zero_study" [checked]="participation_selection == 'zero_study'">
+                      Zero studies
+                    </label>
+                  </div>
+                  <div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="participation_selection" value="less_than_2" [checked]="participation_selection == 'less_than_2'">
+                      Less than two studies
+                    </label>
+                  </div><div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="participation_selection" value="between_2_and_4" [checked]="participation_selection == 'between_2_and_4'">
+                      Less than four studies
+                    </label>
+                  </div><div class="position-relative form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" formControlName="participation_selection" value="more_than_4" [checked]="participation_selection == 'more_than_4'">
+                      More than four studies
+                    </label>
+                  </div>
+                </fieldset>
+                <button class="mr-2 btn-icon btn-icon-only btn btn-outline-success listuser" (click)=studyparticipatedExprience();>Save</button>
+                <span><button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger listuser" (click)=deleteExpriencelist();>Cancel</button></span>
+              </form>
+            </div>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md -12 col-lg-12 col-xs-12" *ngIf="listwhite">
+          <button class="mr-2 btn-icon btn-icon-only btn btn-outline-primary listuser" (click)="openLarge(whitelisteduser)">Add User</button>
+          <button class="mr-2 btn-icon btn-icon-only btn btn-outline-success listuser" title="Study will be send to all eligible users" *ngIf="study?.only_whitelisted == '1'" (click)="openLarge(selectedwhitelisted)">Only Whitelisted</button>
+          <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger listuser" title="Study will be send to only whitelisted user" *ngIf="study?.only_whitelisted == null" (click)="openLarge(notselectedwhitelisted)">Only Whitelisted</button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" *ngIf="listblack">
+          <button class="mr-2 btn-icon btn-icon-only btn btn-outline-primary listuser" (click)="openLarge(blacklisteduser)">Add User</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 bar" *ngIf="listwhite">
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Acceptance rate of the participant">
+            <div class="termscondition">
+              <div class="card-header">White Listed User
+                <div class="btn-actions-pane-right">
+                </div>
+              </div>
+              <div class="table-responsive study">
+                <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Research Worker Id</th>
+                      <th class="text-center">Study Name</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let whitelist of whitelistuser; let i=index;">
+                    <td class="text-center">{{ whitelist?.research_worker_id }}</td>
+                    <td class="text-center">{{ study.name }}</td>
+                    <td class="text-center">
+                      <button class="border-0 btn-transition btn btn-outline-success" title="Blacklist user" (click)="acceptWhiteListUser(whitelist.id);"><fa name="check" class="faicons"></fa></button>
+                      <button class="border-0 btn-transition btn btn-outline-danger rejected" title="Reject user" (click)="openLarge(deletewhitelistuser)"><fa name="trash" class="faicons"></fa></button>
+                    </td>
+
+                    <!-- delete modal -->
+                      <ng-template #deletewhitelistuser let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Delete User</h4>
+                          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                          <div class="modal-body">
+                            <div class="col-md-12 mb-3 form-group">
+                              <h4>Sure! You want to delete whitelist user?</h4>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                            <button type="submit" class="btn submitbutton" (click)="rejectWhiteListUser(whitelist.id);">Yes</button>
+                          </div>
+                      </ng-template>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 bar" *ngIf="listblack">
+      <div class="card-shadow-primary mb-3 widget-chart widget-chart2 text-left card">
+        <div class="widget-chat-wrapper-outer">
+          <div class="widget-chart-content" title="Acceptance rate of the participant">
+            <div class="termscondition">
+              <div class="card-header">Black Listed User
+                <div class="btn-actions-pane-right"></div>
+              </div>
+              <div class="table-responsive study">
+                <table class="align-middle mb-0 table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                    <th class="text-center">Research Worker Id</th>
+                    <th class="text-center">Study Name</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let list of blacklistuser; let i=index;">
+                    <td class="text-center">{{ list?.research_worker_id }}</td>
+                    <td class="text-center">{{ study.name }}</td>
+                    <td class="text-center">
+                      <button class="border-0 btn-transition btn btn-outline-success" title="Whitelist user" (click)="acceptBlackListUser(list.id);"><fa name="check" class="faicons"></fa></button>
+                      <button class="border-0 btn-transition btn btn-outline-danger rejecteduser" title="Reject user" (click)="openLarge(blacklistuser)"><fa name="trash" class="faicons"></fa></button>
+                    </td>
+
+                    <!-- delete modal -->
+                      <ng-template #blacklistuser let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Delete User</h4>
+                          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                          <div class="modal-body">
+                            <div class="col-md-12 mb-3 form-group">
+                              <h4>Sure! You want to delete User?</h4>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                            <button type="submit" class="btn submitbutton" (click)="rejectBlackListUser(list.id);">Yes</button>
+                          </div>
+                      </ng-template>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="widget-chart-flex">
+              <div class="widget-numbers mb-0 w-100">
+                <div class="widget-chart-flex">
+                  <div class="ml-auto">
+                    <div class="widget-title ml-auto font-size-lg font-weight-normal text-muted">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- whitelist modal -->
+<ng-template #whitelisteduser let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">White List</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="this.whitelist" (validSubmit)="this.whiteList()" class="needs-validation" novalidate>
+    <div class="modal-body">
+      <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Researcher Worker Id</label>
+        <input formControlName="research_worker_id" type="text" title="You can add multiple participant ids comma separated" class="form-control" id="validationCustom01" required>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn submitbutton" (click)="c('Close click')">Cancel</button>
+      <button type="submit" class="btn submitbutton">Submit</button>
+    </div>
+  </form>
+</ng-template>
+
+
+<!-- whitelist user selected modal -->
+<ng-template #selectedwhitelisted let-c="close" let-d="dismiss">
+  <div class="modal-header bg-dark">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    <div class="modal-body">
+      <div class="col-md-12 mb-3 form-group">
+        <h4>Sure! You want to select both whitelisted users and filtered users.</h4>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn submitbutton" (click)="c('Close click')">Cancel</button>
+      <button type="submit" class="btn submitbutton" (click)="whitelistedUserNotSelect();">Submit</button>
+    </div>
+</ng-template>
+
+
+<!-- whitelist user not selected modal -->
+<ng-template #notselectedwhitelisted let-c="close" let-d="dismiss">
+  <div class="modal-header bg-dark">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    <div class="modal-body">
+      <div class="col-md-12 mb-3 form-group">
+        <h4>Sure! You want to select only whitelisted users</h4>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn submitbutton" (click)="c('Close click')">Cancel</button>
+      <button type="submit" class="btn submitbutton" (click)="whitelistedUserSelect();">Submit</button>
+    </div>
+</ng-template>
+
+
+
+ <!-- blacklist modal -->
+ <ng-template #blacklisteduser let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Black List</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="this.blacklist" (validSubmit)="blackList()" class="needs-validation" novalidate>
+    <div class="modal-body">
+      <div class="col-md-12 mb-3 form-group">
+          <label for="validationCustom01">Researcher Worker Id</label>
+        <input formControlName="research_worker_id" type="text" title="You can add multiple participant ids comma separated" class="form-control" id="validationCustom01" required>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn submitbutton" (click)="c('Close click')">Cancel</button>
+      <button type="submit" class="btn submitbutton">Submit</button>
+    </div>
+  </form>
+</ng-template>

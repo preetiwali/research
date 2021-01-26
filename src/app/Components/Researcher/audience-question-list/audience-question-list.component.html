@@ -1,0 +1,198 @@
+<style>
+  .custom-control-label{
+    color:black;
+  }
+  .ui-slider .ui-btn-inner {
+      padding: 4px 0 0 0 !important;
+  }
+  .ui-slider-popup {
+    position: absolute !important;width: 64px;height: 64px;text-align: center;font-size: 36px;padding-top: 14px;
+    z-index: 100;opacity: 0.8;
+  }
+  .questoionlist{
+    margin-bottom: 20px;
+  }
+  .categoryname{
+    margin-top:10%;
+  }
+  .rangequestion{
+    margin:auto;
+  }
+  .rangeinput{
+    margin-top:25%;
+  }
+  .audience{
+    height:100%;
+  }
+  .selectquestion{
+    margin-top: 8%;
+  }
+  .backbutton{
+    width:4em;margin-bottom:1%;font-size: 14px;
+  }
+  .lists{
+    top:6%;
+  }
+  .icon-wrapper-bg{
+    background-color:#0a2956;
+  }
+  .widget-numbers{
+    font-size: 20px;
+  }
+  .message{
+    color:#0a2956;margin:auto;font-size:15px;
+  }
+  .demographice{
+    top:6%;
+  }
+  .submitbutton{
+    background-color: #1f4988;border: #1f4988;color:white;
+  }
+  .cardheight{
+    height:255px;
+  }
+  .messageshow{
+    float: left;
+  }
+  .card-footer{
+    border: none;
+  }
+
+</style>
+
+<div class="container">
+  <button class="btn btn-lg bg-white backbutton" title="Back" routerLink="/studyaudience/{{study_id}}">
+    <i class="fa fa-arrow-left"></i>
+  </button>
+
+  <div class="row questoionlist">
+    <div class="col-md-8 col-lg-8 col-xl-8 col-sm-12 col-xs-12 sticky-top lists">
+      <div class="card mb-3 widget-chart audience">
+        <div class="icon-wrapper rounded-circle">
+          <div class="icon-wrapper-bg"></div>
+          <i class="lnr-users icon-gradient bg-white"></i>
+        </div>
+        <div class="widget-numbers">{{ desired_audience }}</div>
+        <div>
+          <h4 class="icon-gradient"> Number of Audience</h4><br>
+          <p class="message">(Please press CTRL to select multiple answers)</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-xl-4 col-sm-12 col-xs-12 sticky-top demographice">
+      <div class="card mb-3 widget-chart audience">
+        <div>
+          <img src="./assets/images/family.jpg" width="80" height="80" *ngIf="image_url == null" alt="./assets/images/family.jpg">
+          <img src="{{image_url}}" width="80" height="80" *ngIf="image_url != null" alt="./assets/images/family.jpg">
+        </div>
+        <div class="widget-numbers">
+          <h5 class="text-center text-uppercase text-black categoryname">{{ category_name }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-lg-6 col-xl-6 col-sm-12 col-xs-12" *ngFor="let question of questionList; let i=index;">
+      <div>
+        <div class="main-card mb-3 card" *ngIf="question.answer_filled == 'No'">
+          <form [formGroup]="saveanswer" *ngIf="question.question['question_type_id'] != 4 && question.question['question_type_id'] != 5 " (ngSubmit)="saveAnswer(question.question['id'], study_id)" class="needs-validation addmodal" novalidate>
+            <div class="card-body cardheight">
+              <div class="tab-content">
+                <div class="position-relative form-group"><h6> {{ question.question['description2'] }} </h6></div>
+                <div class="position-relative form-group selectquestion" *ngIf="question.question['question_type_id'] != 4 && question.question['question_type_id'] != 5 ">
+                  <select type="select" multiple id="exampleCustomMutlipleSelect" formControlName="answer_id" class="custom-select">
+                    <option  *ngFor="let answer of question.answer; let i=index;" value="{{answer['id']}}">{{ answer['description'] }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-12 col-lg-12 col-sm-12" *ngIf="question.image_url != null">
+              <img style="width:100%;height:12%;" src="{{ question.image_url }}">
+            </div>
+            <div class="d-block text-right card-footer">
+              <button type="submit" class="btn-wide btn submitbutton" [disabled]="this.saveanswer.invalid" *ngIf="question.question['question_type_id'] != 4 ">Save</button>
+            </div>
+          </form>
+
+
+          <form [formGroup]="saverangeanswer" *ngIf="question.question['question_type_id'] == 4 || question.question['question_type_id'] == 5 "
+                 (ngSubmit)="saveRangeAnswer(question.question['id'], study_id)" class="needs-validation addmodal" novalidate>
+            <div class="card-body cardheight">
+              <div class="tab-content">
+                <div class="position-relative form-group">
+                  <h6> {{ question.question['description2'] }}</h6>
+                </div>
+
+                <div class="row rangequestion">
+                  <div class="col-md-6 mb-3 form-group rangequestion">
+                    <label class="rangeinput">From</label>
+                    <input formControlName="min_limit" type="number" (keyup)="minimumAgeFunction()" id="minimumage" title="Min Value" class="form-control col-md-12 col-lg-12 col-sm-12">
+                  </div>
+                  <div class="col-md-6 mb-3 form-group">
+                    <span>
+                      <label class="rangeinput">To</label>
+                      <input formControlName="max_limit" min="0" type="number" (keyup)="greaterAgeFunction()" id="maximumage" title="Max Value" class="form-control col-md-12 col-lg-12 col-sm-12">
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-12 col-lg-12 col-sm-12" *ngIf="question.image_url != null">
+              <img style="width:100%;" src="{{ question.image_url }}">
+            </div>
+            <div class="d-block text-right card-footer">
+              <p class="text-danger messageshow" *ngIf="question.question['question_type_id'] == 4 "> Min_limit: {{question.answer.min_limit}},&nbsp;   Max_limit: {{question.answer.max_limit}}</p>
+              <button type="submit" class="btn-wide btn submitbutton">Save</button>
+            </div>
+          </form>
+
+          
+        </div>
+
+        <!-- answer show -->
+
+        <div class="main-card mb-3 card" *ngIf="question.answer_filled == 'Yes'">
+          <div class="card-body cardheight">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tab-eg3-0" role="tabpanel" *ngIf="question.question['question_type_id'] != 4 && question.question['question_type_id'] != 5 ">
+                <h5>{{ question.question['description2'] }}</h5>
+                <p>{{question.answer.join(', ')}}</p>
+              </div>
+              <div class="tab-pane active show" id="tab-eg3-0" role="tabpanel" *ngIf="question.question['question_type_id'] == 4 || question.question['question_type_id'] == 5 ">
+                <h5>{{ question.question['description2'] }}</h5>
+                <p>{{question.answer.min_limit}} ,{{question.answer.max_limit}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="d-block text-right card-footer">
+            <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" title="Delete" [disabled]="question.answer_filled == 'No'"
+            (click)="openLarge(audiencequestions)"><i class="lnr-trash btn-icon-wrapper"></i></button>
+          </div>
+
+          <!-- delete modal -->
+            <ng-template #audiencequestions let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Delete Question</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                <div class="modal-body">
+                  <div class="col-md-12 mb-3 form-group">
+                    <h4>Do you want to delete the filter?</h4>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn submitbutton" (click)="c('Close click')">No</button>
+                  <button type="submit" class="btn submitbutton" (click)="deleteResearcherResponse(question.question['id']);">Yes</button>
+                </div>
+            </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
